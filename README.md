@@ -58,7 +58,7 @@
 - **MIDI Export**: Download compositions as MIDI files
 
 ### 🗺️ Interactive Visualization
-- **Global Route Maps**: Mapbox GL integration with flight path visualization
+
 - **Real-time Updates**: Live route tracking and composition progress
 - **Airport Search**: Fast search across 3,000+ airports
 - **Route Analytics**: Distance, duration, and complexity metrics
