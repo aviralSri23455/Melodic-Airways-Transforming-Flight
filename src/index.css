@@ -1,0 +1,121 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Aviation Night Sky Theme - Dark Mode First */
+    --background: 220 40% 8%;
+    --foreground: 210 100% 98%;
+
+    --card: 220 35% 12%;
+    --card-foreground: 210 100% 98%;
+
+    --popover: 220 40% 10%;
+    --popover-foreground: 210 100% 98%;
+
+    /* Cyan/Teal accent (cockpit displays) */
+    --primary: 185 95% 55%;
+    --primary-foreground: 220 40% 8%;
+
+    --secondary: 220 30% 18%;
+    --secondary-foreground: 210 100% 98%;
+
+    --muted: 220 25% 20%;
+    --muted-foreground: 210 20% 65%;
+
+    /* Bright cyan accent */
+    --accent: 180 100% 65%;
+    --accent-foreground: 220 40% 8%;
+
+    --destructive: 0 72% 55%;
+    --destructive-foreground: 210 100% 98%;
+
+    --border: 220 30% 22%;
+    --input: 220 30% 18%;
+    --ring: 185 95% 55%;
+
+    --radius: 0.75rem;
+
+    /* Custom Aviation Colors */
+    --flight-path: 185 95% 55%;
+    --cockpit-glow: 180 100% 65%;
+    --altitude: 240 80% 65%;
+    
+    /* Gradients */
+    --gradient-sky: linear-gradient(135deg, hsl(220 40% 8%), hsl(230 50% 15%));
+    --gradient-cockpit: linear-gradient(90deg, hsl(185 95% 55% / 0.1), hsl(180 100% 65% / 0.2));
+    --gradient-glow: radial-gradient(circle, hsl(185 95% 55% / 0.3), transparent);
+    
+    /* Shadows & Effects */
+    --shadow-glow: 0 0 30px hsl(185 95% 55% / 0.4), 0 0 60px hsl(185 95% 55% / 0.2);
+    --shadow-cockpit: 0 4px 20px hsl(185 95% 55% / 0.15);
+    --shadow-elevation: 0 10px 40px hsl(220 40% 8% / 0.5);
+    
+    /* Animations */
+    --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-spring: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+    --sidebar-background: 220 35% 12%;
+    --sidebar-foreground: 210 100% 98%;
+    --sidebar-primary: 185 95% 55%;
+    --sidebar-primary-foreground: 220 40% 8%;
+    --sidebar-accent: 220 30% 18%;
+    --sidebar-accent-foreground: 210 100% 98%;
+    --sidebar-border: 220 30% 22%;
+    --sidebar-ring: 185 95% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-background;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-primary/30 rounded-lg;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-primary/50;
+  }
+}
+
+@layer utilities {
+  .glow-text {
+    text-shadow: 0 0 20px hsl(var(--primary) / 0.5);
+  }
+
+  .glow-border {
+    box-shadow: 0 0 15px hsl(var(--primary) / 0.3);
+  }
+
+  .cockpit-panel {
+    background: linear-gradient(135deg, hsl(var(--card)) 0%, hsl(var(--secondary)) 100%);
+    border: 1px solid hsl(var(--primary) / 0.2);
+    box-shadow: var(--shadow-cockpit);
+  }
+
+  .aviation-gradient {
+    background: var(--gradient-sky);
+  }
+}

@@ -1,0 +1,57 @@
+# Core web framework
+fastapi
+uvicorn[standard]
+pydantic
+pydantic-settings
+
+# Database
+sqlalchemy[asyncio]
+pymysql
+asyncmy
+aiomysql
+alembic
+aiosqlite
+
+# Caching (Required for real-time features)
+redis[hiredis]
+
+# Analytics Database
+duckdb
+
+# Authentication
+python-jose[cryptography]
+passlib[bcrypt]
+python-multipart
+
+# Data processing
+pandas
+numpy
+networkx # Required for graph pathfinding (Dijkstra's algorithm)
+
+# Machine learning (Required for AI genre composition)
+torch
+torchvision
+torchaudio
+faiss-cpu  # For local vector similarity search (free alternative to paid services)
+
+# Music generation
+mido
+
+# HTTP client
+httpx
+requests
+
+# Environment management
+python-dotenv
+
+# Development and testing
+pytest
+pytest-asyncio
+pytest-cov # For test coverage reports
+black
+isort
+flake8
+
+# Additional utilities
+python-dateutil  # For datetime handling in contests
+websockets # For WebSocket support in collaboration

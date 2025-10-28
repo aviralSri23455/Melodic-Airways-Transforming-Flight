@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  mariadb:
+    image: mariadb:11.0
+    container_name: aero_melody_db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-rootpassword}
+      MYSQL_DATABASE: ${DB_NAME:-aero_melody}
+      MYSQL_USER: ${DB_USER:-aero_user}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-aero_password}
+      MYSQL_CHARSET: utf8mb4
+      MYSQL_COLLATION: utf8mb4_unicode_ci
+    ports:
+      - "3306:3306"
+    volumes:
+      - mariadb_data:/var/lib/mysql
+      - ./docker/mariadb/init:/docker-entrypoint-initdb.d
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --innodb-buffer-pool-size=1G
+      - --innodb-log-file-size=256M
+      - --max-connections=1000
+      - --query-cache-type=1
+      - --query-cache-size=64M
+      - --innodb-flush-log-at-trx-commit=2
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      start_period: 10s
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    networks:
+      - aero_melody_network
+
+  redis:
+    image: redis:7-alpine
+    container_name: aero_melody_cache
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes --maxmemory 256mb --maxmemory-policy allkeys-lru
+    networks:
+      - aero_melody_network
+
+volumes:
+  mariadb_data:
+    driver: local
+  redis_data:
+    driver: local
+
+networks:
+  aero_melody_network:
+    driver: bridge
