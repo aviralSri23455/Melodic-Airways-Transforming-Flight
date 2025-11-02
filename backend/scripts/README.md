@@ -1,200 +1,280 @@
-# Scripts Documentation
+# Backend Scripts
 
-This directory contains all setup and utility scripts for the Aero Melody backend.
+## Community Features Setup Scripts
 
-## 📁 Available Scripts
+This folder contains scripts to set up and test community features for Aero Melody.
 
-### Setup Scripts
-- **`setup_database.py`** - Database initialization and schema setup
-- **`setup-windows.ps1`** - Windows-specific environment setup
-- **`start.sh`** - Linux/Mac startup script
-
-### Data Management
-- **`etl_openflights.py`** - Import OpenFlights dataset into database
-- **`download_data.py`** - Download and prepare OpenFlights data
-
-### Windows Batch Scripts
-- **`windows/setup_redis_duckdb.bat`** - Complete Windows setup with Redis and DuckDB
-- **`windows/run_etl_with_fix.bat`** - Database schema fixes and ETL execution
-
-### Verification & Testing
-- **`verify_integration.py`** - Comprehensive system verification script
+---
 
 ## 🚀 Quick Start
 
-### Database Setup
+### Run the Setup (Recommended)
+
 ```bash
-# Initialize database and create tables
-python scripts/setup_database.py
-
-# Import OpenFlights data (67,000+ routes)
-python scripts/etl_openflights.py
+run_community_setup.bat
 ```
 
-### System Verification
-```bash
-# Verify all components work together
-python scripts/verify_integration.py
-```
+This will:
+1. Create all database tables
+2. Create database views
+3. Insert sample data
+4. Run tests
+5. Show results
 
-### Development Environment
-```bash
-# Windows setup
-powershell -ExecutionPolicy Bypass -File scripts/setup-windows.ps1
+---
 
-# Linux/Mac startup
-chmod +x scripts/start.sh
-./scripts/start.sh
-```
+## 📁 Files
 
-### Windows Batch Scripts
-```cmd
-# Complete Windows setup (run from backend directory)
-scripts\windows\setup_redis_duckdb.bat
-
-# Database fixes and ETL (run from backend directory)
-scripts\windows\run_etl_with_fix.bat
-```
-
-## 📋 Script Details
-
-### setup_database.py
-Creates all database tables and indexes required for the application.
-
+### 1. run_community_setup.bat
+**Purpose:** One-click setup for community features
 **Usage:**
 ```bash
-python scripts/setup_database.py
+run_community_setup.bat
 ```
+**What it does:**
+- Activates Python virtual environment
+- Runs setup_community_db.py
+- Runs test_community_features.py
+- Shows success/failure report
 
-**Features:**
-- Creates MariaDB tables with proper indexes
-- Sets up JSON columns for vector storage
-- Configures full-text search
-- Validates database connection
+---
 
-### etl_openflights.py
-Imports the complete OpenFlights dataset into the database.
-
+### 2. setup_community_db.py
+**Purpose:** Python script to execute SQL setup
 **Usage:**
 ```bash
-python scripts/etl_openflights.py
+python setup_community_db.py
 ```
-
-**Data Source:**
-- 7,000+ airports with coordinates
-- 67,000+ flight routes
-- Distance calculations using Haversine formula
-
-### verify_integration.py
-Comprehensive verification script that tests all system components.
-
-**Usage:**
-```bash
-python scripts/verify_integration.py
-```
-
-**Tests:**
-- ✅ Database models and relationships
-- ✅ JSON vector storage and similarity
-- ✅ API routes and endpoints
-- ✅ MariaDB configuration
-- ✅ Real-time features verification
-- ✅ No paid extensions required
+**What it does:**
+- Reads `../sql/setup_community_features.sql`
+- Executes each SQL statement
+- Creates tables and views
+- Inserts sample data
+- Handles errors gracefully
 
 **Output:**
-- Detailed verification report
-- System readiness confirmation
-- Setup instructions for frontend team
-
-### setup-windows.ps1
-Windows-specific setup script for development environment.
-
-**Features:**
-- Environment configuration
-- Path setup
-- Windows-specific optimizations
-
-### start.sh
-Linux/Mac startup script for development environment.
-
-**Features:**
-- Environment activation
-- Service startup
-- Development server launch
-
-### download_data.py
-Helper script for downloading and preparing OpenFlights data.
-
-### Windows Batch Scripts
-
-#### setup_redis_duckdb.bat
-Complete Windows setup script that handles the entire development environment setup.
-
-**Usage:**
-```cmd
-scripts\windows\setup_redis_duckdb.bat
+```
+🚀 Starting Community Features Database Setup...
+============================================================
+📄 Using SQL file: C:\...\backend\sql\setup_community_features.sql
+Executing statement 1/50...
+Executing statement 2/50...
+...
+✅ Community features database setup completed!
 ```
 
-**Features:**
-- Creates Python virtual environment
-- Upgrades pip to latest version
-- Installs all dependencies from requirements.txt
-- Creates necessary directories (data/, midi_output/)
-- Tests Redis Cloud connection
-- Provides setup completion status
+---
 
-#### run_etl_with_fix.bat
-Database maintenance script that fixes schema issues and runs the ETL process.
-
+### 3. test_community_features.py
+**Purpose:** Automated test suite for community features
 **Usage:**
-```cmd
-scripts\windows\run_etl_with_fix.bat
+```bash
+python test_community_features.py
+```
+**What it tests:**
+- All 7 tables exist
+- trending_compositions_view exists
+- Sample data inserted correctly
+- Queries execute without errors
+- Foreign key relationships work
+
+**Output:**
+```
+🧪 Community Features Test Suite
+============================================================
+🔍 Testing database tables...
+  ✅ forum_threads: 8 rows
+  ✅ forum_replies: 0 rows
+  ✅ contests: 1 rows
+  ✅ contest_submissions: 0 rows
+  ✅ composition_likes: 0 rows
+  ✅ composition_comments: 0 rows
+  ✅ user_follows: 0 rows
+
+🔍 Testing trending_compositions_view...
+  ✅ View exists with X compositions
+
+🔍 Testing sample data...
+  Forum threads: 8
+  Contests: 1
+  ✅ Sample data looks good!
+
+🔍 Testing community service queries...
+  ✅ Trending query works! Found X recent compositions
+
+🔍 Testing table relationships...
+  ✅ Forum threads linked to users
+  ✅ Contests linked to users
+
+📊 Test Results Summary
+============================================================
+  ✅ PASS - Tables
+  ✅ PASS - View
+  ✅ PASS - Sample Data
+  ✅ PASS - Queries
+  ✅ PASS - Relationships
+
+🎉 All tests passed! (5/5)
+✅ Community features are working correctly!
 ```
 
-**Features:**
-- Applies database schema fixes from SQL files
-- Runs the OpenFlights ETL import process
-- Error handling with detailed messages
-- Step-by-step progress reporting
+---
 
-## 🔧 Configuration
+## 🗄️ Database Objects Created
 
-All scripts use configuration from:
-- Environment variables (`.env` file)
-- Database connection settings
-- Redis configuration
+### Tables (7)
+1. **forum_threads** - Discussion threads
+2. **forum_replies** - Replies to threads
+3. **contests** - Composition contests
+4. **contest_submissions** - Contest entries
+5. **composition_likes** - Like tracking
+6. **composition_comments** - Comment system
+7. **user_follows** - User relationships
 
-## 🐛 Troubleshooting
+### Views (1)
+1. **trending_compositions_view** - Trending score calculation
 
-### Common Issues
+### Sample Data
+- 8 forum threads (various categories)
+- 1 contest (Winter 2025 Challenge)
 
-1. **Database Connection Failed**
+---
+
+## 🔧 Troubleshooting
+
+### Error: "venv not found"
+```bash
+cd ..
+python -m venv venv
+venv\Scripts\activate
+pip install -r requirements.txt
+```
+
+### Error: "Can't connect to database"
+1. Check MySQL is running
+2. Check `.env` file credentials
+3. Verify database `melody_aero` exists
+
+### Error: "Permission denied"
+Run Command Prompt as Administrator
+
+### Error: "Table already exists"
+This is normal if you've run setup before. The script will skip existing tables.
+
+### Tests Failing
+1. Re-run `run_community_setup.bat`
+2. Check MySQL user has proper permissions
+3. Verify at least one user exists in database
+
+---
+
+## 📝 Manual Setup
+
+If the batch file doesn't work, run manually:
+
+### Step 1: Activate Virtual Environment
+```bash
+cd backend
+venv\Scripts\activate
+```
+
+### Step 2: Run Setup
+```bash
+python scripts/setup_community_db.py
+```
+
+### Step 3: Run Tests
+```bash
+python scripts/test_community_features.py
+```
+
+---
+
+## 🔍 Verification
+
+After setup, verify in MySQL:
+
+```sql
+USE melody_aero;
+
+-- Check tables exist
+SHOW TABLES;
+
+-- Check sample data
+SELECT COUNT(*) FROM forum_threads;  -- Should be 8
+SELECT COUNT(*) FROM contests;       -- Should be 1
+
+-- Check view exists
+SHOW FULL TABLES WHERE Table_type = 'VIEW';
+
+-- Test view
+SELECT * FROM trending_compositions_view LIMIT 5;
+```
+
+---
+
+## 📚 Related Files
+
+### SQL Schema
+- `../sql/setup_community_features.sql` - Complete SQL setup
+
+### Documentation
+- `../../START_HERE.md` - Main entry point
+- `../../QUICK_FIX_NOW.md` - Quick fix guide
+- `../../SETUP_CHECKLIST.md` - Verification checklist
+- `../../COMMUNITY_FIXES_GUIDE.md` - Comprehensive guide
+
+---
+
+## 🎯 What Gets Fixed
+
+Running these scripts fixes:
+- ✅ Community feed (no more dummy content)
+- ✅ Contest entry (button now works)
+- ✅ Database errors (tables created)
+- ✅ Column errors (queries fixed)
+- ✅ Forum threads (8 threads added)
+- ✅ Sample contest (1 contest added)
+
+---
+
+## 🚀 Next Steps
+
+After running setup:
+
+1. **Start Backend**
    ```bash
-   # Check database is running
-   python scripts/verify_integration.py
+   cd ..
+   python main.py
    ```
 
-2. **Import Errors**
+2. **Start Frontend**
    ```bash
-   # Verify all dependencies installed
-   pip install -r requirements.txt
+   cd ../..
+   npm run dev
    ```
 
-3. **Permission Issues**
-   ```bash
-   # Make scripts executable (Linux/Mac)
-   chmod +x scripts/*.sh
-   ```
+3. **Test Features**
+   - Visit `http://localhost:5173/community`
+   - Check forum threads display
+   - Check contest displays
+   - Try entering contest
 
-4. **Batch Script Path Issues**
-   ```cmd
-   # Run from project root directory
-   scripts\windows\setup_redis_duckdb.bat
-   ```
+---
 
-## 📚 Related Documentation
+## 📊 Success Criteria
 
-- **Main Documentation**: See [../docs/README.md](../docs/README.md)
-- **Database Setup**: See [../docs/database/README.md](../docs/database/README.md)
-- **API Reference**: See [../docs/api/README.md](../docs/api/README.md)
-- **Testing**: See [../tests/README.md](../tests/README.md)
+Setup is successful when:
+- ✅ All tests pass (5/5)
+- ✅ No database errors
+- ✅ 8 forum threads exist
+- ✅ 1 contest exists
+- ✅ View created successfully
+
+---
+
+## 🎉 All Done!
+
+Your community features are now set up and ready to use!
+
+For more information, see the documentation in the project root.

@@ -13,15 +13,21 @@ from sqlalchemy import text
 
 from app.api.routes import router as api_router
 from app.api.extended_routes import router as extended_router
-from app.api.community_routes import router as community_router
 from app.api.analytics_routes import router as analytics_router
 from app.api.redis_routes import router as redis_router
 from app.api.openflights_routes import router as openflights_router
 from app.api.demo_routes import router as demo_router
 from app.api.analytics_showcase_routes import router as analytics_showcase_router
 from app.api.websocket_demo import router as websocket_demo_router
+from app.api.wellness_routes import router as wellness_router
+from app.api.premium_routes import router as premium_router
+from app.api.education_routes import router as education_router
+from app.api.vrar_routes import router as vrar_router
+from app.api.vector_routes import router as vector_router
+from app.api.metrics_routes import router as metrics_router
 from app.core.config import settings
 from app.db.database import engine, Base, get_db, async_session
+from app.middleware.throughput_monitor import ThroughputMiddleware, get_throughput_monitor
 
 # Configure logging
 logging.basicConfig(
@@ -74,6 +80,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Add throughput monitoring middleware
+app.add_middleware(ThroughputMiddleware, monitor=get_throughput_monitor())
+
 # Include API routes
 try:
     app.include_router(api_router, prefix=settings.API_V1_STR, tags=["Core"])
@@ -86,12 +95,6 @@ try:
     logger.info("✅ extended_router included successfully")
 except Exception as e:
     logger.error(f"❌ Failed to include extended_router: {e}")
-
-try:
-    app.include_router(community_router, prefix=settings.API_V1_STR, tags=["Community"])
-    logger.info("✅ community_router included successfully")
-except Exception as e:
-    logger.error(f"❌ Failed to include community_router: {e}")
 
 try:
     app.include_router(analytics_router, prefix=settings.API_V1_STR, tags=["Analytics"])
@@ -133,6 +136,42 @@ try:
     logger.info("✅ websocket_demo_router included successfully")
 except Exception as e:
     logger.error(f"❌ Failed to include websocket_demo_router: {e}")
+
+try:
+    app.include_router(wellness_router, prefix=f"{settings.API_V1_STR}/wellness", tags=["Wellness"])
+    logger.info("✅ wellness_router included successfully")
+except Exception as e:
+    logger.error(f"❌ Failed to include wellness_router: {e}")
+
+try:
+    app.include_router(premium_router, prefix=f"{settings.API_V1_STR}/premium", tags=["Premium"])
+    logger.info("✅ premium_router included successfully")
+except Exception as e:
+    logger.error(f"❌ Failed to include premium_router: {e}")
+
+try:
+    app.include_router(education_router, prefix=f"{settings.API_V1_STR}/education", tags=["Education"])
+    logger.info("✅ education_router included successfully")
+except Exception as e:
+    logger.error(f"❌ Failed to include education_router: {e}")
+
+try:
+    app.include_router(vrar_router, prefix=f"{settings.API_V1_STR}/vr-ar", tags=["VR/AR"])
+    logger.info("✅ vrar_router included successfully")
+except Exception as e:
+    logger.error(f"❌ Failed to include vrar_router: {e}")
+
+try:
+    app.include_router(vector_router, prefix=settings.API_V1_STR, tags=["Vector Embeddings"])
+    logger.info("✅ vector_router included successfully")
+except Exception as e:
+    logger.error(f"❌ Failed to include vector_router: {e}")
+
+try:
+    app.include_router(metrics_router, prefix=settings.API_V1_STR, tags=["Performance Metrics"])
+    logger.info("✅ metrics_router included successfully")
+except Exception as e:
+    logger.error(f"❌ Failed to include metrics_router: {e}")
 
 # Global exception handler
 @app.exception_handler(Exception)

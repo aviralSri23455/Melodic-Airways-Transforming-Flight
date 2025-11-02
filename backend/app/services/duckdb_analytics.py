@@ -110,8 +110,12 @@ class DuckDBAnalytics:
 
             # Performance metrics table
             self.conn.execute("""
+                CREATE SEQUENCE IF NOT EXISTS performance_metrics_seq START 1
+            """)
+            
+            self.conn.execute("""
                 CREATE TABLE IF NOT EXISTS performance_metrics (
-                    id INTEGER PRIMARY KEY,
+                    id INTEGER PRIMARY KEY DEFAULT nextval('performance_metrics_seq'),
                     operation_type VARCHAR,
                     execution_time_ms DOUBLE,
                     success BOOLEAN,
@@ -475,6 +479,20 @@ class DuckDBAnalytics:
             True if successful, False otherwise
         """
         try:
+            # Convert Decimal and other non-serializable types to float/str
+            if metadata:
+                from decimal import Decimal
+                def convert_decimals(obj):
+                    if isinstance(obj, Decimal):
+                        return float(obj)
+                    elif isinstance(obj, dict):
+                        return {k: convert_decimals(v) for k, v in obj.items()}
+                    elif isinstance(obj, list):
+                        return [convert_decimals(item) for item in obj]
+                    return obj
+                
+                metadata = convert_decimals(metadata)
+            
             metadata_json = json.dumps(metadata) if metadata else None
             
             self.conn.execute("""

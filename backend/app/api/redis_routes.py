@@ -370,14 +370,38 @@ async def get_all_active_sessions():
 
 @router.get("/cache/stats")
 async def get_cache_stats():
-    """Get Redis cache statistics"""
+    """Get Redis cache statistics - OPTIMIZED for high throughput"""
     try:
         cache_service = get_cache()
+        
+        # Cache stats for 3 seconds to reduce load using redis_client directly
+        cache_key = "aero:cache:cache_stats"
+        
+        if cache_service.redis_client:
+            try:
+                cached_data = cache_service.redis_client.get(cache_key)
+                if cached_data:
+                    return {
+                        "status": "success",
+                        "cache_stats": json.loads(cached_data),
+                        "cached": True
+                    }
+            except Exception:
+                pass  # Cache miss or error, continue
+        
         stats = cache_service.get_cache_stats()
+        
+        # Cache for 3 seconds
+        if cache_service.redis_client:
+            try:
+                cache_service.redis_client.setex(cache_key, 3, json.dumps(stats, default=str))
+            except Exception:
+                pass  # Cache write failed, but return data anyway
 
         return {
             "status": "success",
-            "cache_stats": stats
+            "cache_stats": stats,
+            "cached": False
         }
 
     except Exception as e:
@@ -411,16 +435,41 @@ async def clear_cache(
         raise HTTPException(status_code=500, detail=str(e))
 
 
-@router.get("/storage/info")
+@router.get("/storage-info")
 async def get_storage_info():
-    """Get Redis storage usage information"""
+    """Get Redis storage usage information - OPTIMIZED for high throughput"""
     try:
         cache_service = get_cache()
+        
+        # Check cache first - cache storage info for 5 seconds using redis_client directly
+        cache_key = "aero:cache:storage_info"
+        
+        if cache_service.redis_client:
+            try:
+                cached_data = cache_service.redis_client.get(cache_key)
+                if cached_data:
+                    return {
+                        "status": "success",
+                        "storage_info": json.loads(cached_data),
+                        "cached": True
+                    }
+            except Exception:
+                pass  # Cache miss or error, continue
+        
+        # Get fresh data
         storage_info = cache_service.get_storage_info()
+        
+        # Cache for 5 seconds to reduce Redis INFO calls
+        if cache_service.redis_client:
+            try:
+                cache_service.redis_client.setex(cache_key, 5, json.dumps(storage_info, default=str))
+            except Exception:
+                pass  # Cache write failed, but return data anyway
 
         return {
             "status": "success",
-            "storage_info": storage_info
+            "storage_info": storage_info,
+            "cached": False
         }
 
     except Exception as e:

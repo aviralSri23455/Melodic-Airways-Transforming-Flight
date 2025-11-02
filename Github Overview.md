@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)
+![Version](https://img.shields.io/badge/version-2.0.0-blue.svg)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 ![Python](https://img.shields.io/badge/python-3.9+-blue.svg)
 ![React](https://img.shields.io/badge/react-18.3-blue.svg)
@@ -10,7 +10,7 @@
 
 **Transform global flight routes into beautiful musical compositions using AI and data visualization**
 
-[Features](#-features) • [Architecture](#-architecture) • [Quick Start](#-quick-start) • [API Docs](#-api-documentation) • [Demo](#-demo)
+[Quick Start](#-quick-start) • [Features](#-features) • [API Docs](#-api-documentation) • [Tech Stack](#-technology-stack)
 
 </div>
 
@@ -20,298 +20,87 @@
 
 - [Overview](#-overview)
 - [Features](#-features)
-- [Architecture](#-architecture)
-- [Technology Stack](#-technology-stack)
 - [Quick Start](#-quick-start)
-- [Project Structure](#-project-structure)
-- [Music Generation](#-music-generation)
+- [Backend Setup](#-backend-setup)
 - [API Documentation](#-api-documentation)
-- [Real-time Features](#-real-time-features)
-- [Deployment](#-deployment)
-- [Contributing](#-contributing)
+- [Technology Stack](#-technology-stack)
+- [Troubleshooting](#-troubleshooting)
 
 ---
 
 ## 🌟 Overview
 
-**Aero Melody** is an innovative full-stack application that bridges aviation data and creative art by converting complex flight logistics into unique auditory experiences. Using the OpenFlights dataset with **3,000+ airports** and **67,000+ routes**, users can generate completely unique musical compositions based on flight paths, distances, and geographic characteristics.
+**Aero Melody** transforms flight routes into unique musical compositions using **3,000+ airports** and **67,000+ routes** from OpenFlights. Every route generates deterministic music with dynamic tempo (70-140 BPM), multiple scales, and real-time AI embeddings for similarity search.
 
-### What Makes It Unique?
+### Why This Matters
 
-- **Every route creates different music** - Same origin/destination = same composition (deterministic)
-- **6 different musical scales** - Selected based on route characteristics
-- **Dynamic tempo** - Adjusted by flight distance (70-140 BPM)
-- **Three-track harmony** - Melody, harmony, and bass playing simultaneously
-- **Real-time collaboration** - Multiple users can edit compositions together
-- **AI-powered similarity** - Find musically similar routes using vector embeddings
+**Data Sonification for Learning & Creativity**
 
+Aero Melody bridges the gap between abstract data and human perception by transforming geographic information into sound. This approach:
+
+- **Makes Data Tangible**: Geographic distances, coordinates, and route complexity become audible patterns, making abstract concepts concrete and memorable
+- **Enhances Education**: Students learn geography, graph theory, and music theory simultaneously through multi-sensory experiences that improve retention
+- **Enables Creative Exploration**: Artists and musicians can discover new compositional ideas by exploring the musical patterns hidden in global flight networks
+- **Supports Wellness**: Long-distance routes generate calming ambient soundscapes, offering a unique approach to therapeutic audio
+- **Demonstrates AI Applications**: Shows practical use of neural networks, vector embeddings, and similarity search in a creative, accessible context
+- **Inspires Innovation**: Proves that any structured dataset can be transformed into meaningful artistic expression, opening doors for other data sonification projects
+
+Whether you're an educator teaching complex concepts, a developer exploring AI/ML applications, a musician seeking inspiration, or simply curious about the intersection of data and art, Aero Melody offers a unique lens to experience our connected world.
+
+### Key Highlights
+
+- **Deterministic Music Generation**: Same route = same composition
+- **6 Musical Scales**: Major, Minor, Pentatonic, Blues, Dorian, Phrygian
+- **Multi-track Harmony**: Melody, harmony, and bass
+- **Real-time Embeddings**: AI-powered similarity search
+- **Educational Platform**: Interactive lessons on geography and music theory
+- **Wellness Features**: Therapeutic soundscapes
+- **VR/AR Support**: 3D globe with spatial audio
+- **Redis Cloud Caching**: Sub-millisecond performance
+- **FAISS Vector Search**: Fast similarity matching
 
 ---
 
 ## ✨ Features
 
 ### 🎼 Music Generation
-- **AI-Powered Composition**: PyTorch embeddings transform route characteristics into musical parameters
-- **6 Musical Scales**: Major, Minor, Pentatonic, Blues, Dorian, Phrygian
-- **Dynamic Tempo**: 70-140 BPM based on flight distance
-- **Multi-track Output**: Melody, harmony, and bass tracks
-- **MIDI Export**: Download compositions as MIDI files
+- AI-powered composition with PyTorch embeddings
+- Dynamic tempo based on flight distance
+- MIDI export and real-time playback
+- Genre-specific composition (8 genres)
 
-### 🗺️ Interactive Visualization
-- **Global Route Maps**: Mapbox GL integration with flight path visualization
-- **Real-time Updates**: Live route tracking and composition progress
-- **Airport Search**: Fast search across 3,000+ airports
-- **Route Analytics**: Distance, duration, and complexity metrics
+### 🗺️ Visualization & Analytics
+- Global route maps with Mapbox GL
+- Real-time route tracking
+- Airport search across 3,000+ airports
+- Route complexity and performance metrics
+- DuckDB analytics for insights
 
-### 🤝 Collaboration & Community
-- **Real-time Collaboration**: WebSocket-based collaborative editing
-- **Composition Sharing**: Public gallery and remix features
-- **Personal Collections**: Create and manage custom datasets
-- **Social Features**: Like, comment, and share compositions
+### 🎓 Educational Platform
+- Interactive lessons (Geography, Graph Theory, Music Theory)
+- Real-time quizzes with visual feedback
+- Interactive lab for experimentation
+- Learning insights dashboard
 
-### ⚡ Performance & Caching
-- **Redis Cloud**: Lightning-fast caching with 30-minute TTL
-- **Vector Similarity**: Find similar compositions using cosine similarity
-- **DuckDB Analytics**: Real-time performance monitoring (optional)
-- **Optimized Queries**: Indexed database with JSON storage
+### 🧘 Wellness Features
+- Calming soundscapes (3 themes)
+- Adjustable calm level (0-100)
+- Binaural frequency support
+- Serene route recommendations
 
-### 🔐 Security & Authentication
-- **JWT Authentication**: Secure token-based auth
-- **Rate Limiting**: 1000 requests per minute
-- **CORS Protection**: Configurable origin whitelist
+### 🥽 VR/AR Experience
+- 3D globe visualization
+- Animated flight paths
+- WebXR support (Oculus, HTC Vive, Valve Index)
+- Orbit controls for navigation
+
+### ⚡ Performance & Security
+- Redis Cloud caching (30-min TTL)
+- FAISS vector similarity search (~1ms)
+- JWT authentication
+- Rate limiting (1000 req/min)
+- CORS protection
 - **Input Validation**: Pydantic schemas for all endpoints
-
-
----
-
-## 🏗️ Architecture
-
-### System Architecture Diagram
-
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                              CLIENT LAYER                                    │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                               │
-│  ┌──────────────────────────────────────────────────────────────────────┐  │
-│  │                    React Frontend (Port 5173)                         │  │
-│  │  ┌────────────┐  ┌────────────┐  ┌────────────┐  ┌────────────┐    │  │
-│  │  │   Hero     │  │   Route    │  │   Music    │  │  Analytics │    │  │
-│  │  │ Component  │  │  Selector  │  │   Player   │  │ Dashboard  │    │  │
-│  │  └────────────┘  └────────────┘  └────────────┘  └────────────┘    │  │
-│  │                                                                       │  │
-│  │  ┌────────────┐  ┌────────────┐  ┌────────────┐  ┌────────────┐    │  │
-│  │  │  Global    │  │   Route    │  │   Music    │  │  Features  │    │  │
-│  │  │    Map     │  │    Viz     │  │  Controls  │  │  Showcase  │    │  │
-│  │  └────────────┘  └────────────┘  └────────────┘  └────────────┘    │  │
-│  │                                                                       │  │
-│  │  Tech: React 18 + TypeScript + Tailwind CSS + shadcn/ui             │  │
-│  │  State: React Query + React Router + Mapbox GL                       │  │
-│  └──────────────────────────────────────────────────────────────────────┘  │
-│                                    │                                         │
-│                                    │ HTTP/REST + WebSocket                  │
-│                                    ▼                                         │
-└─────────────────────────────────────────────────────────────────────────────┘
-
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                           API GATEWAY LAYER                                  │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                               │
-│  ┌──────────────────────────────────────────────────────────────────────┐  │
-│  │              FastAPI Backend (Port 8000)                              │  │
-│  │                                                                        │  │
-│  │  ┌─────────────────────────────────────────────────────────────┐    │  │
-│  │  │                    API Routes Layer                          │    │  │
-│  │  │  ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐       │    │  │
-│  │  │  │   Core   │ │ Extended │ │Community │ │Analytics │       │    │  │
-│  │  │  │  Routes  │ │  Routes  │ │  Routes  │ │  Routes  │       │    │  │
-│  │  │  └──────────┘ └──────────┘ └──────────┘ └──────────┘       │    │  │
-│  │  │  ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐       │    │  │
-│  │  │  │  Redis   │ │OpenFlights│ │   Demo   │ │WebSocket │       │    │  │
-│  │  │  │  Routes  │ │  Routes  │ │  Routes  │ │  Routes  │       │    │  │
-│  │  │  └──────────┘ └──────────┘ └──────────┘ └──────────┘       │    │  │
-│  │  └─────────────────────────────────────────────────────────────┘    │  │
-│  │                                                                        │  │
-│  │  Middleware: CORS • JWT Auth • Rate Limiting • Error Handling        │  │
-│  └──────────────────────────────────────────────────────────────────────┘  │
-│                                    │                                         │
-│                                    ▼                                         │
-└─────────────────────────────────────────────────────────────────────────────┘
-
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                          BUSINESS LOGIC LAYER                                │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                               │
-│  ┌──────────────────────────────────────────────────────────────────────┐  │
-│  │                         Service Layer                                 │  │
-│  │                                                                        │  │
-│  │  ┌────────────────┐  ┌────────────────┐  ┌────────────────┐         │  │
-│  │  │     Music      │  │     Genre      │  │    Realtime    │         │  │
-│  │  │   Generator    │  │   Composer     │  │   Generator    │         │  │
-│  │  │                │  │                │  │                │         │  │
-│  │  │ • MIDI Output  │  │ • AI Embeddings│  │ • Live Updates │         │  │
-│  │  │ • Scale Logic  │  │ • PyTorch ML   │  │ • WebSocket    │         │  │
-│  │  │ • Tempo Calc   │  │ • Style Match  │  │ • Pub/Sub      │         │  │
-│  │  └────────────────┘  └────────────────┘  └────────────────┘         │  │
-│  │                                                                        │  │
-│  │  ┌────────────────┐  ┌────────────────┐  ┌────────────────┐         │  │
-│  │  │     Graph      │  │     Vector     │  │   Community    │         │  │
-│  │  │  Pathfinder    │  │    Service     │  │    Service     │         │  │
-│  │  │                │  │                │  │                │         │  │
-│  │  │ • Dijkstra's   │  │ • Cosine Sim   │  │ • Social       │         │  │
-│  │  │ • NetworkX     │  │ • Embeddings   │  │ • Collections  │         │  │
-│  │  │ • Route Opt    │  │ • Similarity   │  │ • Sharing      │         │  │
-│  │  └────────────────┘  └────────────────┘  └────────────────┘         │  │
-│  │                                                                        │  │
-│  │  ┌────────────────┐  ┌────────────────┐  ┌────────────────┐         │  │
-│  │  │   WebSocket    │  │     Redis      │  │    Dataset     │         │  │
-│  │  │    Manager     │  │   Publisher    │  │    Manager     │         │  │
-│  │  │                │  │                │  │                │         │  │
-│  │  │ • Connections  │  │ • Pub/Sub      │  │ • OpenFlights  │         │  │
-│  │  │ • Broadcasting │  │ • Events       │  │ • ETL Pipeline │         │  │
-│  │  │ • Sessions     │  │ • Notifications│  │ • Data Import  │         │  │
-│  │  └────────────────┘  └────────────────┘  └────────────────┘         │  │
-│  └──────────────────────────────────────────────────────────────────────┘  │
-│                                    │                                         │
-│                                    ▼                                         │
-└─────────────────────────────────────────────────────────────────────────────┘
-
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                            DATA LAYER                                        │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                               │
-│  ┌──────────────────┐  ┌──────────────────┐  ┌──────────────────┐          │
-│  │   MariaDB        │  │   Redis Cloud    │  │   DuckDB         │          │
-│  │   (Primary DB)   │  │   (Caching)      │  │   (Analytics)    │          │
-│  │                  │  │                  │  │                  │          │
-│  │ • Airports       │  │ • Compositions   │  │ • Route Stats    │          │
-│  │ • Routes         │  │ • Sessions       │  │ • Performance    │          │
-│  │ • Users          │  │ • Pub/Sub        │  │ • Metrics        │          │
-│  │ • Compositions   │  │ • Real-time      │  │ • Similarity     │          │
-│  │ • Collections    │  │ • TTL: 30min     │  │ • Optional       │          │
-│  │ • JSON Vectors   │  │ • 30MB Plan      │  │                  │          │
-│  │                  │  │                  │  │                  │          │
-│  │ Port: 3306       │  │ Port: 16441      │  │ File-based       │          │
-│  │ Async: asyncmy   │  │ redis-py         │  │ In-memory        │          │
-│  └──────────────────┘  └──────────────────┘  └──────────────────┘          │
-│                                                                               │
-└─────────────────────────────────────────────────────────────────────────────┘
-
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                         EXTERNAL SERVICES                                    │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                               │
-│  ┌──────────────────┐  ┌──────────────────┐  ┌──────────────────┐          │
-│  │   OpenFlights    │  │   Mapbox GL      │  │   PyTorch        │          │
-│  │   Dataset        │  │   Maps API       │  │   ML Models      │          │
-│  │                  │  │                  │  │                  │          │
-│  │ • 3,000 Airports │  │ • Route Viz      │  │ • Embeddings     │          │
-│  │ • 67,000 Routes  │  │ • Interactive    │  │ • Genre AI       │          │
-│  │ • GitHub Raw     │  │ • Styling        │  │ • Local CPU      │          │
-│  └──────────────────┘  └──────────────────┘  └──────────────────┘          │
-│                                                                               │
-└─────────────────────────────────────────────────────────────────────────────┘
-```
-
-### Data Flow
-
-```
-User Input (JFK → LAX)
-        │
-        ▼
-┌───────────────────┐
-│  Route Selector   │  ← Search airports, select origin/destination
-└───────────────────┘
-        │
-        ▼
-┌───────────────────┐
-│   API Request     │  → POST /api/v1/demo/complete-demo
-└───────────────────┘
-        │
-        ▼
-┌───────────────────┐
-│  Redis Cache?     │  ← Check if composition exists
-└───────────────────┘
-    │           │
-    │ Cache Hit │ Cache Miss
-    │           ▼
-    │   ┌───────────────────┐
-    │   │ Music Generator   │  ← Generate new composition
-    │   │                   │
-    │   │ 1. Calculate      │
-    │   │    distance       │
-    │   │ 2. Select scale   │
-    │   │ 3. Set tempo      │
-    │   │ 4. Generate notes │
-    │   │ 5. Create MIDI    │
-    │   └───────────────────┘
-    │           │
-    │           ▼
-    │   ┌───────────────────┐
-    │   │  Save to Redis    │  ← Cache for 30 minutes
-    │   └───────────────────┘
-    │           │
-    └───────────┘
-        │
-        ▼
-┌───────────────────┐
-│  Return JSON      │  → Composition data + MIDI
-└───────────────────┘
-        │
-        ▼
-┌───────────────────┐
-│  Music Player     │  ← Play in browser with Web Audio API
-└───────────────────┘
-```
-
-
----
-
-## 🛠️ Technology Stack
-
-### Frontend
-| Technology | Purpose | Version |
-|-----------|---------|---------|
-| **React** | UI Framework | 18.3.1 |
-| **TypeScript** | Type Safety | 5.8.3 |
-| **Vite** | Build Tool | 5.4.19 |
-| **Tailwind CSS** | Styling | 3.4.17 |
-| **shadcn/ui** | Component Library | Latest |
-| **React Query** | Data Fetching | 5.83.0 |
-| **React Router** | Navigation | 6.30.1 |
-| **Mapbox GL** | Map Visualization | Via CDN |
-| **Framer Motion** | Animations | 12.23.24 |
-| **Axios** | HTTP Client | 1.6.0 |
-
-### Backend
-| Technology | Purpose | Version |
-|-----------|---------|---------|
-| **FastAPI** | Web Framework | Latest |
-| **Python** | Language | 3.9+ |
-| **SQLAlchemy** | ORM | Latest (async) |
-| **Pydantic** | Validation | Latest |
-| **PyTorch** | ML/AI | Latest |
-| **NetworkX** | Graph Algorithms | Latest |
-| **Mido** | MIDI Generation | Latest |
-| **python-jose** | JWT Auth | Latest |
-| **Redis** | Caching | redis-py |
-
-### Databases & Storage
-| Technology | Purpose | Details |
-|-----------|---------|---------|
-| **MariaDB** | Primary Database | 10.5+, Async with asyncmy |
-| **Redis Cloud** | Caching & Pub/Sub | 30MB plan, 30min TTL |
-| **DuckDB** | Analytics | Optional, file-based |
-
-### DevOps & Tools
-| Technology | Purpose |
-|-----------|---------|
-| **Docker** | Containerization |
-| **Docker Compose** | Multi-container orchestration |
-| **pytest** | Backend testing |
-| **ESLint** | Frontend linting |
-| **Black** | Python formatting |
-
 
 ---
 
@@ -319,13 +108,37 @@ User Input (JFK → LAX)
 
 ### Prerequisites
 
-Before you begin, ensure you have the following installed:
-
 - **Python 3.9+** - [Download](https://www.python.org/downloads/)
 - **Node.js 16+** - [Download](https://nodejs.org/)
 - **MariaDB 10.5+** - [Download](https://mariadb.org/download/)
 - **Redis** - Cloud (recommended) or [Local](https://redis.io/download)
 - **Git** - [Download](https://git-scm.com/downloads)
+
+### Database Setup
+
+Before installing the application, set up your MariaDB database:
+
+```bash
+# Login to MariaDB as root
+mysql -u root -p
+
+# Create database
+CREATE DATABASE aero_melody CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+# Create user with permissions
+CREATE USER 'aero_user'@'localhost' IDENTIFIED BY 'your_secure_password';
+GRANT ALL PRIVILEGES ON aero_melody.* TO 'aero_user'@'localhost';
+FLUSH PRIVILEGES;
+
+# Verify database creation
+SHOW DATABASES;
+USE aero_melody;
+
+# Exit
+EXIT;
+```
+
+**Note**: Replace `your_secure_password` with a strong password. You'll use these credentials in your `.env` file.
 
 ### Installation
 
@@ -337,14 +150,6 @@ cd aero-melody
 ```
 
 #### 2. Backend Setup
-
-##### Windows (Automated)
-```bash
-cd backend
-scripts\windows\setup_redis_duckdb.bat
-```
-
-##### Manual Setup (All Platforms)
 
 ```bash
 cd backend
@@ -365,18 +170,19 @@ pip install -r requirements.txt
 # Copy .env.example to .env and edit with your credentials
 cp .env.example .env
 
-# Edit .env file with your database and Redis credentials
-# DATABASE_URL=mysql+asyncmy://user:password@localhost:3306/aero_melody
-# REDIS_URL=redis://default:password@host:port
-
 # Load OpenFlights data (3,000 airports + 67,000 routes)
 python scripts/etl_openflights.py
+
+# Setup vector embeddings (optional but recommended)
+setup_vector_embeddings.bat  # Windows
+# or
+python scripts/generate_route_embeddings.py  # Manual
 
 # Start development server
 python main.py
 ```
 
-**Backend will run at**: `http://localhost:8000`  
+**Backend runs at**: `http://localhost:8000`  
 **API Documentation**: `http://localhost:8000/docs`
 
 #### 3. Frontend Setup
@@ -389,22 +195,15 @@ cd ..
 npm install
 
 # Configure environment variables
-# Create .env.local file
 echo "VITE_API_BASE_URL=http://localhost:8000/api/v1" > .env.local
-
 
 # Start development server
 npm run dev
-
-# Build for production
-npm run build
 ```
 
-**Frontend will run at**: `http://localhost:5173`
+**Frontend runs at**: `http://localhost:5173`
 
 ### Quick Test
-
-Once both servers are running, test the API:
 
 ```bash
 # Health check
@@ -415,111 +214,478 @@ curl "http://localhost:8000/api/v1/demo/complete-demo?origin=JFK&destination=LAX
 
 # Search airports
 curl "http://localhost:8000/api/v1/airports/search?query=New%20York&limit=5"
+
+# Find similar routes (requires vector embeddings)
+curl "http://localhost:8000/api/v1/vectors/similar-routes?origin=JFK&destination=LAX&limit=10"
 ```
 
+### ✅ Verify Vector Embeddings After Git Clone
+
+After cloning the repository and setting up the backend, run this test to verify vector embeddings are working:
+
+```bash
+cd backend
+python test_vector_embeddings.py
+```
+
+**This test will check:**
+1. ✅ Database schema (vector columns exist)
+2. ✅ Embeddings generated (coverage percentage)
+3. ✅ Complexity metrics calculated
+4. ✅ Sample embedding data
+5. ✅ FAISS index (if available)
+
+**Expected Output:**
+```
+============================================================
+🔍 TESTING VECTOR EMBEDDINGS
+============================================================
+
+✓ Test 1: Checking database schema...
+   ✅ All vector columns exist: ['route_embedding', 'melodic_complexity', 'harmonic_complexity', 'rhythmic_complexity']
+
+✓ Test 2: Checking if embeddings are generated...
+   Total routes: 67663
+   Routes with embeddings: 67663
+   Coverage: 100.0%
+   ✅ Embeddings are generated!
+
+✓ Test 3: Checking complexity metrics...
+   Average melodic complexity: 0.450
+   Average harmonic complexity: 0.320
+   Average rhythmic complexity: 0.180
+   ✅ Complexity metrics are calculated!
+
+✓ Test 4: Checking sample embedding...
+   Sample route: JFK → LAX
+   Distance: 3974.0 km
+   Embedding dimension: 128D
+   Melodic: 0.199, Harmonic: 0.039, Rhythmic: 0.000
+   ✅ Sample embedding looks good!
+
+✓ Test 5: Checking FAISS index...
+   FAISS index found: 67663 vectors
+   ✅ FAISS index is ready!
+
+============================================================
+✅ VECTOR EMBEDDINGS ARE WORKING!
+============================================================
+
+📝 Summary:
+   • Database schema: ✅ Ready
+   • Embeddings generated: ✅ 100.0% coverage
+   • Complexity metrics: ✅ Calculated
+   • Sample data: ✅ Valid
+
+🎵 You can now use vector similarity search!
+   Try: GET /api/v1/vectors/similar-routes?origin=JFK&destination=LAX
+```
+
+**If embeddings are not set up:**
+The test will show you exactly what's missing and provide commands to fix it:
+- Missing database columns → Run SQL migration
+- No embeddings → Run generation script
+- No FAISS index → Optional but recommended
 
 ---
 
-## 📁 Project Structure
+## 🧬 Vector Embeddings - AI-Powered Music Similarity
+
+### Overview
+
+Vector embeddings enable **semantic similarity search** for routes based on **real-time music characteristics** extracted during playback. Using PyTorch neural networks and FAISS indexing, the system can find musically similar routes in ~1ms.
+
+### System Architecture
 
 ```
-aero-melody/
-│
-├── backend/                          # FastAPI Backend
-│   ├── app/
-│   │   ├── api/                      # API Routes
-│   │   │   ├── routes.py            # Core endpoints (auth, airports, routes)
-│   │   │   ├── extended_routes.py   # Extended features (collections, datasets)
-│   │   │   ├── community_routes.py  # Social features (sharing, likes)
-│   │   │   ├── analytics_routes.py  # Analytics endpoints
-│   │   │   ├── redis_routes.py      # Redis caching endpoints
-│   │   │   ├── openflights_routes.py # OpenFlights data endpoints
-│   │   │   ├── demo_routes.py       # Demo and testing endpoints
-│   │   │   └── websocket_demo.py    # WebSocket collaboration
-│   │   │
-│   │   ├── core/                     # Core Configuration
-│   │   │   ├── config.py            # Settings and environment variables
-│   │   │   └── security.py          # JWT auth and password hashing
-│   │   │
-│   │   ├── db/                       # Database
-│   │   │   ├── database.py          # SQLAlchemy setup
-│   │   │   └── models.py            # Database models
-│   │   │
-│   │   ├── models/                   # Pydantic Schemas
-│   │   │   ├── user.py              # User schemas
-│   │   │   ├── composition.py       # Composition schemas
-│   │   │   ├── route.py             # Route schemas
-│   │   │   └── ...                  # Other schemas
-│   │   │
-│   │   └── services/                 # Business Logic
-│   │       ├── music_generator.py   # MIDI generation
-│   │       ├── genre_composer.py    # AI genre composition
-│   │       ├── graph_pathfinder.py  # Dijkstra's algorithm
-│   │       ├── vector_service.py    # Similarity search
-│   │       ├── websocket_manager.py # WebSocket connections
-│   │       ├── redis_publisher.py   # Redis Pub/Sub
-│   │       ├── cache.py             # Redis caching
-│   │       ├── duckdb_analytics.py  # Analytics service
-│   │       └── ...                  # Other services
-│   │
-│   ├── scripts/                      # Utility Scripts
-│   │   ├── etl_openflights.py       # Load OpenFlights data
-│   │   ├── windows/                 # Windows batch scripts
-│   │   └── ...
-│   │
-│   ├── tests/                        # Test Suite
-│   │   ├── test_music.py
-│   │   ├── test_routes.py
-│   │   └── ...
-│   │
-│   ├── data/                         # Data Storage
-│   │   └── analytics.duckdb         # DuckDB database
-│   │
-│   ├── midi_output/                  # Generated MIDI files
-│   ├── main.py                       # Application entry point
-│   ├── requirements.txt              # Python dependencies
-│   └── .env                          # Environment variables
-│
-├── src/                              # React Frontend
-│   ├── components/                   # React Components
-│   │   ├── ui/                      # shadcn/ui components
-│   │   ├── Hero.tsx                 # Landing hero section
-│   │   ├── RouteSelector.tsx        # Airport search and selection
-│   │   ├── MusicPlayer.tsx          # Audio playback
-│   │   ├── MusicControls.tsx        # Playback controls
-│   │   ├── GlobalMap.tsx            # Mapbox visualization
-│   │   ├── RouteVisualization.tsx   # Route display
-│   │   ├── Analytics.tsx            # Analytics dashboard
-│   │   ├── Features.tsx             # Feature showcase
-│   │   └── MusicDNA.tsx             # Composition details
-│   │
-│   ├── hooks/                        # Custom React Hooks
-│   │   └── use-toast.ts             # Toast notifications
-│   │
-│   ├── lib/                          # Utilities
-│   │   └── utils.ts                 # Helper functions
-│   │
-│   ├── pages/                        # Route Pages
-│   │   ├── Index.tsx                # Home page
-│   │   └── NotFound.tsx             # 404 page
-│   │
-│   ├── App.tsx                       # App component
-│   ├── main.tsx                      # Entry point
-│   └── index.css                     # Global styles
-│
-├── public/                           # Static Assets
-│   ├── favicon.svg
-│   └── ...
-│
-├── .env                              # Frontend environment variables
-├── package.json                      # Node dependencies
-├── vite.config.ts                    # Vite configuration
-├── tailwind.config.ts                # Tailwind configuration
-├── tsconfig.json                     # TypeScript configuration
-├── docker-compose.yml                # Docker orchestration
-└── README.md                         # This file
+┌─────────────────────────────────────────────────────────────────────┐
+│                     OpenFlights Dataset                              │
+│                  3,000+ Airports | 67,000+ Routes                    │
+└────────────────────────────┬────────────────────────────────────────┘
+                             │
+                             ▼
+┌─────────────────────────────────────────────────────────────────────┐
+│                    Feature Extraction (16D)                          │
+│  ┌──────────────┬──────────────┬──────────────┬──────────────┐     │
+│  │ Geographic   │ Route        │ Musical      │ Semantic     │     │
+│  │ Features     │ Chars        │ Mapping      │ Features     │     │
+│  │ (8D)         │ (4D)         │ (4D)         │ (4D)         │     │
+│  └──────────────┴──────────────┴──────────────┴──────────────┘     │
+└────────────────────────────┬────────────────────────────────────────┘
+                             │
+                             ▼
+┌─────────────────────────────────────────────────────────────────────┐
+│                   PyTorch Neural Network                             │
+│                                                                       │
+│  Input Layer (16D)                                                   │
+│         ↓                                                            │
+│  Hidden Layer 1 (64D) + ReLU + BatchNorm + Dropout(0.2)            │
+│         ↓                                                            │
+│  Hidden Layer 2 (128D) + ReLU + BatchNorm + Dropout(0.2)           │
+│         ↓                                                            │
+│  Output Layer (128D) + Tanh Normalization                           │
+│                                                                       │
+│                   128-Dimensional Embeddings                         │
+└────────────────────────────┬────────────────────────────────────────┘
+                             │
+                             ▼
+┌─────────────────────────────────────────────────────────────────────┐
+│                      Storage & Indexing                              │
+│  ┌──────────────────┬──────────────────┬──────────────────┐        │
+│  │   MariaDB        │   FAISS Index    │   DuckDB         │        │
+│  │   (Metadata)     │   (Vectors)      │   (Analytics)    │        │
+│  │                  │                  │                  │        │
+│  │ • Route info     │ • 128D vectors   │ • Statistics     │        │
+│  │ • Complexity     │ • Fast search    │ • Aggregations   │        │
+│  │ • JSON storage   │ • ~1ms queries   │ • Metrics        │        │
+│  │ • Real-time      │ • 35MB index     │ • Cache          │        │
+│  └──────────────────┴──────────────────┴──────────────────┘        │
+└────────────────────────────┬────────────────────────────────────────┘
+                             │
+                             ▼
+┌─────────────────────────────────────────────────────────────────────┐
+│                      API Endpoints                                   │
+│  • /vectors/similar-routes     - Find similar routes                │
+│  • /vectors/routes-by-genre    - Genre-based discovery              │
+│  • /vectors/route/{id}/complexity - Complexity metrics              │
+│  • /vectors/statistics         - System statistics                  │
+└─────────────────────────────────────────────────────────────────────┘
 ```
 
+### Data Flow: Similarity Search
+
+```
+User Query (JFK → LAX)
+        │
+        ▼
+┌───────────────────────┐
+│ Get Route Coordinates │
+│ • Origin: 40.64°N     │
+│ • Dest: 33.94°N       │
+│ • Distance: 3,974 km  │
+└───────────┬───────────┘
+            │
+            ▼
+┌───────────────────────┐
+│ Extract Features (16D)│
+│ • Geographic (8D)     │
+│ • Route chars (4D)    │
+│ • Musical map (4D)    │
+└───────────┬───────────┘
+            │
+            ▼
+┌───────────────────────┐
+│ PyTorch Encoder       │
+│ 16D → 64D → 128D      │
+│ Generate Embedding    │
+└───────────┬───────────┘
+            │
+            ▼
+┌───────────────────────┐
+│ FAISS Similarity      │
+│ Search (~1ms)         │
+│ Find Top K Neighbors  │
+└───────────┬───────────┘
+            │
+            ▼
+┌───────────────────────┐
+│ Fetch Metadata        │
+│ from MariaDB          │
+└───────────┬───────────┘
+            │
+            ▼
+┌───────────────────────┐
+│ Return Results (JSON) │
+│ • JFK → SFO (0.95)    │
+│ • JFK → SEA (0.92)    │
+│ • EWR → LAX (0.90)    │
+└───────────────────────┘
+```
+
+### Features
+
+#### 🎯 Semantic Similarity Search
+Find routes that are musically similar based on:
+- **Geographic characteristics** - Distance, direction, coordinates
+- **Route properties** - Number of stops, airlines, popularity
+- **Musical features** - Tempo, pitch, harmony, rhythm patterns
+- **Complexity metrics** - Harmonic, rhythmic, melodic complexity
+
+#### 🎵 Genre-Based Discovery
+Match routes to musical genres with AI-powered classification:
+
+| Genre | Characteristics | Example Routes |
+|-------|----------------|----------------|
+| **Classical** | Complex, formal, multiple stops | JFK → LHR → CDG → FCO |
+| **Jazz** | Improvisational, varied, unpredictable | JFK → MIA → PTY → BOG |
+| **Electronic** | Repetitive, rhythmic, medium-distance | JFK → ORD → DEN → LAX |
+| **Ambient** | Long, calm, minimal stops, transoceanic | JFK → NRT (10,850 km) |
+| **Pop** | Popular, straightforward, direct | JFK → LAX (3,974 km) |
+
+#### 📊 Complexity Metrics
+Calculate three types of complexity for any route:
+
+```
+Harmonic Complexity = |dest_lat - origin_lat| / 180
+  → Measures latitude change (north-south movement)
+  → Range: 0.0 (no change) to 1.0 (pole to pole)
+
+Rhythmic Complexity = stops / 5
+  → Measures number of stops/connections
+  → Range: 0.0 (direct) to 1.0+ (5+ stops)
+
+Melodic Complexity = distance_km / 20000
+  → Measures route distance
+  → Range: 0.0 (short) to 1.0 (20,000+ km)
+
+Overall Complexity = (harmonic × 0.3) + (rhythmic × 0.3) + (melodic × 0.4)
+  → Weighted average of all three metrics
+```
+
+#### ⚡ Performance
+- **Search Time**: ~1ms per query (FAISS IndexFlatL2)
+- **Throughput**: ~1,000 queries/second
+- **Memory**: ~35MB for 67,000 route index
+- **Accuracy**: 100% (exact search, no approximation)
+- **Generation**: 5-10 minutes for all routes
+
+### Quick Setup
+
+```bash
+cd backend
+setup_vector_embeddings.bat
+```
+
+This automated script will:
+1. ✅ Check PyTorch and FAISS installation
+2. ✅ Add database columns for embeddings
+3. ✅ Generate 128D vectors for all 67,000 routes
+4. ✅ Build FAISS index for fast search
+5. ✅ Test similarity search functionality
+
+**Time**: 5-10 minutes | **One-time setup**
+
+### API Endpoints
+
+#### Find Similar Routes
+```bash
+curl "http://localhost:8000/api/v1/vectors/similar-routes?origin=JFK&destination=LAX&limit=10"
+```
+
+**Response**:
+```json
+[
+  {
+    "route_id": 12345,
+    "origin_code": "JFK",
+    "dest_code": "SFO",
+    "distance_km": 4139.0,
+    "similarity_score": 0.95
+  },
+  {
+    "route_id": 12346,
+    "origin_code": "JFK",
+    "dest_code": "SEA",
+    "distance_km": 3876.0,
+    "similarity_score": 0.92
+  }
+]
+```
+
+#### Find Routes by Genre
+```bash
+# Calm, long-distance routes
+curl "http://localhost:8000/api/v1/vectors/routes-by-genre?genre=ambient&limit=20"
+
+# Complex, formal routes
+curl "http://localhost:8000/api/v1/vectors/routes-by-genre?genre=classical&limit=20"
+
+# Improvisational, varied routes
+curl "http://localhost:8000/api/v1/vectors/routes-by-genre?genre=jazz&limit=20"
+```
+
+#### Get Route Complexity
+```bash
+curl "http://localhost:8000/api/v1/vectors/route/12345/complexity"
+```
+
+**Response**:
+```json
+{
+  "harmonic_complexity": 0.75,
+  "rhythmic_complexity": 0.60,
+  "melodic_complexity": 0.82,
+  "overall_complexity": 0.72
+}
+```
+
+#### Get Statistics
+```bash
+curl "http://localhost:8000/api/v1/vectors/statistics"
+```
+
+**Response**:
+```json
+{
+  "total_routes": 67663,
+  "routes_with_embeddings": 67663,
+  "embedding_coverage": 100.0,
+  "avg_melodic_complexity": 0.45,
+  "faiss_index_size": 67663,
+  "embedding_dimension": 128
+}
+```
+
+### How It Works
+
+#### Step 1: Feature Extraction (16 Dimensions)
+
+```python
+# Geographic Features (8D)
+origin_lat_norm = (origin_lat + 90) / 180  # Normalize to [0, 1]
+origin_lon_norm = (origin_lon + 180) / 360
+dest_lat_norm = (dest_lat + 90) / 180
+dest_lon_norm = (dest_lon + 180) / 360
+lat_diff = abs(dest_lat - origin_lat) / 180
+lon_diff = abs(dest_lon - origin_lon) / 360
+distance_norm = distance_km / 20000  # Normalize to [0, 1]
+bearing = calculate_bearing(origin, dest) / 360
+
+# Route Characteristics (4D)
+stops_norm = stops / 5
+airline_norm = num_airlines / 10
+avg_lat = (origin_lat + dest_lat) / 2 / 90
+avg_lon = (origin_lon + dest_lon) / 2 / 180
+
+# Musical Mapping (4D)
+tempo_feature = 1 - distance_norm  # Shorter = faster tempo
+pitch_feature = avg_lat  # Latitude affects pitch
+harmony_feature = stops_norm  # More stops = more harmony
+rhythm_feature = airline_norm  # More airlines = varied rhythm
+```
+
+#### Step 2: Neural Network Encoding (16D → 128D)
+
+```python
+class RouteEmbeddingEncoder(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.fc1 = nn.Linear(16, 64)
+        self.bn1 = nn.BatchNorm1d(64)
+        self.dropout1 = nn.Dropout(0.2)
+        
+        self.fc2 = nn.Linear(64, 128)
+        self.bn2 = nn.BatchNorm1d(128)
+        self.dropout2 = nn.Dropout(0.2)
+        
+        self.fc3 = nn.Linear(128, 128)
+    
+    def forward(self, x):
+        x = F.relu(self.bn1(self.fc1(x)))
+        x = self.dropout1(x)
+        
+        x = F.relu(self.bn2(self.fc2(x)))
+        x = self.dropout2(x)
+        
+        x = torch.tanh(self.fc3(x))  # Normalize to [-1, 1]
+        return x
+```
+
+#### Step 3: FAISS Indexing
+
+```python
+import faiss
+
+# Create FAISS index (exact search)
+dimension = 128
+index = faiss.IndexFlatL2(dimension)
+
+# Add all route embeddings
+embeddings = np.array([route.embedding for route in routes])
+index.add(embeddings)  # 67,000 vectors
+
+# Search for similar routes (~1ms)
+query_embedding = generate_embedding(origin, destination)
+distances, indices = index.search(query_embedding, k=10)
+```
+
+#### Step 4: Similarity Calculation
+
+```python
+# Cosine similarity
+similarity = 1 - (distance / 2)  # Convert L2 distance to similarity
+
+# Results sorted by similarity score
+results = [
+    {"route_id": idx, "similarity": sim}
+    for idx, sim in zip(indices[0], similarities)
+]
+```
+
+### Use Cases
+
+#### 🎓 Education
+```python
+# Find complex routes for teaching graph theory
+complex_routes = await service.find_routes_by_genre("classical", limit=10)
+# Use these routes to demonstrate Dijkstra's algorithm with sound
+```
+
+#### 🧘 Wellness
+```python
+# Find calm routes for therapeutic soundscapes
+calm_routes = await service.find_routes_by_genre("ambient", limit=20)
+# Generate relaxing music from transoceanic flights
+```
+
+#### 🎵 Entertainment
+```python
+# Find similar routes for playlist generation
+similar = await service.find_similar_routes("JFK", "LAX", limit=10)
+# Create "routes that sound like your trip"
+```
+
+#### 📊 Analytics
+```python
+# Analyze melodic complexity patterns
+complexity = await service.calculate_melodic_complexity(route_id)
+# Identify most complex routes for advanced compositions
+```
+
+### Architecture Benefits
+
+- ✅ **Fast similarity search** (~1ms per query)
+- ✅ **Scalable to millions of routes** (current: 67,000)
+- ✅ **Integrates with existing infrastructure** (MariaDB, Redis, DuckDB)
+- ✅ **Supports multiple use cases** (education, wellness, entertainment, analytics)
+- ✅ **Real-time updates** with Redis pub/sub
+- ✅ **Cached results** with Redis (1-hour TTL)
+- ✅ **Analytics with DuckDB** for aggregations and metrics
+- ✅ **100% accuracy** with exact search (IndexFlatL2)
+- ✅ **Low memory footprint** (~35MB for 67,000 vectors)
+- ✅ **Easy to extend** for new features and use cases
+
+### Documentation
+
+Comprehensive documentation available in `backend/docs/`:
+
+- **📘 Quick Start** (`VECTOR_QUICK_START.md`) - 5-minute setup guide
+- **📗 Complete Guide** (`VECTOR_EMBEDDING_GUIDE.md`) - Full documentation
+- **📙 Commands** (`VECTOR_COMMANDS.md`) - Command reference
+- **📕 Architecture** (`VECTOR_ARCHITECTURE.md`) - System design
+- **📔 Index** (`VECTOR_INDEX.md`) - Documentation navigation
+
+### Technical Specifications
+
+| Component | Technology | Details |
+|-----------|-----------|---------|
+| **Neural Network** | PyTorch | 3-layer encoder (16→64→128→128) |
+| **Vector Index** | FAISS | IndexFlatL2 (exact search) |
+| **Database** | MariaDB | JSON storage for embeddings |
+| **Analytics** | DuckDB | Fast aggregations and metrics |
+| **Cache** | Redis | 1-hour TTL for search results |
+| **Dimension** | 128D | Optimal balance of accuracy/speed |
+| **Coverage** | 100% | All 67,000 routes embedded |
 
 ---
 
@@ -527,11 +693,9 @@ aero-melody/
 
 ### How It Works
 
-Every flight route generates **completely unique** music based on geographic and distance characteristics. The same origin-destination pair will always produce the same composition (deterministic), but different routes create different music.
+Every flight route generates **completely unique** music based on geographic and distance characteristics.
 
 ### Musical Scale Selection (6 Scales)
-
-The system intelligently selects one of 6 musical scales based on route characteristics:
 
 | Scale | Mood | Selection Criteria |
 |-------|------|-------------------|
@@ -544,8 +708,6 @@ The system intelligently selects one of 6 musical scales based on route characte
 
 ### Dynamic Tempo (Based on Distance)
 
-Tempo automatically adjusts based on flight distance:
-
 | Distance | Tempo Range | Feel |
 |----------|-------------|------|
 | **Very Long Haul** (>8000km) | 70-90 BPM | Slow, ambient |
@@ -555,101 +717,161 @@ Tempo automatically adjusts based on flight distance:
 
 ### Three-Track Harmony
 
-Each composition includes three simultaneous tracks:
-
-1. **Melody Track** (Channel 0)
-   - Main melodic line
-   - Notes based on latitude progression
-   - Velocity increases during flight (60 → 100)
-
-2. **Harmony Track** (Channel 1)
-   - Thirds above melody
-   - Plays every 4th note
-   - Creates harmonic richness
-
-3. **Bass Track** (Channel 2)
-   - Root notes one octave down
-   - Plays every 8th note
-   - Provides rhythmic foundation
+1. **Melody Track** (Channel 0) - Main melodic line based on latitude
+2. **Harmony Track** (Channel 1) - Thirds above melody, plays every 4th note
+3. **Bass Track** (Channel 2) - Root notes one octave down, plays every 8th note
 
 ### Route-to-Music Mapping
 
 ```python
-# Latitude → Scale Degree (which note in the scale)
+# Latitude → Scale Degree
 note_index = int((latitude + 90) / 180 * len(scale)) % len(scale)
 
-# Longitude → Octave Shifts (pitch variation)
+# Longitude → Octave Shifts
 octave_shift = int((longitude + 180) / 360 * 2) - 1
 
 # Progress → Velocity (volume increases during flight)
 velocity = 60 + int(progress * 40)  # 60 → 100
 
-# Distance → Duration (longer routes = longer compositions)
+# Distance → Duration
 duration = min(30, max(10, distance / 500))  # 10-30 seconds
 ```
 
-### Music Parameters
+---
 
-- **Styles**: Classical, Jazz, Electronic, Ambient, Rock
-- **Scales**: Major, Minor, Dorian, Phrygian, Lydian, Mixolydian, Aeolian, Locrian, Pentatonic
-- **Keys**: All 12 chromatic keys (C, C#, D, D#, E, F, F#, G, G#, A, A#, B)
-- **Tempo**: 60-200 BPM range (dynamically adjusted)
-- **Duration**: 10-30 seconds (calculated from route distance)
-- **Instruments**: Piano (default), customizable via MIDI
+## 📚 Educational Platform
 
-### Example: JFK to LAX
+### Features
 
-```
-Route: New York (JFK) → Los Angeles (LAX)
-Distance: ~3,944 km
-Direction: West (longitude decreases)
+#### 🗺️ Geography Through Sound
+- Learn world geography by hearing musical representations of flight routes
+- Distance-to-pitch correlation
+- Direction-based melody generation
+- Interactive map-based learning
 
-Generated Music:
-├── Scale: Major (transcontinental, moderate distance)
-├── Tempo: 110 BPM (medium haul)
-├── Key: C Major
-├── Duration: 18 seconds
-├── Tracks:
-│   ├── Melody: 45 notes (latitude-based progression)
-│   ├── Harmony: 11 notes (every 4th note, thirds above)
-│   └── Bass: 5 notes (every 8th note, octave down)
-└── Output: MIDI file + JSON data
-```
+#### 🕸️ Graph Theory Visualization
+- Dijkstra's algorithm sonification
+- Network connectivity through harmony
+- Shortest path musical representation
+- Algorithm step-by-step audio visualization
 
-### API Example
+#### 🎵 Music Theory Lessons
+- Interactive scale and mode exploration
+- Tempo and rhythm understanding
+- Harmony and chord progression learning
+- Beginner to advanced difficulty levels
 
-```javascript
-// Generate music for a route
-const response = await fetch('/api/v1/demo/complete-demo', {
-  method: 'GET',
-  params: {
-    origin: 'JFK',
-    destination: 'LAX',
-    music_style: 'classical',
-    tempo: 120  // Optional override
-  }
-});
+### Interactive Quizzes
 
-const data = await response.json();
-console.log(data);
-// {
-//   "composition": {
-//     "tempo": 110,
-//     "scale": "major",
-//     "key": "C",
-//     "duration": 18,
-//     "notes": [...],
-//     "midi_file": "base64_encoded_midi"
-//   },
-//   "route": {
-//     "origin": "JFK",
-//     "destination": "LAX",
-//     "distance": 3944,
-//     "direction": "west"
-//   }
-// }
-```
+- **Multiple choice questions** with visual feedback
+- **Select answer** → Highlights in blue
+- **Check answer** → Shows correct (green) or incorrect (red)
+- **Explanations** provided for all answers
+- **Quiz locks** after checking to prevent changes
 
+### Interactive Lab
+
+- **Real-time route generation** with backend integration
+- **Select origin and destination** from 8 major airports
+- **Generate music** and see results instantly
+- **Learning insights** explain how data becomes music
+- **Experiment suggestions** for hands-on learning
+
+### Access
+
+Navigate to `/education` or click "Education" in the navigation bar
+
+---
+
+## 🧘 Wellness & Therapeutic Features
+
+### Calming Soundscapes
+
+Generate therapeutic music from serene flight routes with three themes:
+
+#### Ocean Breeze
+- Gentle wave-like melodies
+- Coastal route recommendations (LAX → HNL, MIA → CUN)
+- Calming tempo (60-70 BPM)
+
+#### Mountain Serenity
+- Peaceful ambient soundscapes
+- Mountain route recommendations (DEN → SLC, GVA → INN)
+- Meditative tempo (50-60 BPM)
+
+#### Night Flight
+- Soothing overnight compositions
+- Long-haul route recommendations (JFK → LHR, LAX → NRT)
+- Deep relaxation with binaural frequencies (45-55 BPM)
+
+### Customization
+
+- Adjustable calm level (0-100)
+- Duration control (1-30 minutes)
+- Binaural beat integration for deep relaxation
+
+### Access
+
+Navigate to `/wellness` or click "Wellness" in the navigation bar
+
+---
+
+## 🥽 VR/AR Immersive Experience
+
+### Features
+
+#### Interactive 3D Globe
+- Real Earth representation with transparent blue sphere
+- Rotating animation during playback
+- Mouse controls for 360° viewing
+
+#### Airport Markers
+- 8 major airports with color-coded markers
+- Animated rotating spheres
+- Airport code labels
+- Real geographic coordinates
+
+#### Animated Flight Paths
+- Curved trajectory between airports
+- Real-time progress indicator
+- Animated plane model following the path
+- Trail effect showing completed journey
+
+#### Playback Controls
+- Play/Pause functionality
+- Reset to beginning
+- Adjustable speed (0.5x to 3x)
+- Progress bar with percentage
+
+#### WebXR VR Support
+- Detects VR headset capability
+- "Enter VR" button for immersive mode
+- Compatible with Oculus Quest, HTC Vive, Valve Index
+
+### How to Use
+
+1. Navigate to `/vr-ar`
+2. Select origin and destination airports
+3. Click "Play" to start animation
+4. Use mouse to rotate, zoom, and pan
+5. Click "Enter VR" for immersive mode (requires VR headset)
+
+### Available Airports
+
+| Code | Name | Location | Color |
+|------|------|----------|-------|
+| JFK | New York JFK | USA | Blue |
+| CDG | Paris CDG | France | Purple |
+| LHR | London Heathrow | UK | Pink |
+| NRT | Tokyo Narita | Japan | Orange |
+| DXB | Dubai | UAE | Green |
+| SYD | Sydney | Australia | Cyan |
+| LAX | Los Angeles | USA | Red |
+| SIN | Singapore | Singapore | Purple |
+
+### Access
+
+Navigate to `/vr-ar` or click "VR/AR" in the navigation bar
 
 ---
 
@@ -662,70 +884,13 @@ Development: http://localhost:8000/api/v1
 Production: https://your-domain.com/api/v1
 ```
 
-### Authentication
-
-Most endpoints require JWT authentication. Include the token in the Authorization header:
-
-```bash
-Authorization: Bearer <your_jwt_token>
-```
-
 ### Core Endpoints
-
-#### Authentication
-
-```bash
-# Register new user
-POST /api/v1/auth/register
-Body: {
-  "username": "string",
-  "email": "string",
-  "password": "string"
-}
-
-# Login
-POST /api/v1/auth/login
-Body: {
-  "username": "string",
-  "password": "string"
-}
-Response: {
-  "access_token": "string",
-  "token_type": "bearer"
-}
-```
-
-#### Airports
-
-```bash
-# Search airports
-GET /api/v1/airports/search?query=New%20York&limit=20
-
-# Get airport by code
-GET /api/v1/airports/{airport_code}
-
-# Get all airports
-GET /api/v1/airports?skip=0&limit=100
-```
-
-#### Routes
-
-```bash
-# Get routes from airport
-GET /api/v1/routes/from/{airport_code}
-
-# Get routes to airport
-GET /api/v1/routes/to/{airport_code}
-
-# Get specific route
-GET /api/v1/routes/{origin}/{destination}
-```
 
 #### Music Generation
 
 ```bash
 # Generate music (complete demo)
-GET /api/v1/demo/complete-demo?origin=JFK&destination=LAX&music_style=classical&tempo=120
+GET /api/v1/demo/complete-demo?origin=JFK&destination=LAX
 
 # Generate with custom parameters
 POST /api/v1/compositions/generate
@@ -733,128 +898,72 @@ Body: {
   "origin_code": "JFK",
   "destination_code": "LAX",
   "music_style": "jazz",
-  "tempo": 120,
-  "scale": "minor",
-  "key": "A"
+  "tempo": 120
 }
 ```
 
-#### Compositions
+#### Vector Embeddings
 
 ```bash
-# Get user compositions
-GET /api/v1/compositions/my
-
-# Get composition by ID
-GET /api/v1/compositions/{composition_id}
-
-# Update composition
-PUT /api/v1/compositions/{composition_id}
-
-# Delete composition
-DELETE /api/v1/compositions/{composition_id}
-
-# Get public compositions
-GET /api/v1/compositions/public?skip=0&limit=20
-```
-
-#### Collections
-
-```bash
-# Create collection
-POST /api/v1/collections
-Body: {
-  "name": "My Favorites",
-  "description": "Best compositions",
-  "is_public": true
-}
-
-# Get user collections
-GET /api/v1/collections/my
-
-# Add composition to collection
-POST /api/v1/collections/{collection_id}/compositions/{composition_id}
-```
-
-#### Analytics
-
-```bash
-# Get route complexity statistics
-GET /api/v1/analytics/route-complexity
-
-# Get performance metrics
-GET /api/v1/analytics/performance
-
 # Find similar routes
-GET /api/v1/analytics/similar-routes?origin=JFK&destination=LAX&limit=10
+GET /api/v1/vectors/similar-routes?origin=JFK&destination=LAX&limit=10
 
-# Get user analytics
-GET /api/v1/analytics/user-stats
+# Find routes by genre
+GET /api/v1/vectors/routes-by-genre?genre=ambient&limit=20
+
+# Get route complexity
+GET /api/v1/vectors/route/{route_id}/complexity
+
+# Get statistics
+GET /api/v1/vectors/statistics
 ```
 
-#### Redis Caching
+#### Education
 
 ```bash
-# Test Redis connection
-GET /api/v1/redis/test/save-music
+# Get available lessons
+GET /api/v1/education/lessons
 
-# Get cache statistics
-GET /api/v1/redis/cache/stats
+# Start a lesson
+POST /api/v1/education/lessons/{id}/start
 
-# Get storage information
-GET /api/v1/redis/storage/info
-
-# Clear cache
-DELETE /api/v1/redis/cache/clear
+# Get graph visualization
+GET /api/v1/education/graph-visualization/{origin}/{destination}
 ```
 
-#### WebSocket
+#### Wellness
 
 ```bash
-# Connect to collaboration session
-WS /api/v1/ws/collaborate/{session_id}/{user_id}
-
-# Send message
-{
-  "type": "state_update",
-  "state": {
-    "tempo": 120,
-    "notes": [...]
-  }
+# Generate calming soundscape
+POST /api/v1/wellness/generate-wellness
+Body: {
+  "theme": "ocean",
+  "calm_level": 80,
+  "duration_minutes": 5
 }
+
+# Get wellness themes
+GET /api/v1/wellness/wellness-themes
 ```
 
-### Response Format
+#### VR/AR
 
-All API responses follow this format:
-
-```json
-{
-  "success": true,
-  "data": { ... },
-  "message": "Success message",
-  "timestamp": "2025-10-28T12:00:00Z"
+```bash
+# Create VR session
+POST /api/v1/vr-ar/create-session
+Body: {
+  "origin": "JFK",
+  "destination": "CDG",
+  "enable_spatial_audio": true,
+  "quality": "high"
 }
+
+# Get supported airports
+GET /api/v1/vr-ar/supported-airports
+
+# Get VR capabilities
+GET /api/v1/vr-ar/vr-capabilities
 ```
-
-Error responses:
-
-```json
-{
-  "success": false,
-  "error": "Error message",
-  "detail": "Detailed error information",
-  "timestamp": "2025-10-28T12:00:00Z"
-}
-```
-
-### Rate Limiting
-
-- **Limit**: 1000 requests per minute per IP
-- **Headers**: 
-  - `X-RateLimit-Limit`: Total requests allowed
-  - `X-RateLimit-Remaining`: Requests remaining
-  - `X-RateLimit-Reset`: Time when limit resets
 
 ### Interactive Documentation
 
@@ -864,396 +973,374 @@ Visit these URLs when the backend is running:
 - **ReDoc**: http://localhost:8000/redoc
 - **OpenAPI JSON**: http://localhost:8000/api/v1/openapi.json
 
+---
+
+## 🛠️ Technology Stack
+
+### Frontend
+
+| Technology | Purpose | Version |
+|-----------|---------|---------|
+| **React** | UI Framework | 18.3.1 |
+| **TypeScript** | Type Safety | 5.8.3 |
+| **Vite** | Build Tool | 5.4.19 |
+| **Tailwind CSS** | Styling | 3.4.17 |
+| **shadcn/ui** | Component Library | Latest |
+| **React Query** | Data Fetching | 5.83.0 |
+| **React Router** | Navigation | 6.30.1 |
+| **Mapbox GL** | Map Visualization | Via CDN |
+| **Three.js** | 3D Graphics | Latest |
+| **Framer Motion** | Animations | 12.23.24 |
+
+### Backend
+
+| Technology | Purpose | Version |
+|-----------|---------|---------|
+| **FastAPI** | Web Framework | Latest |
+| **Python** | Language | 3.9+ |
+| **SQLAlchemy** | ORM | Latest (async) |
+| **Pydantic** | Validation | Latest |
+| **PyTorch** | ML/AI | Latest |
+| **FAISS** | Vector Search | faiss-cpu |
+| **NetworkX** | Graph Algorithms | Latest |
+| **Mido** | MIDI Generation | Latest |
+
+### Databases & Storage
+
+| Technology | Purpose | Details |
+|-----------|---------|---------|
+| **MariaDB** | Primary Database | 10.5+, Async with asyncmy |
+| **Redis Cloud** | Caching & Pub/Sub | 30MB plan, 30min TTL |
+| **DuckDB** | Analytics | File-based, in-memory |
 
 ---
 
-## ⚡ Real-time Features
+## 📁 Project Structure
 
-### WebSocket Collaboration
-
-Multiple users can collaborate on compositions in real-time using WebSocket connections.
-
-#### Connection
-
-```javascript
-const ws = new WebSocket(
-  `ws://localhost:8000/api/v1/ws/collaborate/${sessionId}/${userId}`
-);
-
-ws.onopen = () => {
-  console.log('Connected to collaboration session');
-};
-
-ws.onmessage = (event) => {
-  const data = JSON.parse(event.data);
-  console.log('Received update:', data);
-};
-
-ws.onerror = (error) => {
-  console.error('WebSocket error:', error);
-};
-
-ws.onclose = () => {
-  console.log('Disconnected from session');
-};
 ```
-
-#### Message Types
-
-```javascript
-// State update
-ws.send(JSON.stringify({
-  type: 'state_update',
-  state: {
-    tempo: 120,
-    notes: [...],
-    chords: [...]
-  }
-}));
-
-// User joined
-{
-  type: 'user_joined',
-  user_id: 'user123',
-  username: 'John Doe'
-}
-
-// User left
-{
-  type: 'user_left',
-  user_id: 'user123'
-}
-
-// Composition saved
-{
-  type: 'composition_saved',
-  composition_id: 'comp123'
-}
+aero-melody/
+│
+├── backend/                          # FastAPI Backend
+│   ├── app/
+│   │   ├── api/                      # API Routes
+│   │   │   ├── routes.py            # Core endpoints
+│   │   │   ├── vector_routes.py     # Vector embeddings
+│   │   │   ├── education_routes.py  # Education platform
+│   │   │   ├── wellness_routes.py   # Wellness features
+│   │   │   ├── vr_ar_routes.py      # VR/AR endpoints
+│   │   │   └── ...
+│   │   │
+│   │   ├── core/                     # Core Configuration
+│   │   │   ├── config.py            # Settings
+│   │   │   └── security.py          # JWT auth
+│   │   │
+│   │   ├── db/                       # Database
+│   │   │   ├── database.py          # SQLAlchemy setup
+│   │   │   └── models.py            # Database models
+│   │   │
+│   │   ├── models/                   # Pydantic Schemas
+│   │   │   └── ...
+│   │   │
+│   │   └── services/                 # Business Logic
+│   │       ├── music_generator.py   # MIDI generation
+│   │       ├── route_embedding_service.py  # Vector embeddings
+│   │       ├── realtime_vector_sync.py     # Real-time sync
+│   │       └── ...
+│   │
+│   ├── scripts/                      # Utility Scripts
+│   │   ├── etl_openflights.py       # Load OpenFlights data
+│   │   ├── generate_route_embeddings.py  # Generate embeddings
+│   │   └── ...
+│   │
+│   ├── sql/                          # SQL Scripts
+│   │   └── add_vector_embeddings.sql
+│   │
+│   ├── docs/                         # Documentation
+│   │   ├── VECTOR_QUICK_START.md
+│   │   ├── VECTOR_EMBEDDING_GUIDE.md
+│   │   ├── VECTOR_COMMANDS.md
+│   │   ├── VECTOR_ARCHITECTURE.md
+│   │   └── VECTOR_INDEX.md
+│   │
+│   ├── main.py                       # Application entry point
+│   ├── requirements.txt              # Python dependencies
+│   └── .env                          # Environment variables
+│
+├── src/                              # React Frontend
+│   ├── components/                   # React Components
+│   │   ├── ui/                      # shadcn/ui components
+│   │   ├── Hero.tsx
+│   │   ├── RouteSelector.tsx
+│   │   ├── MusicPlayer.tsx
+│   │   └── ...
+│   │
+│   ├── pages/                        # Route Pages
+│   │   ├── Index.tsx                # Home page
+│   │   ├── Education.tsx            # Education platform
+│   │   ├── Wellness.tsx             # Wellness features
+│   │   ├── VrAr.tsx                 # VR/AR experience
+│   │   └── ...
+│   │
+│   ├── App.tsx                       # App component
+│   └── main.tsx                      # Entry point
+│
+├── public/                           # Static Assets
+├── .env                              # Frontend environment variables
+├── package.json                      # Node dependencies
+├── vite.config.ts                    # Vite configuration
+├── tailwind.config.ts                # Tailwind configuration
+└── README.md                         # This file
 ```
-
-### Redis Pub/Sub
-
-Real-time notifications using Redis Pub/Sub:
-
-```python
-# Subscribe to composition updates
-await redis_publisher.subscribe('composition:updates')
-
-# Publish update
-await redis_publisher.publish('composition:updates', {
-  'composition_id': 'comp123',
-  'action': 'updated',
-  'user_id': 'user123'
-})
-```
-
-### Caching Strategy
-
-#### Composition Caching
-
-```python
-# Cache key format
-key = f"aero:music:{origin}:{destination}"
-
-# TTL: 30 minutes (1800 seconds)
-# Optimized for 30MB Redis Cloud plan
-
-# Cache hit: Return immediately
-# Cache miss: Generate → Cache → Return
-```
-
-#### Cache Statistics
-
-```bash
-GET /api/v1/redis/cache/stats
-
-Response:
-{
-  "total_keys": 150,
-  "memory_used": "2.5MB",
-  "hit_rate": "85%",
-  "compositions_cached": 145,
-  "sessions_active": 5
-}
-```
-
-### Performance Optimization
-
-- **Redis Connection Pool**: 10 connections (optimized for 30MB plan)
-- **Cache TTL**: 30 minutes for compositions, 2 hours for sessions
-- **Automatic Cleanup**: Expired keys removed automatically
-- **Compression**: Large compositions compressed before caching
-- **Batch Operations**: Multiple cache operations batched together
-
 
 ---
 
-## 🔧 Configuration
+## 🧪 Testing
 
-### Backend Environment Variables
+### Quick Test Checklist
 
-Create a `.env` file in the `backend/` directory:
+#### Navigation
+- [ ] All tabs clickable
+- [ ] Active tab highlighted
+- [ ] URLs update correctly
+- [ ] Back button works
+
+#### Home Page
+- [ ] Route selection works
+- [ ] Music generation works
+- [ ] Audio playback works
+- [ ] Analytics display
+- [ ] Map visualization
+
+#### Wellness
+- [ ] Theme selection works
+- [ ] Calm level slider works
+- [ ] Generation works
+- [ ] Playback works
+- [ ] All 3 themes tested
+
+#### Education
+- [ ] Lessons display
+- [ ] Quizzes interactive
+- [ ] "Try Interactive Lab" works
+- [ ] Lab generates music
+- [ ] Tabs work
+
+#### VR/AR
+- [ ] Globe renders
+- [ ] Route selection works
+- [ ] Animation plays
+- [ ] Controls work
+- [ ] VR button shows (if supported)
+
+#### Backend APIs
+- [ ] /generate works
+- [ ] /wellness/* works
+- [ ] /education/* works
+- [ ] /vectors/* works
+- [ ] Swagger UI accessible
+
+### Testing Commands
 
 ```bash
-# ============================================
-# DATABASE CONFIGURATION
-# ============================================
-DATABASE_URL=mysql+asyncmy://root:password@localhost:3306/aero_melody
-DB_HOST=localhost
-DB_PORT=3306
-DB_USER=root
-DB_PASSWORD=your_password
-DB_NAME=aero_melody
-DATABASE_POOL_SIZE=20
-DATABASE_MAX_OVERFLOW=30
+# Health check
+curl http://localhost:8000/health
 
-# ============================================
-# REDIS CLOUD CONFIGURATION
-# ============================================
-REDIS_HOST=redis-xxxxx.c267.us-east-1-4.ec2.redns.redis-cloud.com
-REDIS_PORT=16441
-REDIS_USERNAME=default
-REDIS_PASSWORD=your_redis_password
+# Test music generation
+curl -X POST "http://localhost:8000/api/v1/generate" \
+  -H "Content-Type: application/json" \
+  -d '{"origin":"JFK","destination":"CDG","music_style":"major","tempo":120}'
+
+# Test wellness
+curl -X POST "http://localhost:8000/api/v1/wellness/generate-wellness" \
+  -H "Content-Type: application/json" \
+  -d '{"theme":"ocean","calm_level":70,"duration_minutes":5}'
+
+# Test education
+curl "http://localhost:8000/api/v1/education/lessons"
+
+# Test vectors
+curl "http://localhost:8000/api/v1/vectors/statistics"
+```
+
+### Performance Testing
+
+- **Load Time**: < 2 seconds for initial load
+- **API Calls**: < 500ms response time
+- **Memory**: No continuous growth
+- **Search**: ~1ms for vector similarity
+
+---
+
+## � Teroubleshooting
+
+### Common Issues
+
+#### Database Connection Errors
+
+**Problem**: `Can't connect to MySQL server` or `Access denied for user`
+
+**Solutions**:
+```bash
+# Check MariaDB is running
+# Windows:
+net start MariaDB
+
+# Linux/Mac:
+sudo systemctl status mariadb
+
+# Verify credentials in backend/.env
+DATABASE_URL=mysql+asyncmy://aero_user:your_password@localhost:3306/aero_melody
+
+# Test connection manually
+mysql -u aero_user -p aero_melody
+```
+
+#### Redis Connection Issues
+
+**Problem**: `Error connecting to Redis` or `Connection refused`
+
+**Solutions**:
+```bash
+# For Redis Cloud: Verify URL format in .env
 REDIS_URL=redis://default:password@host:port
-REDIS_CACHE_TTL=1800          # 30 minutes
-REDIS_SESSION_TTL=7200        # 2 hours
-REDIS_MAX_CONNECTIONS=10      # Optimized for 30MB plan
 
-# ============================================
-# DUCKDB ANALYTICS (OPTIONAL)
-# ============================================
-DUCKDB_PATH=./data/analytics.duckdb
-DUCKDB_MEMORY_LIMIT=2GB
-DUCKDB_THREADS=4
+# For local Redis, start the service:
+# Windows:
+redis-server
 
-# ============================================
-# JWT AUTHENTICATION
-# ============================================
-JWT_SECRET_KEY=your_secret_key_here_change_in_production
-JWT_ALGORITHM=HS256
-JWT_ACCESS_TOKEN_EXPIRE_MINUTES=480  # 8 hours
-
-# ============================================
-# CORS CONFIGURATION
-# ============================================
-BACKEND_CORS_ORIGINS=http://localhost:5173,http://localhost:3000,https://yourdomain.com
-
-# ============================================
-# API CONFIGURATION
-# ============================================
-API_V1_STR=/api/v1
-PROJECT_NAME=Aero Melody API
-VERSION=1.0.0
-DEBUG=False
-
-# ============================================
-# RATE LIMITING
-# ============================================
-RATE_LIMIT_REQUESTS=1000
-RATE_LIMIT_WINDOW=60  # seconds
-
-# ============================================
-# FILE UPLOAD
-# ============================================
-MAX_UPLOAD_SIZE=10485760  # 10MB
-UPLOAD_DIR=uploads
-MIDI_OUTPUT_DIR=midi_output
-
-# ============================================
-# MUSIC GENERATION DEFAULTS
-# ============================================
-DEFAULT_TEMPO=120
-DEFAULT_SCALE=major
-DEFAULT_KEY=C
-MAX_POLYPHONY=8
-
-# ============================================
-# SIMILARITY SEARCH
-# ============================================
-SIMILARITY_THRESHOLD=0.7
-MAX_SIMILARITY_RESULTS=20
-EMBEDDING_DIMENSIONS=128
-
-# ============================================
-# LOGGING
-# ============================================
-LOG_LEVEL=WARNING
-LOG_FORMAT=%(asctime)s - %(name)s - %(levelname)s - %(message)s
+# Linux/Mac:
+sudo systemctl start redis
 ```
 
-### Frontend Environment Variables
+#### Vector Embeddings Not Working
 
-Create a `.env.local` file in the project root:
+**Problem**: `No embeddings found` or `FAISS index missing`
 
+**Solutions**:
 ```bash
-# API Configuration
-VITE_API_BASE_URL=http://localhost:8000/api/v1
+cd backend
 
-# Mapbox Configuration
-VITE_MAPBOX_TOKEN=your_mapbox_token_here
+# Run the setup script
+setup_vector_embeddings.bat  # Windows
+# or
+python scripts/generate_route_embeddings.py  # Manual
 
-# WebSocket Configuration
-VITE_WS_URL=ws://localhost:8000/api/v1/ws
-
-# Feature Flags
-VITE_ENABLE_ANALYTICS=true
-VITE_ENABLE_COLLABORATION=true
-VITE_ENABLE_SOCIAL=true
-
-# Environment
-VITE_ENV=development
+# Verify with test
+python test_vector_embeddings.py
 ```
 
-### Docker Configuration
+#### Port Already in Use
 
-`docker-compose.yml`:
+**Problem**: `Address already in use` on port 8000 or 5173
 
-```yaml
-version: '3.8'
-
-services:
-  backend:
-    build: ./backend
-    ports:
-      - "8000:8000"
-    environment:
-      - DATABASE_URL=mysql+asyncmy://root:password@db:3306/aero_melody
-      - REDIS_URL=redis://redis:6379
-    depends_on:
-      - db
-      - redis
-    volumes:
-      - ./backend:/app
-      - ./backend/midi_output:/app/midi_output
-
-  frontend:
-    build: .
-    ports:
-      - "5173:5173"
-    environment:
-      - VITE_API_BASE_URL=http://localhost:8000/api/v1
-    volumes:
-      - ./src:/app/src
-      - ./public:/app/public
-
-  db:
-    image: mariadb:10.5
-    environment:
-      - MYSQL_ROOT_PASSWORD=password
-      - MYSQL_DATABASE=aero_melody
-    ports:
-      - "3306:3306"
-    volumes:
-      - db_data:/var/lib/mysql
-
-  redis:
-    image: redis:7-alpine
-    ports:
-      - "6379:6379"
-    volumes:
-      - redis_data:/data
-
-```
-
-### Frontend Environment Variables
-
-Create a `.env.local` file in the project root:
-
+**Solutions**:
 ```bash
-# Aero Melody Frontend Environment Variables
+# Find and kill process using the port
+# Windows:
+netstat -ano | findstr :8000
+taskkill /PID <PID> /F
 
-# Backend API Configuration
-VITE_API_BASE_URL=http://localhost:8000/api/v1
-VITE_API_TIMEOUT=10000
+# Linux/Mac:
+lsof -ti:8000 | xargs kill -9
 
-# Authentication Configuration
-VITE_JWT_TOKEN_KEY=aero_melody_token
-VITE_TOKEN_REFRESH_THRESHOLD=300000
-
-# Application Configuration
-VITE_APP_NAME=Aero Melody
-VITE_APP_VERSION=1.0.0
-VITE_ENABLE_ANALYTICS=true
-
-# Music Generation Configuration
-VITE_DEFAULT_TEMPO=120
-VITE_DEFAULT_SCALE=major
-VITE_DEFAULT_KEY=C
-VITE_MAX_DURATION_MINUTES=10
-
-# File Upload Configuration
-VITE_MAX_FILE_SIZE=10485760
-VITE_ALLOWED_FILE_TYPES=.mid,.midi,.mp3,.wav
-
-# Development Configuration
-VITE_DEBUG_MODE=true
-VITE_LOG_LEVEL=info
-
-# Mapbox Configuration
-VITE_MAPBOX_TOKEN=your_mapbox_token_here
-
-# WebSocket Configuration
-VITE_WS_URL=ws://localhost:8000/api/v1/ws
-
-# Feature Flags
-VITE_ENABLE_ANALYTICS=true
-VITE_ENABLE_COLLABORATION=true
-VITE_ENABLE_SOCIAL=true
-
-# Environment
-VITE_ENV=development
+# Or change the port in your config
+# Backend: uvicorn app.main:app --port 8001
+# Frontend: npm run dev -- --port 5174
 ```
 
-### Required Services Setup
+#### Module Not Found Errors
 
-#### Database Setup (MariaDB)
+**Problem**: `ModuleNotFoundError: No module named 'X'`
+
+**Solutions**:
 ```bash
-# Install MariaDB (Ubuntu/Debian)
-sudo apt update
-sudo apt install mariadb-server
-sudo systemctl start mariadb
-sudo systemctl enable mariadb
+# Ensure virtual environment is activated
+# Windows:
+venv\Scripts\activate
 
-# Create database
-sudo mysql -u root -p
-CREATE DATABASE melody_aero;
-GRANT ALL PRIVILEGES ON melody_aero.* TO 'root'@'localhost';
-FLUSH PRIVILEGES;
-EXIT;
+# Linux/Mac:
+source venv/bin/activate
+
+# Reinstall dependencies
+pip install -r requirements.txt --force-reinstall
 ```
 
-#### Redis Setup
+#### Frontend Build Errors
+
+**Problem**: `Cannot find module` or TypeScript errors
+
+**Solutions**:
 ```bash
-# Install Redis (Ubuntu/Debian)
-sudo apt update
-sudo apt install redis-server
-sudo systemctl start redis-server
-sudo systemctl enable redis-server
+# Clear cache and reinstall
+rm -rf node_modules package-lock.json
+npm install
 
-# Or use Redis Cloud service (recommended for production)
+# Clear Vite cache
+rm -rf .vite
+
+# Rebuild
+npm run build
 ```
 
-### Environment Variable Descriptions
+#### MIDI Playback Issues
 
-| Variable | Description | Required | Default |
-|----------|-------------|----------|---------|
-| `SECRET_KEY` | FastAPI secret key for sessions | Yes | - |
-| `JWT_SECRET_KEY` | JWT token signing key | Yes | - |
-| `DATABASE_URL` | Database connection URL | Yes | - |
-| `REDIS_URL` | Redis connection URL | Yes | - |
-| `DEBUG` | Enable debug mode | No | false |
-| `PORT` | Server port | No | 8000 |
-| `BACKEND_CORS_ORIGINS` | Allowed CORS origins | No | localhost |
-| `RATE_LIMIT_REQUESTS` | Requests per minute limit | No | 1000 |
-| `REDIS_CACHE_TTL` | Cache TTL in seconds | No | 1800 |
+**Problem**: No sound or audio errors in browser
 
-### Security Notes
+**Solutions**:
+- Check browser console for errors
+- Ensure browser supports Web Audio API (Chrome, Firefox, Edge recommended)
+- Verify audio is not muted in browser/system
+- Try a different browser
+- Check that MIDI data is being generated (inspect network tab)
 
-- **Never commit `.env` files** to version control
-- Use strong, unique secrets for production
-- Rotate secrets regularly
-- Use environment-specific configurations
-- Enable HTTPS in production
+#### Slow Performance
+
+**Problem**: API responses are slow or UI is laggy
+
+**Solutions**:
+```bash
+# Check Redis is working (should cache results)
+redis-cli ping  # Should return PONG
+
+# Verify database indexes exist
+mysql -u aero_user -p aero_melody
+SHOW INDEX FROM routes;
+
+# Monitor backend logs for slow queries
+# Check DuckDB analytics cache
+
+# For vector search, ensure FAISS index is built
+ls backend/faiss_index.bin  # Should exist
+```
+
+#### Environment Variables Not Loading
+
+**Problem**: `KeyError` or missing configuration values
+
+**Solutions**:
+```bash
+# Verify .env file exists and has correct format
+# Backend: backend/.env
+# Frontend: .env.local (at project root)
+
+# Check for typos in variable names
+# Ensure no spaces around = sign
+# Example: DATABASE_URL=value (not DATABASE_URL = value)
+
+# Restart servers after changing .env files
+```
+
+### Getting Help
+
+If you encounter issues not covered here:
+
+1. Check the [API Documentation](http://localhost:8000/docs) for endpoint details
+2. Review backend logs for error messages
+3. Check browser console for frontend errors
+4. Verify all prerequisites are installed and running
+5. Ensure all environment variables are set correctly
+6. Try the test commands in the [Testing](#-testing) section
+7. Open an issue on GitHub with error logs and steps to reproduce
 
 ---
 
@@ -1261,1037 +1348,277 @@ sudo systemctl enable redis-server
 
 ### Docker Deployment
 
-#### Build and Run
-
 ```bash
-# Build all services
-docker-compose build
-
-# Start all services
+# Build and run with Docker Compose
 docker-compose up -d
 
-# View logs
+# Check logs
 docker-compose logs -f
 
-# Stop all services
+# Stop services
 docker-compose down
-
-# Stop and remove volumes
-docker-compose down -v
 ```
 
-#### Individual Services
-
-```bash
-# Start only backend
-docker-compose up -d backend
-
-# Start only frontend
-docker-compose up -d frontend
-
-# Restart a service
-docker-compose restart backend
-```
-
-### Production Deployment
-
-#### Prerequisites
-
-- [ ] Domain name configured
-- [ ] SSL/TLS certificates obtained
-- [ ] Production database setup
-- [ ] Redis Cloud instance configured
-- [ ] Environment variables secured
-
-#### Backend Deployment (Ubuntu/Linux)
-
-```bash
-# Install dependencies
-sudo apt update
-sudo apt install python3.9 python3-pip nginx
-
-# Clone repository
-git clone https://github.com/yourusername/aero-melody.git
-cd aero-melody/backend
-
-# Create virtual environment
-python3 -m venv venv
-source venv/bin/activate
-
-# Install dependencies
-pip install -r requirements.txt
-
-# Configure environment
-cp .env.example .env
-nano .env  # Edit with production values
-
-# Load data
-python scripts/etl_openflights.py
-
-# Install as systemd service
-sudo nano /etc/systemd/system/aero-melody.service
-```
-
-**aero-melody.service**:
-
-```ini
-[Unit]
-Description=Aero Melody Backend
-After=network.target
-
-[Service]
-Type=simple
-User=www-data
-WorkingDirectory=/var/www/aero-melody/backend
-Environment="PATH=/var/www/aero-melody/backend/venv/bin"
-ExecStart=/var/www/aero-melody/backend/venv/bin/uvicorn main:app --host 0.0.0.0 --port 8000
-Restart=always
-
-[Install]
-WantedBy=multi-user.target
-```
-
-```bash
-# Start service
-sudo systemctl daemon-reload
-sudo systemctl start aero-melody
-sudo systemctl enable aero-melody
-sudo systemctl status aero-melody
-```
-
-#### Nginx Configuration
-
-```nginx
-server {
-    listen 80;
-    server_name api.yourdomain.com;
-
-    location / {
-        proxy_pass http://localhost:8000;
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
-    }
-
-    location /api/v1/ws {
-        proxy_pass http://localhost:8000;
-        proxy_http_version 1.1;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection "upgrade";
-        proxy_set_header Host $host;
-    }
-}
-```
-
-#### Frontend Deployment
-
-```bash
-# Build for production
-npm run build
-
-# Deploy to static hosting (Vercel, Netlify, etc.)
-# Or serve with Nginx
-sudo cp -r dist/* /var/www/html/
-```
-
-**Frontend Nginx Configuration**:
-
-```nginx
-server {
-    listen 80;
-    server_name yourdomain.com;
-    root /var/www/html;
-    index index.html;
-
-    location / {
-        try_files $uri $uri/ /index.html;
-    }
-
-    location /api {
-        proxy_pass http://localhost:8000;
-    }
-}
-```
-
-#### SSL/TLS with Let's Encrypt
-
-```bash
-# Install certbot
-sudo apt install certbot python3-certbot-nginx
-
-# Obtain certificate
-sudo certbot --nginx -d yourdomain.com -d api.yourdomain.com
-
-# Auto-renewal
-sudo certbot renew --dry-run
-```
-
-### Cloud Deployment Options
-
-#### AWS
-
-- **Backend**: EC2 or ECS
-- **Frontend**: S3 + CloudFront
-- **Database**: RDS (MariaDB)
-- **Cache**: ElastiCache (Redis)
-
-#### Google Cloud Platform
-
-- **Backend**: Cloud Run or Compute Engine
-- **Frontend**: Cloud Storage + Cloud CDN
-- **Database**: Cloud SQL (MySQL)
-- **Cache**: Memorystore (Redis)
-
-#### Azure
-
-- **Backend**: App Service or Container Instances
-- **Frontend**: Static Web Apps
-- **Database**: Azure Database for MySQL
-- **Cache**: Azure Cache for Redis
-
-### Monitoring & Logging
-
-#### Application Monitoring
-
-```python
-# Add to main.py
-from prometheus_client import Counter, Histogram
-import logging
-
-# Metrics
-request_count = Counter('http_requests_total', 'Total HTTP requests')
-request_duration = Histogram('http_request_duration_seconds', 'HTTP request duration')
-
-# Logging
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-    handlers=[
-        logging.FileHandler('app.log'),
-        logging.StreamHandler()
-    ]
-)
-```
-
-#### Health Checks
-
-```bash
-# Backend health
-curl http://localhost:8000/health
-
-# Database health
-curl http://localhost:8000/api/v1/health/db
-
-# Redis health
-curl http://localhost:8000/api/v1/health/redis
-```
-
-### Backup Strategy
-
-#### Database Backup
-
-```bash
-# Daily backup script
-#!/bin/bash
-DATE=$(date +%Y%m%d_%H%M%S)
-mysqldump -u root -p aero_melody > backup_$DATE.sql
-gzip backup_$DATE.sql
-
-# Upload to S3
-aws s3 cp backup_$DATE.sql.gz s3://your-bucket/backups/
-```
-
-#### Redis Backup
-
-```bash
-# Redis persistence (RDB)
-redis-cli BGSAVE
-
-# Copy RDB file
-cp /var/lib/redis/dump.rdb /backup/redis_$(date +%Y%m%d).rdb
-```
-
-
----
-
-## 🧪 Testing
-
-### Backend Testing
-
-#### Run All Tests
-
-```bash
-cd backend
-
-# Activate virtual environment
-source venv/bin/activate  # Linux/Mac
-venv\Scripts\activate     # Windows
-
-# Run pytest
-pytest
-
-# Run with coverage
-pytest --cov=app --cov-report=html
-
-# Run specific test file
-pytest tests/test_music.py
-
-# Run with verbose output
-pytest -v
-```
-
-#### Test Categories
-
-```bash
-# Unit tests
-pytest tests/unit/
-
-# Integration tests
-pytest tests/integration/
-
-# API tests
-pytest tests/api/
-
-# Performance tests
-pytest tests/performance/
-```
-
-#### Manual API Testing
-
-```bash
-# Test Redis connection
-python test_redis_cloud.py
-
-# Test all backend components
-python test_backend.py
-
-# Test music generation
-curl "http://localhost:8000/api/v1/demo/complete-demo?origin=JFK&destination=LAX"
-
-# Test cache
-curl "http://localhost:8000/api/v1/redis/test/save-music"
-
-# Test health
-curl "http://localhost:8000/health"
-```
-
-### Frontend Testing
-
-#### Development
-
-```bash
-# Start dev server
-npm run dev
-
-# Build for production
-npm run build
-
-# Preview production build
-npm run preview
-
-# Lint code
-npm run lint
-```
-
-#### Component Testing
-
-```bash
-# Install testing dependencies
-npm install --save-dev @testing-library/react @testing-library/jest-dom vitest
-
-# Run tests
-npm run test
-
-# Run with coverage
-npm run test:coverage
-```
-
-### Code Quality
+### Manual Deployment
 
 #### Backend
 
 ```bash
-# Format code with Black
-black app/ tests/
-
-# Sort imports
-isort app/ tests/
-
-# Lint with flake8
-flake8 app/ tests/
-
-# Type checking with mypy
-mypy app/
+cd backend
+pip install -r requirements.txt
+uvicorn app.main:app --host 0.0.0.0 --port 8000
 ```
 
 #### Frontend
 
 ```bash
-# Lint TypeScript
-npm run lint
-
-# Fix linting issues
-npm run lint:fix
-
-# Format with Prettier
-npm run format
+npm run build
+# Serve the dist/ folder with your web server
 ```
 
-### Load Testing
+### Environment Variables
 
-#### Using Apache Bench
+#### Backend (.env)
 
-```bash
-# Test music generation endpoint
-ab -n 1000 -c 10 "http://localhost:8000/api/v1/demo/complete-demo?origin=JFK&destination=LAX"
-
-# Test airport search
-ab -n 1000 -c 10 "http://localhost:8000/api/v1/airports/search?query=New%20York"
-```
-
-#### Using Locust
-
-```python
-# locustfile.py
-from locust import HttpUser, task, between
-
-class AeroMelodyUser(HttpUser):
-    wait_time = between(1, 3)
-
-    @task
-    def generate_music(self):
-        self.client.get("/api/v1/demo/complete-demo?origin=JFK&destination=LAX")
-
-    @task
-    def search_airports(self):
-        self.client.get("/api/v1/airports/search?query=New%20York")
-```
-
-```bash
-# Run load test
-locust -f locustfile.py --host=http://localhost:8000
-```
-
-
----
-
-## 🐛 Troubleshooting
-
-### Common Issues
-
-#### Backend Won't Start
-
-**Problem**: `ModuleNotFoundError` or import errors
-
-```bash
-# Solution: Ensure virtual environment is activated
-source venv/bin/activate  # Linux/Mac
-venv\Scripts\activate     # Windows
-
-# Reinstall dependencies
-pip install -r requirements.txt
-```
-
-**Problem**: Database connection failed
-
-```bash
-# Check MariaDB is running
-sudo systemctl status mariadb  # Linux
-# or check Windows services
-
-# Verify credentials in .env
+```env
 DATABASE_URL=mysql+asyncmy://user:password@localhost:3306/aero_melody
-
-# Test connection
-python -c "import pymysql; pymysql.connect(host='localhost', user='root', password='your_password')"
+REDIS_URL=redis://default:password@host:port
+SECRET_KEY=your-secret-key
+MAPBOX_TOKEN=your-mapbox-token
 ```
 
-#### Redis Connection Issues
+#### Frontend (.env.local)
 
-**Problem**: `ConnectionError: Error connecting to Redis`
-
-```bash
-# Test Redis connection
-python test_redis_cloud.py
-
-# Verify .env credentials
-REDIS_HOST=your-redis-host
-REDIS_PORT=16441
-REDIS_PASSWORD=your-password
-
-# Check Redis Cloud dashboard
-# Ensure IP is whitelisted (if using Redis Cloud)
-```
-
-**Problem**: No keys in Redis
-
-```bash
-# Test save endpoint
-curl "http://localhost:8000/api/v1/redis/test/save-music"
-
-# Check storage info
-curl "http://localhost:8000/api/v1/redis/storage/info"
-
-# Verify TTL settings
-REDIS_CACHE_TTL=1800  # 30 minutes
-```
-
-#### DuckDB Errors
-
-**Problem**: `ModuleNotFoundError: No module named 'duckdb'`
-
-```bash
-# DuckDB is optional - application works without it
-# To install:
-pip install duckdb
-
-# Or ignore the warnings - analytics features will be disabled
-```
-
-#### Frontend Issues
-
-**Problem**: API requests failing with CORS errors
-
-```bash
-# Check backend CORS settings in .env
-BACKEND_CORS_ORIGINS=http://localhost:5173,http://localhost:3000
-
-# Verify frontend API URL in .env.local
+```env
 VITE_API_BASE_URL=http://localhost:8000/api/v1
+VITE_MAPBOX_TOKEN=your-mapbox-token
 ```
-
-**Problem**: Mapbox map not loading
-
-```bash
-# Check Mapbox token in .env.local
-VITE_MAPBOX_TOKEN=your_mapbox_token_here
-
-# Get token from: https://account.mapbox.com/access-tokens/
-```
-
-#### Music Generation Issues
-
-**Problem**: No sound playing
-
-```bash
-# Check browser console for errors
-# Ensure AudioContext is supported
-# Try user interaction first (click play button)
-
-# Verify MIDI file is generated
-ls backend/midi_output/
-```
-
-**Problem**: Music sounds wrong
-
-```bash
-# Check route data
-curl "http://localhost:8000/api/v1/routes/JFK/LAX"
-
-# Verify music parameters
-curl "http://localhost:8000/api/v1/demo/complete-demo?origin=JFK&destination=LAX"
-
-# Check logs
-tail -f backend/app.log
-```
-
-#### Database Issues
-
-**Problem**: Tables not created
-
-```bash
-# Run migrations
-cd backend
-alembic upgrade head
-
-# Or recreate tables
-python -c "from app.db.database import engine, Base; import asyncio; asyncio.run(engine.begin().__aenter__()).run_sync(Base.metadata.create_all)"
-```
-
-**Problem**: OpenFlights data not loaded
-
-```bash
-# Run ETL script
-python scripts/etl_openflights.py
-
-# Check data
-mysql -u root -p aero_melody -e "SELECT COUNT(*) FROM airports;"
-mysql -u root -p aero_melody -e "SELECT COUNT(*) FROM routes;"
-```
-
-### Performance Issues
-
-#### Slow API Responses
-
-```bash
-# Check Redis cache hit rate
-curl "http://localhost:8000/api/v1/redis/cache/stats"
-
-# Monitor database queries
-# Enable SQL logging in config.py
-echo_pool=True
-
-# Check connection pool
-DATABASE_POOL_SIZE=20
-DATABASE_MAX_OVERFLOW=30
-```
-
-#### High Memory Usage
-
-```bash
-# Check Redis memory
-redis-cli INFO memory
-
-# Reduce cache TTL
-REDIS_CACHE_TTL=900  # 15 minutes instead of 30
-
-# Limit DuckDB memory
-DUCKDB_MEMORY_LIMIT=1GB
-```
-
-### Debugging Tips
-
-#### Enable Debug Mode
-
-```bash
-# Backend (.env)
-DEBUG=True
-LOG_LEVEL=DEBUG
-
-# Frontend (.env.local)
-VITE_ENV=development
-```
-
-#### View Logs
-
-```bash
-# Backend logs
-tail -f backend/app.log
-
-# Docker logs
-docker-compose logs -f backend
-
-# Systemd logs
-sudo journalctl -u aero-melody -f
-```
-
-#### Database Debugging
-
-```bash
-# Connect to database
-mysql -u root -p aero_melody
-
-# Check tables
-SHOW TABLES;
-
-# Check data
-SELECT * FROM airports LIMIT 10;
-SELECT * FROM routes LIMIT 10;
-SELECT * FROM compositions LIMIT 10;
-```
-
-### Getting Help
-
-If you're still experiencing issues:
-
-1. Check the [API documentation](http://localhost:8000/docs)
-2. Review the [backend logs](backend/app.log)
-3. Run the [test suite](backend/tests/)
-4. Check [GitHub Issues](https://github.com/yourusername/aero-melody/issues)
-5. Contact support or open a new issue
-
 
 ---
 
 ## 🤝 Contributing
 
-We welcome contributions from the community! Here's how you can help make Aero Melody better.
+We welcome contributions from the community! Whether you're fixing bugs, adding features, improving documentation, or suggesting ideas, your help is appreciated.
 
 ### Getting Started
 
-1. **Fork the repository**
+1. **Fork the repository** on GitHub
+2. **Clone your fork** locally:
    ```bash
-   # Click "Fork" on GitHub
-   git clone https://github.com/your-username/aero-melody.git
+   git clone https://github.com/yourusername/aero-melody.git
    cd aero-melody
    ```
-
-2. **Create a feature branch**
+3. **Create a feature branch**:
    ```bash
-   git checkout -b feature/amazing-feature
+   git checkout -b feature/your-feature-name
    ```
+4. **Set up development environment** (see [Quick Start](#-quick-start))
 
-3. **Make your changes**
-   - Write clean, documented code
-   - Follow existing code style
-   - Add tests for new features
-   - Update documentation
-
-4. **Test your changes**
-   ```bash
-   # Backend tests
-   cd backend
-   pytest
-   black app/ tests/
-   flake8 app/ tests/
-
-   # Frontend tests
-   npm run lint
-   npm run build
-   ```
-
-5. **Commit your changes**
-   ```bash
-   git add .
-   git commit -m "feat: add amazing feature"
-   ```
-
-6. **Push to your fork**
-   ```bash
-   git push origin feature/amazing-feature
-   ```
-
-7. **Open a Pull Request**
-   - Go to the original repository
-   - Click "New Pull Request"
-   - Describe your changes
-   - Link any related issues
-
-### Contribution Guidelines
+### Development Guidelines
 
 #### Code Style
 
 **Python (Backend)**
-- Follow PEP 8 style guide
-- Use Black for formatting
-- Use type hints
-- Write docstrings for functions
+- Follow [PEP 8](https://pep8.org/) style guide
+- Use type hints for function parameters and return values
 - Maximum line length: 100 characters
+- Use docstrings for classes and functions
+- Format code with `black`:
+  ```bash
+  pip install black
+  black backend/app
+  ```
 
-```python
-def generate_music(origin: str, destination: str, tempo: int = 120) -> dict:
-    """
-    Generate music composition from flight route.
-
-    Args:
-        origin: Origin airport code (e.g., 'JFK')
-        destination: Destination airport code (e.g., 'LAX')
-        tempo: Beats per minute (default: 120)
-
-    Returns:
-        Dictionary containing composition data and MIDI file
-    """
-    pass
-```
-
-**TypeScript (Frontend)**
-- Use TypeScript for all new code
-- Follow ESLint rules
+**TypeScript/React (Frontend)**
+- Follow [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript)
 - Use functional components with hooks
-- Write JSDoc comments for complex functions
-
-```typescript
-/**
- * Generate music from flight route
- * @param origin - Origin airport code
- * @param destination - Destination airport code
- * @param tempo - Beats per minute
- * @returns Promise with composition data
- */
-async function generateMusic(
-  origin: string,
-  destination: string,
-  tempo: number = 120
-): Promise<Composition> {
-  // Implementation
-}
-```
+- Use TypeScript for type safety
+- Format code with Prettier:
+  ```bash
+  npm run format
+  ```
 
 #### Commit Messages
 
 Follow [Conventional Commits](https://www.conventionalcommits.org/):
 
-- `feat:` New feature
-- `fix:` Bug fix
-- `docs:` Documentation changes
-- `style:` Code style changes (formatting, etc.)
-- `refactor:` Code refactoring
-- `test:` Adding or updating tests
-- `chore:` Maintenance tasks
-
-Examples:
-```bash
-feat: add real-time collaboration feature
-fix: resolve Redis connection timeout issue
-docs: update API documentation for music generation
-test: add unit tests for music generator service
 ```
+feat: add wellness theme customization
+fix: resolve MIDI playback issue in Safari
+docs: update vector embeddings guide
+style: format code with black
+refactor: simplify route generation logic
+test: add unit tests for music generator
+chore: update dependencies
+```
+
+#### Testing Requirements
+
+**Before submitting a PR, ensure:**
+
+1. **Backend tests pass**:
+   ```bash
+   cd backend
+   pytest tests/
+   ```
+
+2. **Frontend builds without errors**:
+   ```bash
+   npm run build
+   ```
+
+3. **Linting passes**:
+   ```bash
+   # Backend
+   flake8 backend/app
+   
+   # Frontend
+   npm run lint
+   ```
+
+4. **Manual testing checklist**:
+   - [ ] Feature works as expected
+   - [ ] No console errors
+   - [ ] No breaking changes to existing features
+   - [ ] API endpoints return correct responses
+   - [ ] UI is responsive on mobile/desktop
+
+#### Adding New Features
+
+**For new API endpoints:**
+1. Add route in `backend/app/api/`
+2. Create Pydantic schemas in `backend/app/models/`
+3. Add business logic in `backend/app/services/`
+4. Update API documentation (docstrings)
+5. Add tests in `backend/tests/`
+
+**For new UI components:**
+1. Create component in `src/components/`
+2. Use TypeScript interfaces for props
+3. Follow existing component patterns
+4. Ensure accessibility (ARIA labels, keyboard navigation)
+5. Test on multiple screen sizes
+
+**For new features:**
+1. Discuss in GitHub Issues first (for major changes)
+2. Update documentation (README, backend/docs/)
+3. Add examples and usage instructions
+4. Consider backward compatibility
 
 #### Pull Request Process
 
-1. **Update documentation** - If you change APIs or add features
-2. **Add tests** - Ensure new code is tested
-3. **Update CHANGELOG** - Add entry for your changes
-4. **Pass CI checks** - All tests must pass
-5. **Get review** - Wait for maintainer review
-6. **Address feedback** - Make requested changes
-7. **Merge** - Maintainer will merge when approved
+1. **Update documentation** if needed
+2. **Add tests** for new functionality
+3. **Ensure all tests pass** locally
+4. **Update CHANGELOG.md** with your changes
+5. **Submit PR** with clear description:
+   ```markdown
+   ## Description
+   Brief description of changes
+   
+   ## Type of Change
+   - [ ] Bug fix
+   - [ ] New feature
+   - [ ] Breaking change
+   - [ ] Documentation update
+   
+   ## Testing
+   - [ ] Tests pass locally
+   - [ ] Manual testing completed
+   
+   ## Screenshots (if applicable)
+   ```
+
+6. **Respond to review feedback** promptly
+7. **Squash commits** if requested before merge
 
 ### Areas for Contribution
 
-#### High Priority
+**Good First Issues:**
+- Documentation improvements
+- UI/UX enhancements
+- Bug fixes
+- Test coverage improvements
+- Performance optimizations
 
-- [ ] Add more musical scales and styles
-- [ ] Improve AI genre composition accuracy
-- [ ] Add user authentication with OAuth
-- [ ] Implement composition versioning
-- [ ] Add mobile responsive design
-- [ ] Improve WebSocket reconnection logic
-
-#### Medium Priority
-
-- [ ] Add more visualization options
-- [ ] Implement composition export formats (MP3, WAV)
-- [ ] Add social sharing features
-- [ ] Improve search functionality
-- [ ] Add keyboard shortcuts
-- [ ] Implement dark mode
-
-#### Low Priority
-
-- [ ] Add internationalization (i18n)
-- [ ] Create mobile app
-- [ ] Add gamification features
-- [ ] Implement AI-powered recommendations
-- [ ] Add composition tutorials
-
-### Bug Reports
-
-Found a bug? Please open an issue with:
-
-- **Title**: Clear, descriptive title
-- **Description**: What happened vs. what you expected
-- **Steps to Reproduce**: Detailed steps
-- **Environment**: OS, browser, versions
-- **Screenshots**: If applicable
-- **Logs**: Relevant error messages
-
-### Feature Requests
-
-Have an idea? Open an issue with:
-
-- **Title**: Clear feature description
-- **Problem**: What problem does it solve?
-- **Solution**: How should it work?
-- **Alternatives**: Other solutions considered
-- **Additional Context**: Mockups, examples, etc.
+**Feature Ideas:**
+- Additional musical scales and modes
+- More wellness themes
+- Enhanced VR/AR features
+- Mobile app development
+- Additional data sources beyond OpenFlights
+- Social features (share compositions)
+- Export to different audio formats
+- Real-time collaboration features
 
 ### Code of Conduct
 
 - Be respectful and inclusive
-- Welcome newcomers
-- Accept constructive criticism
-- Focus on what's best for the community
-- Show empathy towards others
+- Provide constructive feedback
+- Focus on the code, not the person
+- Help others learn and grow
+- Follow the [Contributor Covenant](https://www.contributor-covenant.org/)
 
-### License
+### Questions?
 
-By contributing, you agree that your contributions will be licensed under the MIT License.
+- Open a [GitHub Discussion](https://github.com/yourusername/aero-melody/discussions)
+- Check existing [Issues](https://github.com/yourusername/aero-melody/issues)
+- Review [Documentation](backend/docs/)
 
-
----
-
-## 📊 Performance Metrics
-
-### System Capabilities
-
-| Metric | Value | Notes |
-|--------|-------|-------|
-| **Airports** | 3,000+ | OpenFlights dataset |
-| **Routes** | 67,000+ | Global coverage |
-| **Music Generation** | <500ms | With Redis cache |
-| **Cache Hit Rate** | 85%+ | Typical usage |
-| **Concurrent Users** | 100+ | WebSocket connections |
-| **API Response Time** | <100ms | Cached endpoints |
-| **Database Queries** | <50ms | Indexed queries |
-| **MIDI File Size** | 1-5KB | Per composition |
-
-### Scalability
-
-- **Horizontal Scaling**: Load balancer + multiple backend instances
-- **Database**: Connection pooling (20 connections, 30 overflow)
-- **Caching**: Redis Cloud with 30MB plan (expandable)
-- **CDN**: Static assets served via CDN
-- **WebSocket**: Supports 100+ concurrent connections per instance
-
-### Optimization Techniques
-
-1. **Database Indexing**
-   - Airport codes indexed
-   - Route pairs indexed
-   - User IDs indexed
-   - Composition timestamps indexed
-
-2. **Caching Strategy**
-   - Compositions cached for 30 minutes
-   - Airport data cached for 24 hours
-   - Route data cached for 12 hours
-   - User sessions cached for 2 hours
-
-3. **Query Optimization**
-   - Async database operations
-   - Batch queries where possible
-   - Lazy loading for large datasets
-   - Pagination for list endpoints
-
-4. **Frontend Optimization**
-   - Code splitting
-   - Lazy loading components
-   - Image optimization
-   - Bundle size optimization
+Thank you for contributing to Aero Melody! 🎵✈️
 
 ---
 
-## 🔐 Security
+## 📄 License
 
-### Authentication & Authorization
-
-- **JWT Tokens**: Secure token-based authentication
-- **Password Hashing**: bcrypt with salt
-- **Token Expiration**: 8 hours (configurable)
-- **Refresh Tokens**: Planned for future release
-
-### API Security
-
-- **Rate Limiting**: 1000 requests/minute per IP
-- **CORS**: Configurable origin whitelist
-- **Input Validation**: Pydantic schemas for all inputs
-- **SQL Injection**: Protected via SQLAlchemy ORM
-- **XSS Protection**: React's built-in escaping
-
-### Data Protection
-
-- **Environment Variables**: Sensitive data in .env files
-- **Database Encryption**: TLS connections supported
-- **Redis Encryption**: TLS connections supported
-- **HTTPS**: SSL/TLS in production
-
-### Best Practices
-
-1. **Never commit .env files**
-2. **Use strong JWT secrets**
-3. **Enable HTTPS in production**
-4. **Regularly update dependencies**
-5. **Monitor for security vulnerabilities**
-6. **Implement proper error handling**
-7. **Log security events**
-
----
-
-## 📈 Roadmap
-
-### Version 1.1 (Q1 2026)
-
-- [ ] OAuth authentication (Google, GitHub)
-- [ ] Composition export to MP3/WAV
-- [ ] Mobile responsive design improvements
-- [ ] Advanced analytics dashboard
-- [ ] User profiles and avatars
-
-### Version 1.2 (Q2 2026)
-
-- [ ] Real-time collaboration improvements
-- [ ] AI-powered composition recommendations
-- [ ] Social features (follow, feed)
-- [ ] Composition versioning
-- [ ] Advanced search and filters
-
-### Version 2.0 (Q3 2026)
-
-- [ ] Mobile app (React Native)
-- [ ] Live performance mode
-- [ ] Composition marketplace
-- [ ] Advanced AI features
-- [ ] Multi-language support
-
-### Long-term Vision
-
-- Integration with flight booking APIs
-- Real-time flight tracking with live music
-- VR/AR visualization experiences
-- Educational platform for music theory
-- API for third-party integrations
-
----
-
-## 📝 License
-
-This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
-
-```
-MIT License
-
-Copyright (c) 2025 Aero Melody
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-```
+This project is licensed under the MIT License - see the LICENSE file for details.
 
 ---
 
 ## 🙏 Acknowledgments
 
-### Data Sources
-
-- **OpenFlights**: Airport and route data
-- **Mapbox**: Map visualization
-- **shadcn/ui**: UI component library
-
-### Technologies
-
-- **FastAPI**: Modern Python web framework
-- **React**: UI library
-- **PyTorch**: Machine learning framework
-- **Redis**: Caching and real-time features
-- **MariaDB**: Reliable database
-
-### Contributors
-
-Thank you to all contributors who have helped make Aero Melody better!
-
-
-For their dedication and contributions to the Aero Melody project.
+- **OpenFlights** - For the comprehensive aviation dataset
+- **FastAPI** - For the excellent Python web framework
+- **React** - For the powerful UI library
+- **PyTorch** - For AI/ML capabilities
+- **FAISS** - For fast similarity search
+- **shadcn/ui** - For beautiful UI components
 
 ---
 
+## 📞 Support
 
-### Documentation
-
+- **Documentation**: See the `backend/docs/` folder
 - **API Docs**: http://localhost:8000/docs
-
-- Aviral
-- Shani
-- Karina
-- Mythri
-
-⭐ Star us on GitHub if you find this project interesting!
-
-
+- **Issues**: GitHub Issues
+- **Email**: support@aeromelody.com
 
 ---
+
+## 🎉 Get Started
+
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/aero-melody.git
+cd aero-melody
+
+# Setup backend
+cd backend
+python -m venv venv
+source venv/bin/activate  # or venv\Scripts\activate on Windows
+pip install -r requirements.txt
+python scripts/etl_openflights.py
+setup_vector_embeddings.bat  # Optional but recommended
+python main.py
+
+# Setup frontend (in new terminal)
+cd ..
+npm install
+npm run dev
+```
+
+Visit http://localhost:5173 and start creating music from flight routes! 🎵✈️
+
+---
+
+**Built with ❤️ by the Aero Melody Team**

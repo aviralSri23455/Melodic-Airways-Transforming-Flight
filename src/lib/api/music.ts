@@ -66,7 +66,6 @@ export interface MusicGenerationResponse {
       similar_routes: any;
       midi_generation: MidiGenerationStep;
       redis_broadcast: any;
-      galera_sync: any;
       duckdb_analytics: any;
     };
     timing: Record<string, number>;

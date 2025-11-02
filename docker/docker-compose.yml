@@ -1,0 +1,121 @@
+version: '3.8'
+
+services:
+  # MariaDB Database - Stores airports, routes, compositions, user data
+  mariadb:
+    image: mariadb:10.11
+    container_name: aero-melody-db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-rootpassword}
+      MYSQL_DATABASE: aero_melody
+      MYSQL_USER: aero_user
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-aeropassword}
+    ports:
+      - "3306:3306"
+    volumes:
+      - mariadb_data:/var/lib/mysql
+      - ../backend/sql:/docker-entrypoint-initdb.d:ro
+    networks:
+      - aero-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD:-rootpassword}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Redis Cloud Alternative - Local Redis for caching and pub/sub
+  redis:
+    image: redis:7-alpine
+    container_name: aero-melody-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - aero-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+  # Backend API - FastAPI application
+  backend:
+    build:
+      context: ../backend
+      dockerfile: ../docker/Dockerfile.backend
+    container_name: aero-melody-backend
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      # Database
+      DATABASE_URL: mysql://aero_user:${MYSQL_PASSWORD:-aeropassword}@mariadb:3306/aero_melody
+      
+      # Redis
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      REDIS_PASSWORD: ""
+      REDIS_USERNAME: default
+      REDIS_CACHE_TTL: 3600
+      
+      # Security
+      JWT_SECRET_KEY: ${JWT_SECRET_KEY:-your-secret-key-change-in-production}
+      BACKEND_CORS_ORIGINS: http://localhost:5173,http://localhost:3000
+      
+      # Optional
+      DUCKDB_PATH: /app/data/analytics.duckdb
+      DUCKDB_MEMORY_LIMIT: 2GB
+    volumes:
+      - ../backend:/app
+      - backend_data:/app/data
+      - backend_midi:/app/midi_files
+    depends_on:
+      mariadb:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - aero-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Frontend - React/Vite application
+  frontend:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.frontend
+    container_name: aero-melody-frontend
+    restart: unless-stopped
+    ports:
+      - "5173:5173"
+    environment:
+      VITE_API_URL: http://localhost:8000
+    volumes:
+      - ../src:/app/src
+      - ../public:/app/public
+      - ../index.html:/app/index.html
+      - ../vite.config.ts:/app/vite.config.ts
+    depends_on:
+      - backend
+    networks:
+      - aero-network
+
+volumes:
+  mariadb_data:
+    driver: local
+  redis_data:
+    driver: local
+  backend_data:
+    driver: local
+  backend_midi:
+    driver: local
+
+networks:
+  aero-network:
+    driver: bridge

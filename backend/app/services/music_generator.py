@@ -110,8 +110,8 @@ class MusicGenerator:
         base_pitch = 60 + (direction_factor * 24)  # C4 to C6 range
 
         # Map distance to tempo (longer flights = slower tempo)
-        distance_factor = min(route.distance_km / 10000, 1.0)  # Normalize
-        adjusted_tempo = int(tempo * (1 - distance_factor * 0.3))  # Slower for long flights
+        distance_factor = min(float(route.distance_km) / 10000, 1.0)  # Normalize
+        adjusted_tempo = int(float(tempo) * (1 - distance_factor * 0.3))  # Slower for long flights
 
         # Map altitude difference to harmony complexity
         alt_diff = abs((destination.altitude or 0) - (origin.altitude or 0))
@@ -385,11 +385,11 @@ class MusicGenerator:
         base_pitch = 60 + (direction_factor * 24)  # C4 to C6 range
 
         # Distance factor affects tempo (longer total distance = slower tempo)
-        distance_factor = min(total_distance / 10000, 1.0)  # Normalize
-        adjusted_tempo = int(tempo * (1 - distance_factor * 0.3))  # Slower for long distances
+        distance_factor = min(float(total_distance) / 10000, 1.0)  # Normalize
+        adjusted_tempo = int(float(tempo) * (1 - distance_factor * 0.3))  # Slower for long distances
 
         # Complexity factor based on number of segments and total distance
-        complexity_factor = min((total_segments * 0.1) + (total_distance / 10000 * 0.05), 1.0)
+        complexity_factor = min((total_segments * 0.1) + (float(total_distance) / 10000 * 0.05), 1.0)
 
         # Determine scale notes
         scale_notes = self.scales[scale.value]
@@ -430,7 +430,7 @@ class MusicGenerator:
             ])
 
         # Add aggregate features
-        total_distance = sum(segment['distance_km'] for segment in path_segments)
+        total_distance = sum(float(segment['distance_km']) for segment in path_segments)
         avg_distance = total_distance / len(path_segments)
 
         features.extend([
@@ -638,7 +638,7 @@ class MusicGenerator:
             route = route_result.scalar_one_or_none()
 
             if not route:
-                distance = first_segment['distance_km']
+                distance = float(first_segment['distance_km'])
                 duration = int(distance / 800 * 60) if distance > 0 else None
 
                 route = Route(
@@ -779,7 +779,7 @@ class MusicGenerationService:
                 raise ValueError(f"No route found between {origin_code} and {destination_code}")
             
             # Log route analytics to DuckDB
-            complexity_score = len(path_segments) * (total_distance / 10000)
+            complexity_score = len(path_segments) * (float(total_distance) / 10000)
             self.analytics.log_route_analytics(
                 origin=origin_code,
                 destination=destination_code,
@@ -798,13 +798,13 @@ class MusicGenerationService:
                 select(Route).where(
                     Route.origin_airport_id == first_segment['origin_id'],
                     Route.destination_airport_id == first_segment['destination_id']
-                )
+                ).limit(1)
             )
             route = route_result.scalar_one_or_none()
 
             if not route:
                 # Calculate route metrics if not exists
-                distance = first_segment['distance_km']
+                distance = float(first_segment['distance_km'])
                 duration = int(distance / 800 * 60) if distance > 0 else None
 
                 route = Route(

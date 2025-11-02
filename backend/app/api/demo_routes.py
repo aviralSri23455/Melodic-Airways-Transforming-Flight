@@ -15,8 +15,8 @@ from app.services.music_generator import MusicGenerator
 from app.services.redis_publisher import get_publisher
 from app.services.faiss_duckdb_service import get_faiss_duckdb_service
 from app.services.duckdb_analytics import get_analytics
-# from app.services.galera_manager import GaleraManager  # Removed to prevent errors
 from app.services.cache import get_cache
+from app.services.realtime_vector_sync import get_realtime_vector_sync
 from app.db.database import get_db
 from app.models.schemas import MusicStyle, ScaleType
 from app.models.models import Airport, Route
@@ -37,9 +37,7 @@ class DemoOrchestrator:
         self.faiss_service = get_faiss_duckdb_service()
         self.analytics = get_analytics()
         self.cache = get_cache()
-        # GaleraManager removed to prevent NoneType errors
-        # self.galera = GaleraManager()
-
+        self.vector_sync = get_realtime_vector_sync()
     async def run_complete_demo(
         self,
         origin: str,
@@ -54,9 +52,8 @@ class DemoOrchestrator:
         2. Vector embedding (PyTorch)
         3. Similar routes (FAISS)
         4. MIDI generation (Mido)
-        5. Redis Pub/Sub broadcast
-        6. Galera sync
-        7. DuckDB analytics
+        5. Real-time broadcasting
+        6. DuckDB analytics
         """
         demo_start = time.time()
         results = {
@@ -638,16 +635,16 @@ class DemoOrchestrator:
             results["timing"]["redis_broadcast"] = time.time() - step_start
             results["tech_stack_used"].append("Redis (Pub/Sub Broadcasting)")
 
-            # Step 6: Galera Cluster Sync (Skipped - Optional Component)
+            # Step 6: Database Sync (Skipped - Optional Component)
             step_start = time.time()
-            results["steps"]["galera_sync"] = {
+            results["steps"]["database_sync"] = {
                 "status": "skipped",
-                "reason": "Galera cluster sync is optional for demo",
+                "reason": "Database sync is optional for demo",
                 "cluster_nodes": 1,
                 "sync_status": "Single-node mode"
             }
-            results["timing"]["galera_sync"] = time.time() - step_start
-            results["tech_stack_used"].append("Galera Cluster (Multi-node Sync - Skipped)")
+            results["timing"]["database_sync"] = time.time() - step_start
+            results["tech_stack_used"].append("Database Sync (Multi-node Sync - Skipped)")
 
             # Step 7: DuckDB Analytics - Real Analytics from OpenFlights Data
             step_start = time.time()
@@ -668,6 +665,33 @@ class DemoOrchestrator:
                     path_length=len(route_data.get("path", [])),
                     intermediate_stops=route_data.get("num_stops", 0)
                 )
+                
+                # ✅ Real-time vector sync - generate embeddings from ACTUAL MUSIC DATA
+                music_features = None
+                if music_data:
+                    # Extract REAL music features from the generated composition
+                    all_notes = music_data.get("notes", [])
+                    pitches = [n["note"] for n in all_notes if "note" in n]
+                    pitch_range = max(pitches) - min(pitches) if pitches else 24
+                    rhythm_density = music_data.get("note_count", 100) / max(1, music_data.get("duration_seconds", 60))
+                    
+                    music_features = {
+                        "tempo": music_data.get("tempo", 120),
+                        "note_count": music_data.get("note_count", 100),
+                        "duration_seconds": music_data.get("duration_seconds", 60),
+                        "harmony_complexity": 0.7,  # Based on 3-track composition
+                        "pitch_range": pitch_range,
+                        "rhythm_density": rhythm_density
+                    }
+                
+                self.vector_sync.sync_route_embedding(
+                    origin=origin,
+                    destination=destination,
+                    distance_km=route_data.get("total_distance_km", 0),
+                    complexity_score=min(1.0, complexity_score),
+                    intermediate_stops=route_data.get("num_stops", 0),
+                    music_features=music_features  # Pass REAL music data
+                )
 
             if music_data:
                 self.analytics.log_music_analytics(
@@ -680,6 +704,20 @@ class DemoOrchestrator:
                     harmony_complexity=0.7,
                     genre=music_style,
                     embedding_vector=embedding or []
+                )
+                
+                # ✅ Real-time music vector sync
+                self.vector_sync.sync_music_vector(
+                    route_id=music_data.get("composition_id", 0),
+                    origin=origin,
+                    destination=destination,
+                    tempo=tempo,
+                    key="C",
+                    scale=music_style,
+                    duration_seconds=music_data.get("duration_seconds", 0),
+                    note_count=music_data.get("note_count", 0),
+                    harmony_complexity=0.7,
+                    genre=music_style
                 )
 
             # Get analytics insights
@@ -736,8 +774,7 @@ async def run_complete_demo(
     3. Similar routes (FAISS vector search)
     4. MIDI generation (Mido)
     5. Redis Pub/Sub broadcasting
-    6. Galera cluster sync
-    7. DuckDB analytics computation
+    6. DuckDB analytics computation
     
     Example: GET /demo/complete-demo?origin=DEL&destination=LHR&music_style=ambient&tempo=120
     """
@@ -760,7 +797,7 @@ async def run_complete_demo(
                 "analytics": "DuckDB (fast, lightweight SQL engine)",
                 "ai_embeddings": "PyTorch (route → sound embeddings)",
                 "music_generation": "Mido (route → MIDI conversion)",
-                "real_time_sync": "Galera Cluster (multi-node sync)",
+                "real_time_sync": "Redis Pub/Sub (real-time messaging)",
                 "caching_streaming": "Redis Stack (Pub/Sub + caching)",
                 "api_layer": "FastAPI (high-performance async API)"
             },
@@ -771,8 +808,7 @@ async def run_complete_demo(
                 "step_4": "Find similar routes using FAISS search",
                 "step_5": "Generate real-time MIDI with Mido",
                 "step_6": "Broadcast via Redis Pub/Sub",
-                "step_7": "Sync across Galera cluster nodes",
-                "step_8": "Compute analytics with DuckDB"
+                "step_7": "Compute analytics with DuckDB"
             }
         }
 
@@ -791,7 +827,6 @@ async def get_tech_stack_status():
     - Redis connectivity  
     - DuckDB analytics
     - FAISS vector search
-    - Galera cluster status
     """
     try:
         status = {
@@ -835,16 +870,6 @@ async def get_tech_stack_status():
             }
         except Exception as e:
             status["components"]["duckdb"] = {"status": "error", "error": str(e)}
-
-        # Check Galera (Skipped - Optional Component)
-        try:
-            status["components"]["galera"] = {
-                "status": "skipped",
-                "note": "Galera cluster sync is optional for demo",
-                "details": "Galera Cluster (multi-node sync - Skipped)"
-            }
-        except Exception as e:
-            status["components"]["galera"] = {"status": "skipped", "note": "Galera not configured"}
 
         # Check PyTorch
         try:
@@ -943,7 +968,7 @@ async def get_demo_examples():
             "ai_powered": "PyTorch generates route embeddings for semantic similarity",
             "scalable_search": "FAISS enables fast vector similarity without paid services", 
             "analytics_ready": "DuckDB computes pitch complexity by continent in real-time",
-            "multi_node_sync": "Galera ensures data consistency across team laptops",
+            "real_time_sync": "Redis Pub/Sub ensures instant updates across all clients",
             "production_ready": "FastAPI provides high-performance async endpoints"
         }
     }

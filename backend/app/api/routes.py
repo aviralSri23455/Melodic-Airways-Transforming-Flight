@@ -61,10 +61,9 @@ async def get_all_routes(
 @router.post("/generate-midi", response_model=RouteGenerateResponse)
 async def generate_midi(
     request: RouteGenerateRequest,
-    current_user: User = Depends(get_current_active_user),
     db: AsyncSession = Depends(get_db)
 ):
-    """Generate unique MIDI for a flight route"""
+    """Generate unique MIDI for a flight route (no auth required)"""
     try:
         composition, midi_path, analytics = await music_service.generate_music_for_route(
             db, request.origin_code, request.destination_code,
@@ -341,7 +340,8 @@ async def get_composition_info(composition: MusicComposition, route: Route, db: 
     origin = origin_result.scalar_one_or_none()
     destination = destination_result.scalar_one_or_none()
 
-    return CompositionInfo(
+    # Build composition info with helper fields
+    comp_info = CompositionInfo(
         id=composition.id,
         route=RouteInfo(
             id=route.id,
@@ -370,6 +370,47 @@ async def get_composition_info(composition: MusicComposition, route: Route, db: 
         scale=composition.scale,
         created_at=composition.created_at
     )
+    
+    # Add helper fields for easier frontend access
+    comp_dict = comp_info.model_dump()
+    comp_dict['title'] = f"{origin.iata_code} → {destination.iata_code}"
+    comp_dict['route_name'] = f"{origin.city} to {destination.city}"
+    comp_dict['origin_code'] = origin.iata_code
+    comp_dict['destination_code'] = destination.iata_code
+    comp_dict['genre'] = composition.scale
+    comp_dict['likes_count'] = 0  # TODO: Get from database
+    comp_dict['play_count'] = 0  # TODO: Get from database
+    
+    # Load MIDI data for playback
+    try:
+        import os
+        from mido import MidiFile
+        
+        if composition.midi_path and os.path.exists(composition.midi_path):
+            mid = MidiFile(composition.midi_path)
+            notes = []
+            
+            for track in mid.tracks:
+                current_time = 0
+                for msg in track:
+                    current_time += msg.time
+                    if msg.type == 'note_on' and msg.velocity > 0:
+                        notes.append({
+                            'note': msg.note,
+                            'velocity': msg.velocity,
+                            'time': current_time,
+                            'duration': 480  # Default duration
+                        })
+            
+            comp_dict['midi_data'] = {
+                'notes': notes,
+                'tempo': composition.tempo or 120
+            }
+    except Exception as e:
+        print(f"Error loading MIDI data: {e}")
+        comp_dict['midi_data'] = None
+    
+    return comp_dict
 
 
 @router.get("/airports/search", response_model=List[AirportSearchResponse])
@@ -443,10 +484,9 @@ async def get_airport(
 @router.get("/compositions/{composition_id}", response_model=CompositionInfo)
 async def get_composition(
     composition_id: int,
-    current_user: User = Depends(get_current_active_user),
     db: AsyncSession = Depends(get_db)
 ):
-    """Get a specific composition"""
+    """Get a specific composition (no auth required)"""
     try:
         result = await db.execute(
             select(MusicComposition).where(MusicComposition.id == composition_id)
@@ -455,10 +495,6 @@ async def get_composition(
 
         if not composition:
             raise HTTPException(status_code=404, detail="Composition not found")
-
-        # Check if user owns the composition or if it's public
-        if composition.user_id != current_user.id and not composition.is_public:
-            raise HTTPException(status_code=403, detail="Access denied")
 
         # Get route info
         route_result = await db.execute(
@@ -481,14 +517,12 @@ async def get_composition(
 async def get_user_compositions(
     limit: int = Query(50, ge=1, le=200),
     offset: int = Query(0, ge=0),
-    current_user: User = Depends(get_current_active_user),
     db: AsyncSession = Depends(get_db)
 ):
-    """Get compositions for current user"""
+    """Get all public compositions (no auth required)"""
     try:
         result = await db.execute(
             select(MusicComposition)
-            .where(MusicComposition.user_id == current_user.id)
             .order_by(MusicComposition.created_at.desc())
             .limit(limit)
             .offset(offset)
