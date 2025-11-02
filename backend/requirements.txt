@@ -56,19 +56,4 @@ flake8
 python-dateutil  # For datetime handling in contests
 websockets # For WebSocket support in collaboration
 
-# Product scope alignment (non-package notes)
-# Applications:
-# - Education: Teach geography and graph theory with sound-based visualizations.
-# - Art & Multimedia: Enable data-driven compositions for artists and musicians.
-# - Entertainment & Personalization: Support travel playlists and in-flight audio experiences.
-# - Therapeutic & Wellness: Generate calming soundscapes from serene routes.
-# - Commercial: Power marketing experiences such as "Hear your trip" features.
-# Final result capabilities:
-# - Convert flight routes into unique MIDI compositions synced with interactive maps.
-# - Provide analytics (e.g., melodic complexity) and downloadable/remixable MIDI files.
-# - Showcase example routes like JFK → CDG with distance-responsive tempo and layover chords.
-# Ecosystem & growth focus:
-# - Embrace user-generated datasets and genre-aware PyTorch models.
-# - Explore VR/AR fly-through integrations and community remix contests.
-# - Build partnerships with airlines and educational institutions while enabling premium exports.
-# - Encourage open-source contributions across the data-to-art toolchain.
+
