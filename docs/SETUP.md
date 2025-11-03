@@ -1,6 +1,58 @@
-# Aero Melody Backend - Setup Guide
+# Aero Melody Backend - Setup & Documentation
 
-Complete setup instructions for the Aero Melody backend.
+**Transform Flight Routes into Musical Compositions using AI**
+
+A FastAPI backend that converts aviation data into unique MIDI music files using PyTorch, NetworkX, and Mido.
+
+---
+
+## 📚 Documentation Structure
+
+### Quick Start
+- **This Guide** - Complete setup and installation instructions
+
+### API Reference
+- **[Frontend API Guide](./API_GUIDE.md)** - Complete API documentation for frontend integration
+- **[Database Architecture](./DATABASE_ARCHITECTURE.md)** - Database schema and design
+- **[DuckDB Analytics](./DUCKDB.md)** - Analytics and vector embeddings
+- **[Vector Embeddings](./VECTOR_EMBEDDINGS.md)** - Similarity search implementation
+- **[Performance Optimization](./PERFORMANCE_OPTIMIZATION.md)** - Performance tuning guide
+
+---
+
+## 🛠 Technology Stack
+
+- **FastAPI** - Async web framework
+- **Python 3.9+** - Primary language
+- **MariaDB** - Primary database
+- **Redis Cloud** - Caching and real-time features
+- **PyTorch** - Neural networks for embeddings
+- **NetworkX** - Graph algorithms (Dijkstra)
+- **Mido** - MIDI file generation
+- **FAISS** - Vector similarity search
+
+---
+
+## 🎵 Key Features
+
+- **Music Generation** - Convert flight routes to MIDI compositions
+- **Vector Embeddings** - AI-powered similarity search
+- **Real-time Collaboration** - WebSocket support
+- **Educational Platform** - Interactive lessons
+- **Wellness Features** - Therapeutic soundscapes
+- **VR/AR Support** - 3D visualization
+
+---
+
+## 📊 Database Schema
+
+**Core Tables:**
+- `airports` - 3,000+ airports with coordinates
+- `routes` - 67,000+ flight routes
+- `music_compositions` - Generated music metadata
+- `users` - Authentication
+- `user_datasets` - Personal collections
+- `collaboration_sessions` - Real-time sessions
 
 ---
 
@@ -189,6 +241,35 @@ Expected: 19 tables including:
 - collaboration_sessions
 - 
 - contests
+
+---
+
+## 📖 API Documentation
+
+When the server is running, visit:
+- **Swagger UI**: http://localhost:8000/docs
+- **ReDoc**: http://localhost:8000/redoc
+
+---
+
+## 🧪 Testing
+
+```bash
+# Run all tests
+pytest
+
+# Test specific features
+pytest tests/test_new_features.py -v
+
+# Test database connection
+python tests/test_db.py
+
+# Test Redis connection
+python tests/test_redis_cloud.py
+
+# Test vector embeddings
+python test_all_vector_embeddings.py
+```
 
 ---
 

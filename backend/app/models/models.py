@@ -221,3 +221,22 @@ class UserActivity(Base):
 
     # Relationships
     user = relationship("User", back_populates="activities")
+
+
+class TravelLog(Base):
+    """User-generated travel logs for personal journey tracking"""
+    __tablename__ = "travel_logs"
+
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
+    title = Column(String(255), nullable=False)
+    description = Column(Text, nullable=True)
+    waypoints = Column(JSON, nullable=False)  # Array of waypoint objects with airport codes and timestamps
+    travel_date = Column(DateTime, nullable=True)
+    tags = Column(JSON, nullable=True)  # Array of tags for categorization
+    is_public = Column(Boolean, default=False)
+    created_at = Column(DateTime, default=func.now())
+    updated_at = Column(DateTime, default=func.now(), onupdate=func.now())
+
+    # Relationships
+    user = relationship("User", backref="travel_logs")

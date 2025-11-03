@@ -269,7 +269,7 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen pt-16">
+    <div className="min-h-screen pt-20">
       <Hero />
       <Features />
       
@@ -288,10 +288,7 @@ const Index = () => {
           </div>
 
           <Tabs defaultValue="experience" className="space-y-10">
-            <TabsList className="mx-auto grid w-full max-w-md grid-cols-2">
-              <TabsTrigger value="experience">Interactive Experience</TabsTrigger>
-              <TabsTrigger value="functionality">Full Functionality</TabsTrigger>
-            </TabsList>
+            
 
             <TabsContent value="experience" className="space-y-10">
               {/* Interactive Map */}
@@ -328,95 +325,6 @@ const Index = () => {
                 <MusicDNA composition={currentComposition} />
               </div>
             </TabsContent>
-
-            <TabsContent value="functionality" className="space-y-12">
-              <section className="space-y-6">
-                <h3 className="text-2xl font-semibold">Applications</h3>
-                <div className="space-y-5">
-                  <div className="rounded-xl border border-border bg-background/80 p-6 shadow-sm">
-                    <h4 className="text-lg font-semibold">Education</h4>
-                    <p className="mt-2 text-sm text-muted-foreground">
-                      Teach geography, graph theory with sound-based visualization.
-                    </p>
-                  </div>
-                  <div className="rounded-xl border border-border bg-background/80 p-6 shadow-sm">
-                    <h4 className="text-lg font-semibold">Art &amp; Multimedia</h4>
-                    <p className="mt-2 text-sm text-muted-foreground">
-                      Artists &amp; musicians generate data-driven compositions.
-                    </p>
-                  </div>
-                  <div className="rounded-xl border border-border bg-background/80 p-6 shadow-sm">
-                    <h4 className="text-lg font-semibold">Entertainment &amp; Personalization</h4>
-                    <p className="mt-2 text-sm text-muted-foreground">
-                      Create travel playlists or in-flight audio experiences.
-                    </p>
-                  </div>
-                  <div className="rounded-xl border border-border bg-background/80 p-6 shadow-sm">
-                    <h4 className="text-lg font-semibold">Therapeutic &amp; Wellness</h4>
-                    <p className="mt-2 text-sm text-muted-foreground">
-                      Generate calming sounds from serene routes.
-                    </p>
-                  </div>
-                  <div className="rounded-xl border border-border bg-background/80 p-6 shadow-sm">
-                    <h4 className="text-lg font-semibold">Commercial</h4>
-                    <p className="mt-2 text-sm text-muted-foreground">
-                      Travel platforms can use it for marketing e.g., "Hear your trip" feature.
-                    </p>
-                  </div>
-                </div>
-              </section>
-
-              <section className="space-y-6">
-                <h3 className="text-2xl font-semibold">Final Result</h3>
-                <div className="rounded-xl border border-border bg-background/80 p-6 shadow-sm">
-                  <ul className="space-y-2 text-sm text-muted-foreground">
-                    <li>• A functional web &amp; desktop app that converts any flight route into a unique MIDI composition.</li>
-                    <li>• Visualizes routes on an interactive map synced with music.</li>
-                    <li>• Provides analytics like melodic complexity score.</li>
-                    <li>• Allows downloadable MIDI files &amp; sharing/remixing.</li>
-                  </ul>
-                  <div className="mt-4 rounded-lg bg-secondary/30 p-4">
-                    <h4 className="text-base font-semibold">Example: JFK → CDG (New York → Paris)</h4>
-                    <ul className="mt-2 space-y-2 text-sm text-muted-foreground">
-                      <li>• 3-minute melody.</li>
-                      <li>• Ascending pitch eastward travel.</li>
-                      <li>• Tempo linked to distance.</li>
-                      <li>• Chords for layovers.</li>
-                    </ul>
-                  </div>
-                </div>
-              </section>
-
-              <section className="space-y-6">
-                <h3 className="text-2xl font-semibold">Ecosystem &amp; Growth</h3>
-                <div className="rounded-xl border border-border bg-background/80 p-6 shadow-sm">
-                  <ul className="space-y-2 text-sm text-muted-foreground">
-                    <li>• User-generated datasets e.g., personal travel logs.</li>
-                    <li>• Advanced AI models in PyTorch for genre-based compositions.</li>
-                    <li>• VR/AR integration for immersive “fly-through” experiences.</li>
-                    <li>• Community features:
-                      <ul className="ml-5 mt-1 space-y-1 list-disc">
-                        <li>Forums for sharing remixes.</li>
-                        <li>Contests for best compositions.</li>
-                      </ul>
-                    </li>
-                    <li>• Commercial partnerships:
-                      <ul className="ml-5 mt-1 space-y-1 list-disc">
-                        <li>Airlines</li>
-                        <li>Educational institutions</li>
-                      </ul>
-                    </li>
-                    <li>• Monetization:
-                      <ul className="ml-5 mt-1 space-y-1 list-disc">
-                        <li>Premium features e.g., high-res audio exports.</li>
-                        <li>Grants for educational outreach.</li>
-                      </ul>
-                    </li>
-                    <li>• Open-source contributions for data-to-art tools.</li>
-                  </ul>
-                </div>
-              </section>
-            </TabsContent>
           </Tabs>
         </div>
       </section>
@@ -425,7 +333,7 @@ const Index = () => {
       <footer className="py-12 px-4 border-t border-border">
         <div className="container mx-auto text-center">
           <p className="text-muted-foreground">
-            FlightSymphony - Transforming aviation data into musical experiences
+            Melodic Airways Transforming Flight - Transforming aviation data into musical experiences
           </p>
           <p className="text-sm text-muted-foreground mt-2">
             Built with React, MariaDB, PyTorch, and passion for data-driven art

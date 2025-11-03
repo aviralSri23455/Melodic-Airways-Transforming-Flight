@@ -9,6 +9,9 @@ import Education from "./pages/Education";
 import Wellness from "./pages/Wellness";
 import Premium from "./pages/Premium";
 import VRAR from "./pages/VRAR";
+import TravelLogs from "./pages/TravelLogs";
+import AIGenreComposer from "./pages/AIGenreComposer";
+import VRExperience from "./pages/VRExperience";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -26,6 +29,9 @@ const App = () => (
           <Route path="/wellness" element={<Wellness />} />
           <Route path="/premium" element={<Premium />} />
           <Route path="/vr-ar" element={<VRAR />} />
+          <Route path="/travel-logs" element={<TravelLogs />} />
+          <Route path="/ai-composer" element={<AIGenreComposer />} />
+          <Route path="/vr-experience" element={<VRExperience />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

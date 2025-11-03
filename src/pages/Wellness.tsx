@@ -109,7 +109,7 @@ const Wellness = () => {
   ];
 
   return (
-    <div className="min-h-screen py-24 px-4">
+    <div className="min-h-screen pt-20 py-24 px-4">
       <div className="container mx-auto max-w-7xl">
         <div className="text-center mb-12">
           <Heart className="w-16 h-16 mx-auto mb-4 text-primary" />

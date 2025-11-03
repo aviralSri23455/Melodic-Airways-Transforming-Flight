@@ -370,6 +370,26 @@ async def start_lesson(
                 }
             ]
         
+        # ✅ Sync education lesson to DuckDB using vector sync helper
+        try:
+            from app.services.vector_sync_helper import get_vector_sync_helper
+            
+            vector_sync = get_vector_sync_helper()
+            vector_sync.sync_education_lesson(
+                lesson_type=lesson_id,
+                difficulty=request.difficulty,
+                topic=content.get("introduction", "")[:100],
+                interaction_count=len(interactive_elements),
+                metadata={
+                    "key_concepts_count": len(content.get("key_concepts", [])),
+                    "examples_count": len(content.get("examples", [])),
+                    "has_quiz": any(elem.get("type") == "quiz" for elem in interactive_elements)
+                }
+            )
+            logger.info(f"✅ Synced education lesson to DuckDB: {lesson_id} ({request.difficulty})")
+        except Exception as e:
+            logger.warning(f"Could not sync education lesson to DuckDB: {e}")
+        
         return LessonResponse(
             lesson_id=lesson_id,
             title=f"{lesson_id.replace('-', ' ').title()} - {request.difficulty.title()} Level",

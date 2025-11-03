@@ -55,5 +55,8 @@ flake8
 # Additional utilities
 python-dateutil  # For datetime handling in contests
 websockets # For WebSocket support in collaboration
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 228b94e (fix: updated configuration and refactored some modules)

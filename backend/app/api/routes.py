@@ -71,6 +71,35 @@ async def generate_midi(
             request.tempo or 120, request.duration_minutes or 3
         )
 
+        # ✅ Sync home route to DuckDB using vector sync helper
+        try:
+            from app.services.vector_sync_helper import get_vector_sync_helper
+            import logging
+            
+            logger = logging.getLogger(__name__)
+            vector_sync = get_vector_sync_helper()
+            vector_sync.sync_home_route(
+                origin=request.origin_code,
+                destination=request.destination_code,
+                distance_km=analytics.get("distance_km", 0),
+                music_style=request.music_style.value if hasattr(request.music_style, 'value') else str(request.music_style),
+                tempo=request.tempo or 120,
+                note_count=analytics.get("note_count", 0),
+                duration=(request.duration_minutes or 3) * 60,
+                metadata={
+                    "composition_id": composition.id,
+                    "route_id": composition.route_id,
+                    "scale": request.scale.value if hasattr(request.scale, 'value') else str(request.scale),
+                    "key": request.key,
+                    "complexity": analytics.get("complexity", 0),
+                    "harmonic_richness": analytics.get("harmonic_richness", 0)
+                }
+            )
+            logger.info(f"✅ Synced home route to DuckDB: {request.origin_code} → {request.destination_code}")
+        except Exception as e:
+            import logging
+            logging.getLogger(__name__).warning(f"Could not sync home route to DuckDB: {e}")
+
         return RouteGenerateResponse(
             composition_id=composition.id,
             route_id=composition.route_id,

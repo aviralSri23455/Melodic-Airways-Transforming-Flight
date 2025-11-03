@@ -23,7 +23,7 @@ dist-ssr
 *.sln
 *.sw?
 
-# Environment variables
+# Environment variables - SENSITIVE
 .env
 .env.local
 .env.*.local
@@ -31,22 +31,57 @@ backend/.env
 backend/.env.local
 docker/.env
 
-# Python cache
+# Keep example files (these are safe templates)
+!.env.example
+!backend/.env.example
+!docker/.env.example
+
+# Python cache and bytecode
 __pycache__/
 *.py[cod]
 *$py.class
 *.so
 .Python
+backend/__pycache__/
+backend/**/__pycache__/
+*.pyc
+.pytest_cache/
+backend/.pytest_cache/
 
-# Database files
+# Virtual environments
+venv/
+env/
+ENV/
+backend/venv/
+backend/env/
+
+# Database files - SENSITIVE DATA
 *.db
+*.sqlite
+*.sqlite3
 *.duckdb
 *.duckdb.wal
+backend/data/
 backend/data/*.duckdb
 backend/data/*.duckdb.wal
+backend/data/*.db
+backend/data/*.csv
 
 # Uploads and generated files
 uploads/
 midi_output/
 backend/uploads/
 backend/midi_output/
+backend/analytics_export/
+backend/vector_exports_all/
+
+# Documentation files are now INCLUDED in git
+# Only exclude sensitive documentation if needed
+
+# Test and performance data
+backend/performance/
+backend/tests/__pycache__/
+
+# Lock files (optional - uncomment if you want to exclude)
+# package-lock.json
+# bun.lockb

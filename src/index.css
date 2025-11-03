@@ -79,6 +79,7 @@ All colors MUST be HSL.
   body {
     @apply bg-background text-foreground;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    line-height: 1.6;
   }
 
   /* Custom scrollbar */
@@ -117,5 +118,17 @@ All colors MUST be HSL.
 
   .aviation-gradient {
     background: var(--gradient-sky);
+  }
+
+  .text-no-overlap {
+    position: relative;
+    z-index: 1;
+    line-height: 1.5;
+    margin-bottom: 0.5rem;
+  }
+
+  .page-header {
+    padding-top: 5rem;
+    margin-bottom: 2rem;
   }
 }

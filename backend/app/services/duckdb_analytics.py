@@ -72,6 +72,7 @@ class DuckDBAnalytics:
                     complexity_score DOUBLE,
                     path_length INTEGER,
                     intermediate_stops INTEGER,
+                    route_embedding VARCHAR,
                     created_at TIMESTAMP
                 )
             """)
@@ -89,6 +90,7 @@ class DuckDBAnalytics:
                     harmony_complexity DOUBLE,
                     genre VARCHAR,
                     embedding_vector VARCHAR,
+                    music_vector VARCHAR,
                     created_at TIMESTAMP
                 )
             """)

@@ -158,6 +158,28 @@ async def generate_wellness_composition(
         except Exception as e:
             logger.warning(f"Could not sync wellness music embedding: {e}")
         
+        # ✅ Sync to DuckDB for analytics using vector sync helper
+        try:
+            from app.services.vector_sync_helper import get_vector_sync_helper
+            
+            vector_sync = get_vector_sync_helper()
+            vector_sync.sync_wellness_composition(
+                theme=request.theme,
+                calm_level=request.calm_level,
+                duration=int(duration),
+                note_count=len(notes),
+                binaural_frequency=binaural_freq,
+                metadata={
+                    "origin": origin_code,
+                    "destination": dest_code,
+                    "tempo": params["tempo"],
+                    "scale": params.get("scale", "pentatonic")
+                }
+            )
+            logger.info(f"✅ Synced wellness composition to DuckDB: {request.theme}")
+        except Exception as e:
+            logger.warning(f"Could not sync wellness to DuckDB: {e}")
+        
         return WellnessResponse(
             composition_id=f"wellness_{request.theme}_{request.calm_level}_{origin_code}_{dest_code}",
             theme=request.theme,

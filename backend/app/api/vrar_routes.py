@@ -178,6 +178,30 @@ async def create_vr_session(request: VRSessionRequest):
         
         session_id = f"vr_{request.origin}_{request.destination}_{int(distance)}"
         
+        # ✅ Sync AR/VR session to DuckDB using vector sync helper
+        try:
+            from app.services.vector_sync_helper import get_vector_sync_helper
+            
+            vector_sync = get_vector_sync_helper()
+            vector_sync.sync_arvr_session(
+                session_type="vr_flight",
+                origin=request.origin,
+                destination=request.destination,
+                waypoint_count=len(waypoints),
+                spatial_audio=request.enable_spatial_audio,
+                quality=request.quality,
+                duration=duration,
+                metadata={
+                    "distance_km": distance,
+                    "audio_zones": len(audio_zones),
+                    "resolution": vr_settings.get("resolution"),
+                    "fps": vr_settings.get("fps")
+                }
+            )
+            logger.info(f"✅ Synced AR/VR session to DuckDB: {request.origin} → {request.destination}")
+        except Exception as e:
+            logger.warning(f"Could not sync AR/VR session to DuckDB: {e}")
+        
         return VRSessionResponse(
             session_id=session_id,
             flight_path=flight_path,

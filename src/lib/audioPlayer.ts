@@ -124,12 +124,17 @@ export class AudioPlayer {
     const compositionStartTime = this.audioContext.currentTime;
 
     // Safety check: prevent extremely short compositions
-    if (totalDuration < 1.0) {
-      console.warn(`Composition too short (${totalDuration.toFixed(2)}s), extending to minimum 2 seconds`);
-      totalDuration = 2.0; // Minimum 2 seconds for audible playback
-    } else if (totalDuration < 3.0) {
-      console.warn(`Composition is short (${totalDuration.toFixed(2)}s), but acceptable`);
-      // Don't force extend, just warn
+    if (totalDuration < 2.0) {
+      console.warn(`Composition too short (${totalDuration.toFixed(2)}s), extending to minimum 30 seconds`);
+      // Extend notes proportionally to reach minimum duration
+      const extensionFactor = 30.0 / totalDuration;
+      notes.forEach(note => {
+        note.time *= extensionFactor;
+        note.duration *= extensionFactor;
+      });
+      totalDuration = 30.0; // Minimum 30 seconds for VR experience
+    } else if (totalDuration < 10.0) {
+      console.warn(`Composition is short (${totalDuration.toFixed(2)}s), but acceptable for testing`);
     }
 
     console.log(`Starting composition: ${notes.length} notes, ${totalDuration.toFixed(2)}s duration`);

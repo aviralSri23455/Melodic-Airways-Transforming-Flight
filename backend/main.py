@@ -25,6 +25,9 @@ from app.api.education_routes import router as education_router
 from app.api.vrar_routes import router as vrar_router
 from app.api.vector_routes import router as vector_router
 from app.api.metrics_routes import router as metrics_router
+from app.api.travel_log_routes import router as travel_log_router
+from app.api.ai_genre_routes import router as ai_genre_router
+from app.api.vrar_experience_routes import router as vrar_experience_router
 from app.core.config import settings
 from app.db.database import engine, Base, get_db, async_session
 from app.middleware.throughput_monitor import ThroughputMiddleware, get_throughput_monitor
@@ -172,6 +175,32 @@ try:
     logger.info("✅ metrics_router included successfully")
 except Exception as e:
     logger.error(f"❌ Failed to include metrics_router: {e}")
+
+try:
+    app.include_router(travel_log_router, prefix=f"{settings.API_V1_STR}/user", tags=["Travel Logs"])
+    logger.info("✅ travel_log_router included successfully")
+except Exception as e:
+    logger.error(f"❌ Failed to include travel_log_router: {e}")
+
+try:
+    app.include_router(ai_genre_router, prefix=f"{settings.API_V1_STR}/ai", tags=["AI Genre Composition"])
+    logger.info("✅ ai_genre_router included successfully")
+except Exception as e:
+    logger.error(f"❌ Failed to include ai_genre_router: {e}")
+
+try:
+    app.include_router(vrar_experience_router, prefix=f"{settings.API_V1_STR}/vr", tags=["VR/AR Experiences"])
+    logger.info("✅ vrar_experience_router included successfully")
+except Exception as e:
+    logger.error(f"❌ Failed to include vrar_experience_router: {e}")
+
+try:
+    from app.api.duckdb_vector_routes import router as duckdb_vector_router
+    app.include_router(duckdb_vector_router, prefix=f"{settings.API_V1_STR}/analytics", tags=["DuckDB Vector Analytics"])
+    logger.info("✅ duckdb_vector_router included successfully")
+except Exception as e:
+    logger.error(f"❌ Failed to include duckdb_vector_router: {e}")
+    logger.warning("Continuing without DuckDB vector analytics")
 
 # Global exception handler
 @app.exception_handler(Exception)

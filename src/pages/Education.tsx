@@ -35,7 +35,7 @@ const Education = () => {
       
       if (response.data) {
         // Backend returns {lessons: [...]} so we need to access the lessons array
-        const lessonsArray = response.data.lessons || response.data;
+        const lessonsArray = Array.isArray(response.data) ? response.data : (response.data as any).lessons || response.data;
         
         // Map backend lessons to UI format
         const mappedLessons = Array.isArray(lessonsArray) ? lessonsArray.map((lesson: any) => ({
@@ -96,7 +96,7 @@ const Education = () => {
       
       toast({
         title: "Lesson Loaded!",
-        description: `${response.data.title} is ready to explore`,
+        description: `${(response.data as any).title || 'Lesson'} is ready to explore`,
       });
     } else if (response.error) {
       toast({
@@ -216,7 +216,7 @@ const Education = () => {
   };
 
   return (
-    <div className="min-h-screen py-24 px-4">
+    <div className="min-h-screen pt-20 py-24 px-4">
       <div className="container mx-auto max-w-7xl">
         <div className="text-center mb-12">
           <BookOpen className="w-16 h-16 mx-auto mb-4 text-primary" />
