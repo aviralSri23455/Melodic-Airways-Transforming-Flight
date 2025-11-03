@@ -3027,17 +3027,6 @@ For their dedication and contributions to the Aero Melody project.
 
 - **API Docs**: http://localhost:8000/docs
 
-- Aviral
-- Shani
-- Karina
-- Mythri
-
-⭐ Star us on GitHub if you find this project interesting!
-
-
-
----
-
 
 ## 📞 Support
 
@@ -3111,9 +3100,6 @@ python scripts/generate_route_embeddings.py  # Manual
 ![Alt text](./Screen%20Shot/VECTOR%20EMEDING.png)
 
 
-
-
-
 **Built with  by 
 Aviral 
 Shani 
@@ -3121,5 +3107,7 @@ Karina
 Mythri
 **
 
-⭐ Star us on GitHub if you find this project interesting!
+⭐ ## 💬 Feedback & Contributions  
+If you like this project, please ⭐ the repo.  
+Feel free to open an Issue for suggestions, or send a Pull Request.  
 
