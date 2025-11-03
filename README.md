@@ -1,4 +1,4 @@
-# 🎵 Aero Melody - Flight Routes to Musical Compositions
+# 🎵 Melodic Airways- Flight Routes to Musical Compositions
 
 <div align="center">
 
@@ -22,7 +22,7 @@
 
 - [Overview](#-overview)
 - [Features](#-features)
-- [🚀 New Advanced Features](#-new-advanced-features)
+- [🚀 AdvanceFeatures](#-Advance-features)
 - [Quick Start](#-quick-start)
 - [Architecture](#-architecture)
 - [Music Generation](#-music-generation)
@@ -39,13 +39,13 @@
 
 ## 🌟 Overview
 
-**Aero Melody** is a revolutionary full-stack application that transforms aviation data into immersive musical and visual experiences. Using real OpenFlights data with **3,000+ airports** and **67,000+ routes**, the platform generates unique musical compositions, 3D flight visualizations, and VR/AR experiences.
+**Melodic Airways** is a revolutionary full-stack application that transforms aviation data into immersive musical and visual experiences. Using real OpenFlights data with **3,000+ airports** and **67,000+ routes**, the platform generates unique musical compositions, 3D flight visualizations, and VR/AR experiences.
 
 ### Why This Matters
 
 **Data Sonification for Learning & Creativity**
 
-Aero Melody bridges the gap between abstract data and human perception by transforming geographic information into sound. This approach:
+Melodic Airways bridges the gap between abstract data and human perception by transforming geographic information into sound. This approach:
 
 - **Makes Data Tangible**: Geographic distances, coordinates, and route complexity become audible patterns, making abstract concepts concrete and memorable
 - **Enhances Education**: Students learn geography, graph theory, and music theory simultaneously through multi-sensory experiences that improve retention
@@ -70,7 +70,7 @@ Whether you're an educator teaching complex concepts, a developer exploring AI/M
 
 ---
 
-## ✨ Features
+## ✨  Features
 
 ### 🎼 Music Generation
 - **AI-Powered Composition**: PyTorch embeddings transform route characteristics into musical parameters
@@ -105,7 +105,7 @@ Whether you're an educator teaching complex concepts, a developer exploring AI/M
 
 ---
 
-## 🚀 New Advanced Features
+## 🚀 Advance  Features
 
 ### 1. 📍 Personal Travel Logs - User-Generated Datasets
 
