@@ -1613,7 +1613,7 @@ Create a `.env` file in the `backend/` directory:
 # ============================================
 # DATABASE CONFIGURATION
 # ============================================
-DATABASE_URL=mysql+asyncmy://root:password@localhost:3306/melody_aero
+DATABASE_URL=mysql+asyncmy://root:password@localhost:3306/your_database_name
 DB_HOST=localhost
 DB_PORT=3306
 DB_USER=root
@@ -1626,7 +1626,7 @@ DATABASE_MAX_OVERFLOW=30
 # REDIS CLOUD CONFIGURATION
 # ============================================
 REDIS_HOST=redis-xxxxx.c267.us-east-1-4.ec2.redns.redis-cloud.com
-REDIS_PORT=16441
+REDIS_PORT=6379
 REDIS_USERNAME=default
 REDIS_PASSWORD=your_redis_password
 REDIS_URL=redis://default:password@host:port
@@ -1635,7 +1635,7 @@ REDIS_SESSION_TTL=7200        # 2 hours
 REDIS_MAX_CONNECTIONS=10      # Optimized for 30MB plan
 
 # ============================================
-# DUCKDB ANALYTICS (OPTIONAL)
+# DUCKDB ANALYTICS 
 # ============================================
 DUCKDB_PATH=./data/analytics.duckdb
 DUCKDB_MEMORY_LIMIT=2GB
@@ -1720,10 +1720,7 @@ VITE_ENV=development
 ```
 
 ### Docker Configuration
-
-`docker-compose.yml`:
-
-```yaml
+```
 version: '3.8'
 
 services:
@@ -1732,7 +1729,7 @@ services:
     ports:
       - "8000:8000"
     environment:
-      - DATABASE_URL=mysql+asyncmy://root:password@db:3306/melody_aero
+      - DATABASE_URL=mysql+asyncmy://<DB_USER>:<DB_PASSWORD>@db:3306/<DB_NAME>
       - REDIS_URL=redis://redis:6379
     depends_on:
       - db
@@ -1754,8 +1751,8 @@ services:
   db:
     image: mariadb:10.5
     environment:
-      - MYSQL_ROOT_PASSWORD=password
-      - MYSQL_DATABASE=melody_aero
+      - MYSQL_ROOT_PASSWORD=<DB_ROOT_PASSWORD>
+      - MYSQL_DATABASE=<DB_NAME>
     ports:
       - "3306:3306"
     volumes:
@@ -1768,6 +1765,9 @@ services:
     volumes:
       - redis_data:/data
 
+volumes:
+  db_data:
+  redis_data:
 ```
 
 ### Frontend Environment Variables
