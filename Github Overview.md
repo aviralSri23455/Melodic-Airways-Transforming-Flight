@@ -18,11 +18,29 @@
 
 ---
 
+## � Recento Updates (Nov 2025)
+
+**Project Cleanup & Optimization:**
+- ✅ Consolidated setup scripts into `backend/bat/` folder
+- ✅ Removed redundant Windows batch files and shell scripts
+- ✅ Cleaned up old MySQL/MariaDB scripts (now using DuckDB)
+- ✅ Removed unnecessary lockfiles (bun.lockb) and test configs
+- ✅ Streamlined project structure for better maintainability
+- ✅ Updated setup process: Single `setup.bat` for Windows, `setup.sh` for Linux/Mac
+
+**Setup is now simpler:**
+```bash
+cd backend/bat
+setup.bat  # Windows - includes Redis + DuckDB setup
+```
+
+---
+
 ## 📖 Table of Contents
 
 - [Overview](#-overview)
 - [Features](#-features)
-- [🚀 New Advanced Features](#-advanced-features)
+- [🚀 Advanced Features](#-advanced-features)
 - [Quick Start](#-quick-start)
 - [Architecture](#-architecture)
 - [Music Generation](#-music-generation)
@@ -486,13 +504,22 @@ cd Melodic-Airways-Transforming-Flight
 
 #### 2. Backend Setup
 
-##### Windows (Automated)
+##### Automated Setup
+
+**Windows:**
 ```bash
-cd backend
-scripts\windows\setup_redis_duckdb.bat
+cd backend\bat
+setup.bat
 ```
 
-##### Manual Setup (All Platforms)
+**Linux/Mac:**
+```bash
+cd backend/bat
+chmod +x setup.sh
+./setup.sh
+```
+
+##### Manual Setup
 
 ```bash
 cd backend
@@ -514,7 +541,7 @@ pip install -r requirements.txt
 cp .env.example .env
 
 # Edit .env file with your database and Redis credentials
-# DATABASE_URL=mysql+asyncmy://user:password@localhost:3306/melodic_airways
+# DATABASE_URL=mysql+asyncmy://user:password@localhost:3306/your_database_name
 # REDIS_URL=redis://default:password@host:port
 
 # Load OpenFlights data (3,000 airports + 67,000 routes)
@@ -538,7 +565,7 @@ npm install
 
 # Configure environment variables
 # Create .env.local file
-echo "VITE_API_BASE_URL=http://localhost:8000/api/v1" > .env.local
+echo "VITE_API_BASE_URL=http://localhost:8000/api/v1"  .env.local
 
 
 # Start development server
@@ -648,17 +675,17 @@ Melodic Airways/
 │   │       ├── activity_service.py  # User activity tracking
 │   │       └── realtime_generator.py # Real-time generation
 │   │
+│   ├── bat/                          # Setup Scripts
+│   │   ├── setup.bat                # Windows setup (Redis + DuckDB)
+│   │   └── setup.sh                 # Linux/Mac setup (Redis + DuckDB)
+│   │
 │   ├── scripts/                      # Utility Scripts
 │   │   ├── etl_openflights.py       # Load OpenFlights data
 │   │   ├── download_data.py         # Download datasets
-│   │   ├── generate_route_embeddings.py # Generate embeddings
 │   │   ├── generate_route_embeddings_duckdb.py # DuckDB embeddings
 │   │   ├── add_vector_columns_duckdb.py # Add vector columns
 │   │   ├── init_duckdb.py           # Initialize DuckDB
-│   │   ├── redis_cleanup.py         # Redis cleanup
-│   │   ├── setup-windows.ps1        # Windows setup
-│   │   ├── start.sh                 # Start script
-│   │   └── windows/                 # Windows batch scripts
+│   │   └── redis_cleanup.py         # Redis cleanup
 │   │
 │   ├── sql/                          # SQL Scripts
 │   │   ├── create_tables.sql        # Main schema
@@ -743,10 +770,10 @@ Melodic Airways/
 │
 ├── .env.example                      # Frontend environment template
 ├── package.json                      # Node dependencies
+├── package-lock.json                 # npm lockfile
 ├── vite.config.ts                    # Vite configuration
 ├── tailwind.config.ts                # Tailwind configuration
 ├── tsconfig.json                     # TypeScript configuration
-├── start-dev.bat                     # Windows dev start script
 └── Github Overview.md                # This file
 ```
 
@@ -1613,23 +1640,23 @@ Create a `.env` file in the `backend/` directory:
 # ============================================
 # DATABASE CONFIGURATION
 # ============================================
-DATABASE_URL=mysql+asyncmy://root:password@localhost:3306/melody_aero
+DATABASE_URL=mysql+asyncmy://your_user:your_password@localhost:3306/your_database_name
 DB_HOST=localhost
-DB_PORT=3306
-DB_USER=root
-DB_PASSWORD=your_password
-DB_NAME=melody_aero
+DB_PORT=6379
+DB_USER=your_database_user
+DB_PASSWORD=your_database_password
+DB_NAME=aero_melody_db
 DATABASE_POOL_SIZE=20
 DATABASE_MAX_OVERFLOW=30
 
 # ============================================
 # REDIS CLOUD CONFIGURATION
 # ============================================
-REDIS_HOST=redis-xxxxx.c267.us-east-1-4.ec2.redns.redis-cloud.com
-REDIS_PORT=16441
+REDIS_HOST=your-redis-host.redis-cloud.com
+REDIS_PORT=6379
 REDIS_USERNAME=default
-REDIS_PASSWORD=your_redis_password
-REDIS_URL=redis://default:password@host:port
+REDIS_PASSWORD=your_redis_cloud_password
+REDIS_URL=redis://default:your_password@your-redis-host.redis-cloud.com:16441
 REDIS_CACHE_TTL=1800          # 30 minutes
 REDIS_SESSION_TTL=7200        # 2 hours
 REDIS_MAX_CONNECTIONS=10      # Optimized for 30MB plan
@@ -1732,7 +1759,7 @@ services:
     ports:
       - "8000:8000"
     environment:
-      - DATABASE_URL=mysql+asyncmy://root:password@db:3306/melody_aero
+      - DATABASE_URL=mysql+asyncmy://root:your_password@db:3306/your_database_name
       - REDIS_URL=redis://redis:6379
     depends_on:
       - db
@@ -1754,8 +1781,8 @@ services:
   db:
     image: mariadb:10.5
     environment:
-      - MYSQL_ROOT_PASSWORD=password
-      - MYSQL_DATABASE=melody_aero
+      - MYSQL_ROOT_PASSWORD=your_secure_password
+      - MYSQL_DATABASE=aero_melody_db
     ports:
       - "3306:3306"
     volumes:
@@ -3049,15 +3076,24 @@ SOFTWARE.
 - **FastAPI**: Modern Python web framework
 - **React**: UI library
 - **PyTorch**: Machine learning framework
-- **Redis**: Caching and real-time features
-- **MariaDB**: Reliable database
+- **Redis Cloud**: Caching and real-time features
+- **MariaDB/MySQL**: Primary database
+- **DuckDB**: Analytics and vector embeddings
+
+---
+
+## 👨‍💻 Built With ❤️
+
+**Created by Aviral Shani & KarinaMythri**
+
+*Transforming flight data into musical experiences*
 
 ### Contributors
 
-Thank you to all contributors who have helped make Aero Melody better!
+Thank you to all contributors who have helped make ! Melodic Airways 
 
 
-For their dedication and contributions to the Aero Melody project.
+For their dedication and contributions to the Melodic Airways .
 
 ---
 
@@ -3089,9 +3125,6 @@ For their dedication and contributions to the Aero Melody project.
 ### Quick Links
 
 - [Vector Embeddings Guide](backend/docs/VECTOR_EMBEDDING_GUIDE.md)
-- [Quick Start Guide](backend/docs/VECTOR_QUICK_START.md)
-- [Architecture Documentation](backend/docs/VECTOR_ARCHITECTURE.md)
-- [API Commands Reference](backend/docs/VECTOR_COMMANDS.md)
 
 ---
 
@@ -3119,9 +3152,7 @@ npm run dev
 
 # 4. Optional: Setup vector embeddings for similarity search
 cd backend
-setup_vector_embeddings.bat  # Windows
-# or
-python scripts/generate_route_embeddings.py  # Manual
+python scripts/generate_route_embeddings_duckdb.py
 ```
 
 **Visit http://localhost:5173 and start creating music from flight routes!** 🎵✈️
