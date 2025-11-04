@@ -23,7 +23,7 @@ Your project uses a **multi-database architecture** for optimal performance:
 - Full-text search capabilities
 
 ### 2. Redis Cloud (Caching & Real-time)
-**Connection**: `redis://default:***@redis-14696.crce219.us-east-1-4.ec2.redns.redis-cloud.com:14696`
+**Connection**: `redis://default:***@your-redis-host:port` (configured via environment variables)
 
 **Purpose**: High-speed caching and real-time features
 

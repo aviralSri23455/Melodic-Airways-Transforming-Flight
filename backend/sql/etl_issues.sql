@@ -1,7 +1,7 @@
 -- Fix ETL issues: coordinate precision and ensure JSON column type
 -- Run this before executing the ETL script
 
-USE aero_melody;
+USE melody_aero;
 
 -- Drop and recreate tables to ensure correct schema
 DROP TABLE IF EXISTS routes;

@@ -4,7 +4,7 @@
 -- Using only FREE MariaDB features: JSON storage, Full-text search, and application-level real-time features
 -- Compatible with standard MariaDB without paid extensions
 
-USE aero_melody;
+USE melody_aero;
 
 -- ============================================================================
 -- SECTION 1: ADD ENHANCED INDEXES FOR JSON-BASED SIMILARITY SEARCH
@@ -12,7 +12,7 @@ USE aero_melody;
 
 -- Check if tables exist before adding indexes
 SET @tables_exist = (SELECT COUNT(*) FROM information_schema.tables 
-                     WHERE table_schema = 'aero_melody' 
+                     WHERE table_schema = 'melody_aero' 
                      AND table_name IN ('music_compositions', 'routes', 'user_datasets', 
                                        'collaboration_sessions', 'user_collections', 
                                        'composition_remixes', 'user_activities'));
@@ -223,7 +223,7 @@ SELECT
     TABLE_NAME as view_name,
     TABLE_TYPE
 FROM information_schema.TABLES
-WHERE TABLE_SCHEMA = 'aero_melody' 
+WHERE TABLE_SCHEMA = 'melody_aero' 
 AND TABLE_TYPE = 'VIEW'
 ORDER BY TABLE_NAME;
 
@@ -233,7 +233,7 @@ SELECT
     INDEX_NAME,
     INDEX_TYPE
 FROM information_schema.STATISTICS
-WHERE TABLE_SCHEMA = 'aero_melody'
+WHERE TABLE_SCHEMA = 'melody_aero'
 AND INDEX_NAME LIKE 'idx_music_vector%'
 OR INDEX_NAME LIKE 'idx_routes_embedding%'
 OR INDEX_NAME LIKE 'idx_sessions_active%'

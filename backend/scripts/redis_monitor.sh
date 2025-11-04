@@ -3,8 +3,8 @@
 # Run this script every 15 minutes via cron to monitor storage usage
 
 # Configuration
-REDIS_URL="redis://default:zcUJQD3G4uebZD0Ve5hz6J171zwohat2@redis-16441.c267.us-east-1-4.ec2.redns.redis-cloud.com:16441"
-LOG_FILE="/var/log/aero_melody/redis_monitor.log"
+REDIS_URL="${REDIS_URL:-redis://default:your_password@your-redis-host:6379}"
+LOG_FILE="/var/log/melody_aero/redis_monitor.log"
 ALERT_THRESHOLD=25  # MB
 CRITICAL_THRESHOLD=28  # MB
 

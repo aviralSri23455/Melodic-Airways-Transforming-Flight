@@ -141,16 +141,16 @@ docker-compose ps
 
 ```bash
 # Access MariaDB (replace with your password from .env)
-docker-compose exec mariadb mysql -u aero_user -p aero_melody
+docker-compose exec mariadb mysql -u aero_user -p Melodic-Airways-Transforming-Flight
 
 # Check tables
-docker-compose exec mariadb mysql -u aero_user -p aero_melody -e "SHOW TABLES;"
+docker-compose exec mariadb mysql -u aero_user -p melody_aero -e "SHOW TABLES;"
 
 # Count airports
-docker-compose exec mariadb mysql -u aero_user -p aero_melody -e "SELECT COUNT(*) FROM airports;"
+docker-compose exec mariadb mysql -u aero_user -p melody_aero -e "SELECT COUNT(*) FROM airports;"
 
 # Backup database
-docker-compose exec mariadb mysqldump -u aero_user -p aero_melody > backup.sql
+docker-compose exec mariadb mysqldump -u aero_user -p melody_aero > backup.sql
 ```
 
 ### Backend Operations

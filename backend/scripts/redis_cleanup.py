@@ -296,7 +296,7 @@ def main():
     args = parser.parse_args()
 
     # Get Redis URL from environment or command line
-    redis_url = args.redis_url or "redis://default:zcUJQD3G4uebZD0Ve5hz6J171zwohat2@redis-16441.c267.us-east-1-4.ec2.redns.redis-cloud.com:16441"
+    redis_url = args.redis_url or os.getenv("REDIS_URL", "redis://default:your_password@localhost:6379")
 
     manager = RedisStorageManager(redis_url)
 

@@ -1,7 +1,7 @@
 -- Aero Melody Database Schema - FREE MariaDB Features Only
 -- Updated script with proper foreign key order and JSON-based embeddings
 
-USE aero_melody;
+USE melody_aero;
 
 -- Drop all tables in correct order (due to foreign key dependencies)
 DROP TABLE IF EXISTS composition_remixes;

@@ -184,7 +184,7 @@ if ((-not $SkipDocker) -and (Test-CommandExists "docker")) {
         Start-Sleep -Seconds 5
         $retryCount++
         try {
-            $result = & docker exec aero-melody-mariadb mysqladmin ping -h localhost 2>$null
+            $result = & docker exec melody-aero-mariadb mysqladmin ping -h localhost 2>$null
             if ($LASTEXITCODE -eq 0) {
                 Write-Host "✅ MariaDB is ready!" -ForegroundColor Green
                 break
@@ -228,7 +228,7 @@ if (-not (Test-Path ".env")) {
         Write-Host "📝 Creating basic .env file..." -ForegroundColor Cyan
         @"
 # Database configuration
-DATABASE_URL=mysql://user:password@localhost:3306/aero_melody
+DATABASE_URL=mysql://user:password@localhost:3306/melody_aero
 
 # Redis configuration (optional)
 REDIS_URL=redis://localhost:6379/0

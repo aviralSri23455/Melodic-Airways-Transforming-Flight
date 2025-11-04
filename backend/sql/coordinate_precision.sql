@@ -1,7 +1,7 @@
 -- Fix coordinate precision for airports table
 -- This migration increases the precision of latitude and longitude columns
 
-USE aero_melody;
+USE melody_aero;
 
 -- Modify airports table to increase coordinate precision
 ALTER TABLE airports 

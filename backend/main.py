@@ -1,5 +1,5 @@
 """
-Aero Melody Backend - Flight Route to Music Generation API
+ Melodic Airways Backend - Flight Route to Music Generation API
 Comprehensive FastAPI backend for converting flight routes into musical compositions
 """
 

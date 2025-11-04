@@ -5,7 +5,7 @@ echo ========================================
 
 echo.
 echo Step 1: Fixing database schema...
-mysql -u root -p aero_melody < ..\..\sql\fix_etl_issues.sql
+mysql -u root -p melody_aero < ..\..\sql\fix_etl_issues.sql
 
 if %ERRORLEVEL% NEQ 0 (
     echo ERROR: Failed to fix database schema

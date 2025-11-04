@@ -24,17 +24,28 @@ dist-ssr
 *.sw?
 
 # Environment variables - SENSITIVE
+# Never commit these files - they contain real credentials
 .env
 .env.local
 .env.*.local
+.env.production
+.env.development
 backend/.env
 backend/.env.local
+backend/.env.production
+backend/.env.development
 docker/.env
+docker/.env.local
 
-# Keep example files (these are safe templates)
+# Keep example files (these are safe templates with placeholders only)
 !.env.example
 !backend/.env.example
 !docker/.env.example
+
+# Backup files that might contain credentials
+*.env.backup
+*.env.bak
+.env.old
 
 # Python cache and bytecode
 __pycache__/

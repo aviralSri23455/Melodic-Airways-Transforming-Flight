@@ -1,4 +1,4 @@
-# 🎵 Aero Melody - Flight Routes to Musical Compositions
+# 🎵 Melodic Airways – Transforming  - Flight Routes to Musical Compositions
 
 <div align="center">
 
@@ -22,7 +22,7 @@
 
 - [Overview](#-overview)
 - [Features](#-features)
-- [🚀 New Advanced Features](#-new-advanced-features)
+- [🚀 New Advanced Features](#-advanced-features)
 - [Quick Start](#-quick-start)
 - [Architecture](#-architecture)
 - [Music Generation](#-music-generation)
@@ -105,7 +105,7 @@ Whether you're an educator teaching complex concepts, a developer exploring AI/M
 
 ---
 
-## 🚀 New Advanced Features
+## 🚀 Advanced Features
 
 ### 1. 📍 Personal Travel Logs - User-Generated Datasets
 
@@ -480,8 +480,8 @@ Before you begin, ensure you have the following installed:
 #### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/aero-melody.git
-cd aero-melody
+git clone https://github.com/aviralSri23455/Melodic-Airways-Transforming-Flight.git
+cd Melodic-Airways-Transforming-Flight
 ```
 
 #### 2. Backend Setup
@@ -514,7 +514,7 @@ pip install -r requirements.txt
 cp .env.example .env
 
 # Edit .env file with your database and Redis credentials
-# DATABASE_URL=mysql+asyncmy://user:password@localhost:3306/aero_melody
+# DATABASE_URL=mysql+asyncmy://user:password@localhost:3306/melodic_airways
 # REDIS_URL=redis://default:password@host:port
 
 # Load OpenFlights data (3,000 airports + 67,000 routes)
@@ -586,91 +586,115 @@ cd backend && python test_all_vector_embeddings.py
 ## 📁 Project Structure
 
 ```
-aero-melody/
+Melodic Airways/
 │
 ├── backend/                          # FastAPI Backend
 │   ├── app/
 │   │   ├── api/                      # API Routes
 │   │   │   ├── routes.py            # Core endpoints (auth, airports, routes)
 │   │   │   ├── extended_routes.py   # Extended features (collections, datasets)
-│   │   │   ├── community_routes.py  # Social features (sharing, likes)
 │   │   │   ├── analytics_routes.py  # Analytics endpoints
+│   │   │   ├── analytics_showcase_routes.py # Analytics showcase
 │   │   │   ├── redis_routes.py      # Redis caching endpoints
 │   │   │   ├── openflights_routes.py # OpenFlights data endpoints
 │   │   │   ├── demo_routes.py       # Demo and testing endpoints
 │   │   │   ├── websocket_demo.py    # WebSocket collaboration
-│   │   │   ├── travel_log_routes.py # Travel log endpoints [NEW]
-│   │   │   ├── ai_genre_routes.py   # AI composer endpoints [NEW]
-│   │   │   └── vrar_experience_routes.py # VR/AR endpoints [NEW]
+│   │   │   ├── travel_log_routes.py # Travel log endpoints
+│   │   │   ├── ai_genre_routes.py   # AI composer endpoints
+│   │   │   ├── vrar_routes.py       # VR/AR endpoints
+│   │   │   ├── vrar_experience_routes.py # VR/AR experience
+│   │   │   ├── education_routes.py  # Education endpoints
+│   │   │   ├── wellness_routes.py   # Wellness endpoints
+│   │   │   ├── premium_routes.py    # Premium features
+│   │   │   ├── vector_routes.py     # Vector search endpoints
+│   │   │   ├── duckdb_vector_routes.py # DuckDB vector operations
+│   │   │   └── metrics_routes.py    # Performance metrics
 │   │   │
 │   │   ├── core/                     # Core Configuration
 │   │   │   ├── config.py            # Settings and environment variables
 │   │   │   └── security.py          # JWT auth and password hashing
 │   │   │
 │   │   ├── db/                       # Database
-│   │   │   ├── database.py          # SQLAlchemy setup
-│   │   │   └── models.py            # Database models (includes TravelLog)
+│   │   │   └── database.py          # SQLAlchemy setup
 │   │   │
-│   │   ├── models/                   # Pydantic Schemas
-│   │   │   ├── user.py              # User schemas
-│   │   │   ├── composition.py       # Composition schemas
-│   │   │   ├── route.py             # Route schemas
-│   │   │   └── ...                  # Other schemas
+│   │   ├── models/                   # Database Models & Schemas
+│   │   │   ├── models.py            # SQLAlchemy models
+│   │   │   └── schemas.py           # Pydantic schemas
+│   │   │
+│   │   ├── middleware/               # Middleware
+│   │   │   └── throughput_monitor.py # Performance monitoring
 │   │   │
 │   │   └── services/                 # Business Logic
 │   │       ├── music_generator.py   # MIDI generation
-│   │       ├── ai_genre_composer.py # PyTorch AI models [NEW]
-│   │       ├── travel_log_service.py # Travel log management [NEW]
-│   │       ├── vrar_experience_service.py # VR/AR generation [NEW]
-│   │       ├── vector_sync_helper.py # Vector embeddings sync [NEW]
+│   │       ├── ai_genre_composer.py # PyTorch AI models
+│   │       ├── genre_composer.py    # Genre composition
+│   │       ├── travel_log_service.py # Travel log management
+│   │       ├── vrar_experience_service.py # VR/AR generation
+│   │       ├── vector_sync_helper.py # Vector embeddings sync
+│   │       ├── realtime_vector_sync.py # Real-time vector sync
 │   │       ├── graph_pathfinder.py  # Dijkstra's algorithm
 │   │       ├── vector_service.py    # Similarity search
+│   │       ├── route_embedding_service.py # Route embeddings
+│   │       ├── route_embedding_service_duckdb.py # DuckDB embeddings
 │   │       ├── websocket_manager.py # WebSocket connections
 │   │       ├── redis_publisher.py   # Redis Pub/Sub
+│   │       ├── redis_session_manager.py # Redis sessions
 │   │       ├── cache.py             # Redis caching
+│   │       ├── openflights_cache.py # OpenFlights caching
 │   │       ├── duckdb_analytics.py  # Analytics service
-│   │       └── ...                  # Other services
+│   │       ├── duckdb_sync_service.py # DuckDB sync
+│   │       ├── faiss_duckdb_service.py # FAISS vector search
+│   │       ├── dataset_manager.py   # Dataset management
+│   │       ├── activity_service.py  # User activity tracking
+│   │       └── realtime_generator.py # Real-time generation
 │   │
 │   ├── scripts/                      # Utility Scripts
 │   │   ├── etl_openflights.py       # Load OpenFlights data
-│   │   ├── windows/                 # Windows batch scripts
-│   │   └── ...
+│   │   ├── download_data.py         # Download datasets
+│   │   ├── generate_route_embeddings.py # Generate embeddings
+│   │   ├── generate_route_embeddings_duckdb.py # DuckDB embeddings
+│   │   ├── add_vector_columns_duckdb.py # Add vector columns
+│   │   ├── init_duckdb.py           # Initialize DuckDB
+│   │   ├── redis_cleanup.py         # Redis cleanup
+│   │   ├── setup-windows.ps1        # Windows setup
+│   │   ├── start.sh                 # Start script
+│   │   └── windows/                 # Windows batch scripts
+│   │
+│   ├── sql/                          # SQL Scripts
+│   │   ├── create_tables.sql        # Main schema
+│   │   ├── add_travel_logs_table.sql # Travel logs migration
+│   │   ├── add_vector_embeddings.sql # Vector embeddings
+│   │   ├── enhanced_schema_migration.sql # Schema updates
+│   │   └── ...                      # Other SQL scripts
 │   │
 │   ├── tests/                        # Test Suite
-│   │   ├── test_music.py
-│   │   ├── test_routes.py
-│   │   └── ...
+│   │   ├── test_db.py               # Database tests
+│   │   ├── test_populate_openflights_auto.py # OpenFlights tests
+│   │   ├── test_redis_cloud.py      # Redis tests
+│   │   ├── test_skysql_connection.py # SkySQL tests
+│   │   └── verify_openflights_data.py # Data verification
 │   │
-│   ├── data/                         # Data Storage
-│   │   └── analytics.duckdb         # DuckDB database (vector embeddings)
+│   ├── duckdb_analytics/             # Analytics System
+│   │   ├── analytics.py             # Analytics engine
+│   │   ├── query.py                 # Query interface
+│   │   ├── run_analytics.py         # Analytics runner
+│   │   └── vector_embeddings.py     # Vector storage and analysis
 │   │
-│   ├── duckdb_analytics/             # Analytics System [NEW]
-│   │   ├── vector_embeddings.py     # Vector storage and analysis
-│   │   ├── README.md                # Analytics documentation
-│   │   └── QUICK_START.md           # Analytics quick start
+│   ├── performance/                  # Performance Testing
+│   │   ├── measure_throughput.py    # Throughput measurement
+│   │   └── measure_throughput_optimized.py # Optimized tests
 │   │
-│   ├── migrations/                   # Database Migrations [NEW]
-│   │   ├── add_travel_logs_table.sql
-│   │   └── add_travel_logs_table_safe.sql
-│   │
-│   ├── tests/                        # Test Suite
-│   │   ├── test_music.py
-│   │   ├── test_routes.py
-│   │   ├── test_new_features.py     # New features tests [NEW]
-│   │   └── test_throughput.py       # Performance tests [NEW]
-│   │
-│   ├── midi_output/                  # Generated MIDI files
-│   ├── test_all_vector_embeddings.py # Vector embeddings test [NEW]
-│   ├── test_duckdb_sync.py          # DuckDB sync test [NEW]
 │   ├── main.py                       # Application entry point
 │   ├── requirements.txt              # Python dependencies
-│   └── .env                          # Environment variables
+│   ├── .env.example                  # Environment template
+│   └── Dockerfile                    # Docker configuration
 │
 ├── src/                              # React Frontend
 │   ├── components/                   # React Components
 │   │   ├── ui/                      # shadcn/ui components
 │   │   ├── Hero.tsx                 # Landing hero section
 │   │   ├── RouteSelector.tsx        # Airport search and selection
+│   │   ├── AirportAutocomplete.tsx  # Airport autocomplete
 │   │   ├── MusicPlayer.tsx          # Audio playback
 │   │   ├── MusicControls.tsx        # Playback controls
 │   │   ├── GlobalMap.tsx            # Mapbox visualization
@@ -678,37 +702,52 @@ aero-melody/
 │   │   ├── Analytics.tsx            # Analytics dashboard
 │   │   ├── Features.tsx             # Feature showcase
 │   │   ├── MusicDNA.tsx             # Composition details
-│   │   └── Navigation.tsx           # Navigation with new links [UPDATED]
+│   │   └── Navigation.tsx           # Navigation menu
 │   │
 │   ├── hooks/                        # Custom React Hooks
-│   │   └── use-toast.ts             # Toast notifications
+│   │   ├── use-toast.ts             # Toast notifications
+│   │   ├── use-mobile.tsx           # Mobile detection
+│   │   └── useRouteVisualization.ts # Route visualization
 │   │
 │   ├── lib/                          # Utilities
-│   │   └── utils.ts                 # Helper functions
+│   │   ├── utils.ts                 # Helper functions
+│   │   ├── audioPlayer.ts           # Audio player utilities
+│   │   ├── midiExport.ts            # MIDI export
+│   │   ├── api/                     # API clients
+│   │   └── visualization/           # Visualization utilities
 │   │
 │   ├── pages/                        # Route Pages
 │   │   ├── Index.tsx                # Home page
-│   │   ├── TravelLogs.tsx           # Travel log management [NEW]
-│   │   ├── AIGenreComposer.tsx      # AI composition interface [NEW]
-│   │   ├── VRExperience.tsx         # VR experience with 3D viz [NEW]
-│   │   ├── Education.tsx            # Learning modules [NEW]
+│   │   ├── TravelLogs.tsx           # Travel log management
+│   │   ├── AIGenreComposer.tsx      # AI composition interface
+│   │   ├── VRExperience.tsx         # VR experience with 3D viz
+│   │   ├── VRAR.tsx                 # VR/AR page
+│   │   ├── Education.tsx            # Learning modules
+│   │   ├── Wellness.tsx             # Wellness features
+│   │   ├── Premium.tsx              # Premium features
 │   │   └── NotFound.tsx             # 404 page
 │   │
-│   ├── App.tsx                       # App component (updated routes)
+│   ├── assets/                       # Static Assets
+│   │   └── hero-globe.jpg           # Hero image
+│   │
+│   ├── App.tsx                       # App component
 │   ├── main.tsx                      # Entry point
 │   └── index.css                     # Global styles
 │
-├── public/                           # Static Assets
-│   ├── favicon.svg
-│   └── ...
+├── docs/                             # Documentation
+│   └── DUCKDB.md                    # DuckDB documentation
 │
-├── .env                              # Frontend environment variables
+├── docker/                           # Docker files
+│
+├── public/                           # Public Assets
+│
+├── .env.example                      # Frontend environment template
 ├── package.json                      # Node dependencies
 ├── vite.config.ts                    # Vite configuration
 ├── tailwind.config.ts                # Tailwind configuration
 ├── tsconfig.json                     # TypeScript configuration
-├── docker-compose.yml                # Docker orchestration
-└── README.md                         # This file
+├── start-dev.bat                     # Windows dev start script
+└── Github Overview.md                # This file
 ```
 
 
@@ -1574,12 +1613,12 @@ Create a `.env` file in the `backend/` directory:
 # ============================================
 # DATABASE CONFIGURATION
 # ============================================
-DATABASE_URL=mysql+asyncmy://root:password@localhost:3306/aero_melody
+DATABASE_URL=mysql+asyncmy://root:password@localhost:3306/melody_aero
 DB_HOST=localhost
 DB_PORT=3306
 DB_USER=root
 DB_PASSWORD=your_password
-DB_NAME=aero_melody
+DB_NAME=melody_aero
 DATABASE_POOL_SIZE=20
 DATABASE_MAX_OVERFLOW=30
 
@@ -1693,7 +1732,7 @@ services:
     ports:
       - "8000:8000"
     environment:
-      - DATABASE_URL=mysql+asyncmy://root:password@db:3306/aero_melody
+      - DATABASE_URL=mysql+asyncmy://root:password@db:3306/melody_aero
       - REDIS_URL=redis://redis:6379
     depends_on:
       - db
@@ -1716,7 +1755,7 @@ services:
     image: mariadb:10.5
     environment:
       - MYSQL_ROOT_PASSWORD=password
-      - MYSQL_DATABASE=aero_melody
+      - MYSQL_DATABASE=melody_aero
     ports:
       - "3306:3306"
     volumes:
@@ -1743,7 +1782,7 @@ VITE_API_BASE_URL=http://localhost:8000/api/v1
 VITE_API_TIMEOUT=10000
 
 # Authentication Configuration
-VITE_JWT_TOKEN_KEY=aero_melody_token
+VITE_JWT_TOKEN_KEY=melody_aero_token
 VITE_TOKEN_REFRESH_THRESHOLD=300000
 
 # Application Configuration
@@ -1887,8 +1926,8 @@ sudo apt update
 sudo apt install python3.9 python3-pip nginx
 
 # Clone repository
-git clone https://github.com/yourusername/aero-melody.git
-cd aero-melody/backend
+git clone https://github.com/yourusername/Melodic-Airways-Transforming-Flight.git
+cd Melodic-Airways-Transforming-Flight/backend
 
 # Create virtual environment
 python3 -m venv venv
@@ -1905,10 +1944,10 @@ nano .env  # Edit with production values
 python scripts/etl_openflights.py
 
 # Install as systemd service
-sudo nano /etc/systemd/system/aero-melody.service
+sudo nano /etc/systemd/system/Melodic-Airways-Transforming-Flight.service
 ```
 
-**aero-melody.service**:
+**Melodic-Airways-Transforming-Flight.service**:
 
 ```ini
 [Unit]
@@ -1918,9 +1957,9 @@ After=network.target
 [Service]
 Type=simple
 User=www-data
-WorkingDirectory=/var/www/aero-melody/backend
-Environment="PATH=/var/www/aero-melody/backend/venv/bin"
-ExecStart=/var/www/aero-melody/backend/venv/bin/uvicorn main:app --host 0.0.0.0 --port 8000
+WorkingDirectory=/var/www/Melodic-Airways-Transforming-Flight/backend
+Environment="PATH=/var/www/Melodic-Airways-Transforming-Flight/backend/venv/bin"
+ExecStart=/var/www/Melodic-Airways-Transforming-Flight/backend/venv/bin/uvicorn main:app --host 0.0.0.0 --port 8000
 Restart=always
 
 [Install]
@@ -1930,9 +1969,9 @@ WantedBy=multi-user.target
 ```bash
 # Start service
 sudo systemctl daemon-reload
-sudo systemctl start aero-melody
-sudo systemctl enable aero-melody
-sudo systemctl status aero-melody
+sudo systemctl start Melodic-Airways-Transforming-Flight
+sudo systemctl enable Melodic-Airways-Transforming-Flight
+sudo systemctl status Melodic-Airways-Transforming-Flight
 ```
 
 #### Nginx Configuration
@@ -2071,7 +2110,7 @@ curl http://localhost:8000/api/v1/health/redis
 # Daily backup script
 #!/bin/bash
 DATE=$(date +%Y%m%d_%H%M%S)
-mysqldump -u root -p aero_melody > backup_$DATE.sql
+mysqldump -u root -p melody_aero > backup_$DATE.sql
 gzip backup_$DATE.sql
 
 # Upload to S3
@@ -2372,7 +2411,7 @@ sudo systemctl status mariadb  # Linux
 # or check Windows services
 
 # Verify credentials in .env
-DATABASE_URL=mysql+asyncmy://user:password@localhost:3306/aero_melody
+DATABASE_URL=mysql+asyncmy://user:password@localhost:3306/melody_aero
 
 # Test connection
 python -c "import pymysql; pymysql.connect(host='localhost', user='root', password='your_password')"
@@ -2520,10 +2559,10 @@ npm install @react-three/fiber @react-three/drei three
 
 ```bash
 # Run database migration
-mysql -u root -p aero_melody < backend/migrations/add_travel_logs_table_safe.sql
+mysql -u root -p melody_aero < backend/migrations/add_travel_logs_table_safe.sql
 
 # Or create manually:
-mysql -u root -p aero_melody -e "
+mysql -u root -p Melodic-Airways-Transforming-Flight -e "
 CREATE TABLE IF NOT EXISTS travel_logs (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT,
@@ -2585,8 +2624,8 @@ python -c "from app.db.database import engine, Base; import asyncio; asyncio.run
 python scripts/etl_openflights.py
 
 # Check data
-mysql -u root -p aero_melody -e "SELECT COUNT(*) FROM airports;"
-mysql -u root -p aero_melody -e "SELECT COUNT(*) FROM routes;"
+mysql -u root -p melody_aero -e "SELECT COUNT(*) FROM airports;"
+mysql -u root -p melody_aero -e "SELECT COUNT(*) FROM routes;"
 ```
 
 ### Performance Issues
@@ -2642,14 +2681,14 @@ tail -f backend/app.log
 docker-compose logs -f backend
 
 # Systemd logs
-sudo journalctl -u aero-melody -f
+sudo journalctl -u Melodic-Airways-Transforming-Flight -f
 ```
 
 #### Database Debugging
 
 ```bash
 # Connect to database
-mysql -u root -p aero_melody
+mysql -u root -p melody_aero
 
 # Check tables
 SHOW TABLES;
@@ -2667,7 +2706,7 @@ If you're still experiencing issues:
 1. Check the [API documentation](http://localhost:8000/docs)
 2. Review the [backend logs](backend/app.log)
 3. Run the [test suite](backend/tests/)
-4. Check [GitHub Issues](https://github.com/yourusername/aero-melody/issues)
+4. Check [GitHub Issues](https://github.com/yourusername/Melodic-Airways-Transforming-Flight/issues)
 5. Contact support or open a new issue
 
 
@@ -2682,8 +2721,8 @@ We welcome contributions from the community! Here's how you can help make Aero M
 1. **Fork the repository**
    ```bash
    # Click "Fork" on GitHub
-   git clone https://github.com/your-username/aero-melody.git
-   cd aero-melody
+   git clone https://github.com/your-username/Melodic-Airways-Transforming-Flight.git
+   cd Melodic-Airways-Transforming-Flight
    ```
 
 2. **Create a feature branch**
@@ -3060,8 +3099,8 @@ For their dedication and contributions to the Aero Melody project.
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/yourusername/aero-melody.git
-cd aero-melody
+git clone https://github.com/yourusername/Melodic-Airways-Transforming-Flight.git
+cd Melodic-Airways-Transforming-Flight
 
 # 2. Setup backend
 cd backend

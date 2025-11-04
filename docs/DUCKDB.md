@@ -460,7 +460,7 @@ When items are created, you'll see:
 
 When running analytics:
 ```
-✅ DuckDB Vector Store connected: ./data/aero_melody_analytics.duckdb
+✅ DuckDB Vector Store connected: ./data/melody_aero_analytics.duckdb
 ✅ Vector embedding tables created/verified
 ✅ Vector similarity functions registered
 
@@ -511,7 +511,7 @@ Generated: 2025-11-03 20:54:46
 Database settings are read from `app/core/config.py`:
 
 ```python
-DUCKDB_PATH = "./data/aero_melody_analytics.duckdb"
+DUCKDB_PATH = "./data/melody_aero_analytics.duckdb"
 DUCKDB_MEMORY_LIMIT = "2GB"
 DUCKDB_THREADS = 4
 ```
@@ -653,7 +653,7 @@ backend/
 │   └── api/
 │       └── duckdb_vector_routes.py # DuckDB API endpoints
 ├── data/
-│   └── aero_melody_analytics.duckdb # DuckDB database file
+│   └── melody_aero_analytics.duckdb # DuckDB database file
 └── analytics_export/              # CSV exports
 ```
 

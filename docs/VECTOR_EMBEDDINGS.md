@@ -1778,7 +1778,7 @@ Using OpenFlights route data: 10830.46 km  ← REAL DATA
 ##### Method 3: Inspect Database Tables
 ```bash
 # Check PostgreSQL for real data
-psql -U postgres -d aero_melody
+psql -U postgres -d Melodic-Airways-Transforming-Flight
 \dt  # List all tables
 SELECT COUNT(*) FROM airports;  # 7,698 real airports from OpenFlights
 SELECT COUNT(*) FROM routes;    # Real flight routes
@@ -2065,7 +2065,7 @@ similar_routes = self.faiss_service.search_similar_routes(
 grep -r "mock" backend/app/api/
 
 # 2. Check database (real data)
-psql -U postgres -d aero_melody -c "SELECT COUNT(*) FROM airports;"
+psql -U postgres -d melody_aero -c "SELECT COUNT(*) FROM airports;"
 
 # 3. Check logs (real data flow)
 # Generate music and watch logs show "Using OpenFlights route data"

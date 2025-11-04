@@ -90,9 +90,9 @@ pip install -r requirements.txt
 mysql -u root -p
 
 # Create database
-CREATE DATABASE aero_melody CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE DATABASE melody_aero CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 CREATE USER 'aero_user'@'localhost' IDENTIFIED BY 'your_password';
-GRANT ALL PRIVILEGES ON aero_melody.* TO 'aero_user'@'localhost';
+GRANT ALL PRIVILEGES ON melody_aero.* TO 'aero_user'@'localhost';
 FLUSH PRIVILEGES;
 EXIT;
 ```
@@ -103,13 +103,13 @@ Apply schema migrations in order:
 
 ```bash
 # Step 1: Base tables
-mysql -u root -p aero_melody < sql/create_tables.sql
+mysql -u root -p melody_aero < sql/create_tables.sql
 
 # Step 2: Enhanced schema
-mysql -u root -p aero_melody < sql/enhanced_schema_migration.sql
+mysql -u root -p melody_aero < sql/enhanced_schema_migration.sql
 
 # Step 3: Community features
-mysql -u root -p aero_melody < sql/community_features_tables.sql
+mysql -u root -p melody_aero < sql/community_features_tables.sql
 ```
 
 ### 4. Configure Environment
@@ -118,7 +118,7 @@ Create `.env` file in `backend/` directory:
 
 ```bash
 # Database
-DATABASE_URL=mysql://aero_user:your_password@localhost:3306/aero_melody
+DATABASE_URL=mysql://aero_user:your_password@localhost:3306/melody_aero
 
 # Redis Cloud
 REDIS_HOST=your-redis-host.redis-cloud.com
@@ -229,7 +229,7 @@ pytest tests/test_new_features.py -v
 ## Verify Database Tables
 
 ```bash
-mysql -u root -p aero_melody -e "SHOW TABLES;"
+mysql -u root -p melody_aero -e "SHOW TABLES;"
 ```
 
 Expected: 19 tables including:
@@ -283,7 +283,7 @@ pip install -r requirements.txt
 ### Database Connection Failed
 1. Check `.env` file has correct DATABASE_URL
 2. Verify MariaDB is running: `sudo systemctl status mariadb`
-3. Test connection: `mysql -u aero_user -p aero_melody`
+3. Test connection: `mysql -u aero_user -p melody_aero`
 
 ### Redis Connection Failed
 1. Test connection: `python tests/test_redis_cloud.py`
