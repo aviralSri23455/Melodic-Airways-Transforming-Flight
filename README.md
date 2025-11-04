@@ -26,9 +26,7 @@
 - **Part 1 - Core Features & Music Generation**: [Watch on Loom](https://www.loom.com/share/3258c1e904644252947adfdf76b01f08)
 - **Part 2 - AI Composer & VR Experience**: [Watch on Loom](https://www.loom.com/share/52b7f23b0dc64ed090fc552e876a4104)
 
-<div align="center">
-  <img width="2289" alt="Melodic Airways Dashboard" src="https://github.com/user-attachments/assets/38c3ae3f-84bc-4f07-8c81-0e073d1defdf" />
-</div>
+
 
 ## � Recento Updates (Nov 2025)
 
