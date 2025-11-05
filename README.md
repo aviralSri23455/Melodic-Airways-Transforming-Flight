@@ -67,7 +67,7 @@ setup.bat  # Windows - includes Redis + DuckDB setup
 
 ## 🌟 Overview
 
-**Aero Melody** is a revolutionary full-stack application that transforms aviation data into immersive musical and visual experiences. Using real OpenFlights data with **3,000+ airports** and **67,000+ routes**, the platform generates unique musical compositions, 3D flight visualizations, and VR/AR experiences.
+**Melodic Airways** is a revolutionary full-stack application that transforms aviation data into immersive musical and visual experiences. Using real OpenFlights data with **3,000+ airports** and **67,000+ routes**, the platform generates unique musical compositions, 3D flight visualizations, and VR/AR experiences.
 
 ### Why This Matters
 
@@ -102,7 +102,7 @@ Whether you're an educator teaching complex concepts, a developer exploring AI/M
 
 ### 🎼 Music Generation
 - **AI-Powered Composition**: PyTorch embeddings transform route characteristics into musical parameters
-- **6 Musical Scales**: Major, Minor, Pentatonic, Blues, Dorian, Phrygian
+- **Musical Scales**: Major, Minor, Pentatonic, Blues, Dorian, Phrygian
 - **Dynamic Tempo**: 70-140 BPM based on flight distance
 - **Multi-track Output**: Melody, harmony, and bass tracks
 - **MIDI Export**: Download compositions as MIDI files
@@ -112,12 +112,6 @@ Whether you're an educator teaching complex concepts, a developer exploring AI/M
 - **Real-time Updates**: Live route tracking and composition progress
 - **Airport Search**: Fast search across 3,000+ airports
 - **Route Analytics**: Distance, duration, and complexity metrics
-
-### 🤝 Collaboration & Community
-- **Real-time Collaboration**: WebSocket-based collaborative editing
-- **Composition Sharing**: Public gallery and remix features
-- **Personal Collections**: Create and manage custom datasets
-- **Social Features**: Like, comment, and share compositions
 
 ### ⚡ Performance & Caching
 - **Redis Cloud**: Lightning-fast caching with 30-minute TTL
@@ -2310,7 +2304,6 @@ curl "http://localhost:8000/health"
 ```bash
 # Test all new features
 cd backend
-python tests/test_new_features.py
 
 # Test performance
 python tests/test_throughput.py
